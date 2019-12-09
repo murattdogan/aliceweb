@@ -5513,7 +5513,8 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Alice.Data >= 1.0.0",
-      "Microsoft.NETCore.App >= 2.2.0"
+      "Microsoft.NETCore.App >= 2.2.0",
+      "MySql.Data.EntityFrameworkCore >= 8.0.18"
     ]
   },
   "packageFolders": {
@@ -5566,6 +5567,10 @@
             "target": "Package",
             "version": "[2.2.0, )",
             "autoReferenced": true
+          },
+          "MySql.Data.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[8.0.18, )"
           }
         },
         "imports": [

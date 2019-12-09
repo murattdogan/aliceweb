@@ -1,32 +1,179 @@
-﻿
+﻿@using Alice.Service.Model
+@model List<CategoriesDTO>
 @{
-    ViewData["Title"] = "List";
+    ViewData["Title"] = "Kategori Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" />
 <script src="~/Content/vendors/custom/datatables/datatables.bundle.js"></script>
 
-<div class="kt-subheader   kt-grid__item" id="kt_subheader">
-    <div class="kt-subheader__main">
-        <h3 class="kt-subheader__title">Basic Examples</h3>
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 
-        <span class="kt-subheader__separator kt-hidden"></span>
-        <div class="kt-subheader__breadcrumbs">
-            <a href="#" class="kt-subheader__breadcrumbs-home"><i class="flaticon2-shelter"></i></a>
-            <span class="kt-subheader__breadcrumbs-separator"></span>
-            <a href="#" class="kt-subheader__breadcrumbs-link">
-                DataTables
-            </a>
-            <span class="kt-subheader__breadcrumbs-separator"></span>
-            <a href="#" class="kt-subheader__breadcrumbs-link">
-                Basic
-            </a>
-            <span class="kt-subheader__breadcrumbs-separator"></span>
-            <a href="#" class="kt-subheader__breadcrumbs-link">
-                Basic Tables
-            </a>
-            <!-- <span class="kt-subheader__breadcrumbs-link kt-subheader__breadcrumbs-link--active">Active link</span> -->
+    <div class="kt-notification kt-margin-t-30 kt-margin-b-20 kt-scroll" data-scroll="true" data-mobile-height="220">
+        <div class="kt-portlet kt-portlet--mobile" id="newcategory" style="display:none;">
+
+            <div class="kt-portlet__body">
+                <form class="kt-form" action="/Categories/Insert" method="post" enctype="multipart/form-data">
+                    <div class="kt-portlet__body">
+                        <div class="form-group form-group-last">
+                            <div class="alert alert-secondary" role="alert">
+                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
+                                <div class="alert-text">
+                                    Kategori resmi eklerken 700x350 boyutundan büyük girmeyiniz!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Kategori Adı</label>
+                            <input type="text" name="CategoryName" class="form-control" aria-describedby="emailHelp" placeholder="Travel, Hotel vb.">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Kategori Path</label>
+                            <input type="text" name="CategoryPath" class="form-control" id="exampleInputPassword1" placeholder="/travel gibi">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelect1">Üst Kategori</label>
+                            <select class="form-control" name="TopCategory" id="TopCategory">
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label id="categoryimage">Resim</label>
+                            <div></div>
+                            <div class="custom-file">
+                                <input type="file" name="CategoryFile" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Resim Seç</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="kt-portlet__foot">
+                        <div class="kt-form__actions">
+                            <input type="hidden" name="Id" class="custom-file-input" id="CategoryId" value="0">
+                            <button type="submit" class="btn btn-primary">Kaydet</button>
+                            <button type="reset" class="btn btn-secondary" id="cancelnewcategory">İptal Et</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="kt-portlet kt-portlet--mobile">
+
+            <div class="kt-portlet__body">
+                <div class="row">
+                    <div class="col-sm-6 text-left">
+                        <div id="kt_table_1_filter" class="dataTables_filter">
+                            <label><br /><br /></label>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 text-right">
+                        <div class="dt-buttons btn-group">
+                            <button type="button" class="btn btn-success btn-elevate btn-elevate-air" id="newcategorytrigger">Yeni Kategori Ekle</button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Kategori Adı</th>
+                            <th>Url Yolu</th>
+                            <th>#</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            var categoryName = string.Empty;
+                            if (item.MainCategoryId != 0)
+                            {
+                                categoryName = $"<strong>{Model.First(x => x.Id == item.MainCategoryId).CategoryName}</strong> / {item.CategoryName}";
+                            }
+                            else
+                            {
+                                categoryName = item.CategoryName;
+                            }
+
+                            <tr data-id="@item.Id">
+                                <td>@item.Id</td>
+                                <td>@Html.Raw(categoryName)</td>
+                                <td>@item.Path</td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-info btn-elevate btn-elevate-air categoryupdate" data-id="@item.Id">Güncelle</button>
+                                    <button type="button" class="btn btn-danger btn-elevate btn-elevate-air categorydelete" data-id="@item.Id">Sil</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
         </div>
 
     </div>
+
 </div>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            $(".categoryupdate").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Categories/GetById",
+                    data: { Id: parseInt($(this).data("id")) },
+                    success: function (e) {
+                        $("#categoryimage").css({ "color": "red" }).text("Kategori'nin resmini güncellemek istiyorsanız. Yeni resim seçebilirsiniz.");
+                        renderCategory();
+                        $("input[name='CategoryName']").val(e.categoryName);
+                        $("input[name='CategoryPath']").val(e.categoryPath);
+                        $('select[name="TopCategory"]').val(e.mainCategoryId).change();
+                        $("#CategoryId").val(e.id);
+
+                        $('#newcategory').fadeIn();
+                    },
+                    dataType: "json"
+                });
+            });
+
+            $(".categorydelete").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Categories/Delete",
+                    data: { Id: parseInt($(this).data("id")) },
+                    success: function (e) {
+                        window.location.reload(false);
+                    },
+                    dataType: "json"
+                });
+            });
+            $('#newcategorytrigger').click(function () {
+                $("#categoryimage").css({ "color": "black" }).text("Resim");
+                renderCategory();
+            });
+
+            $('#cancelnewcategory').click(function () {
+                $('#newcategory').fadeOut();
+            });
+        });
+
+        function renderCategory() {
+            $.ajax({
+                type: "POST",
+                url: "/Categories/UpCategory",
+                data: null,
+                success: function (e) {
+                    $("#CategoryId").val("0");
+                    $.each(e, function (key, value) {
+                        $("#TopCategory").append(`<option value="${e[key].id}">${e[key].categoryName}</option>`);
+                    });
+                },
+                dataType: "json"
+            });
+
+            $('#newcategory').fadeIn();
+        }
+    </script>
+}

@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Alice.Admin.Filters;
+using Alice.Service;
 using Alice.Service.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +39,7 @@ namespace Alice.Admin
             });
 
             services.AddSingleton<UserService>();
+            services.AddSingleton<CategoryService>();
             services.AddScoped<AuthorizationAttribute>();
 
 
@@ -57,6 +59,7 @@ namespace Alice.Admin
                 options.IdleTimeout = TimeSpan.FromMinutes(10);
             });
 
+            services.SetUpAppDependencies();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

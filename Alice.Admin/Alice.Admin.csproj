@@ -19,6 +19,7 @@
   <ItemGroup>
     <Folder Include="Content\Admin\css\demo2\" />
     <Folder Include="Content\Admin\js\demo2\" />
+    <Folder Include="Content\UImage\Categories\" />
   </ItemGroup>
 
 

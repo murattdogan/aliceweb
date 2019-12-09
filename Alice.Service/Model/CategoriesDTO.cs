@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Alice.Service.Model
 {
-    class CategoriesDTO : BaseModel
+    public class CategoriesDTO : BaseModel
     {
         public string CategoryName { get; set; }
         public string Path { get; set; }
+        public string ImagePath { get; set; }
         public int MainCategoryId { get; set; }
     }
 }

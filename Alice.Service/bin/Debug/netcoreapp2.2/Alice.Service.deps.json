@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v2.2": {
       "Alice.Service/1.0.0": {
         "dependencies": {
-          "Alice.Data": "1.0.0"
+          "Alice.Data": "1.0.0",
+          "MySql.Data.EntityFrameworkCore": "8.0.18"
         },
         "runtime": {
           "Alice.Service.dll": {}

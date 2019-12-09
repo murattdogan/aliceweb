@@ -27,7 +27,7 @@ namespace Alice.Service.Service
         public UserDTO isLoginControl(string username, string password)
         {
             IRepository<User> userRepository = new Repository<User>(_dbContext);
-            return userRepository.Where(o => o.Email == username)?.Select(x => new UserDTO() { Id = x.Id, Name = x.Name, Email = x.Email, UserType = x.UserType, LastLoginDate = x.LastLoginDate })?.First() ?? null;
+            return userRepository.Where(o => o.Email == username && o.Password == password)?.Select(x => new UserDTO() { Id = x.Id, Name = x.Name, Email = x.Email, UserType = x.UserType, LastLoginDate = x.LastLoginDate })?.First() ?? null;
         }
 
     }
