@@ -10,6 +10,7 @@ namespace Alice.Data.Context
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Categories> Categories { get; set; }
+        public DbSet<Tour> Tours { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

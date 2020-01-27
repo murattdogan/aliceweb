@@ -11,11 +11,9 @@ namespace Alice.Service.Service
 {
     public class CategoryService
     {
-        private readonly LuxuryContext _dbContext;
         IRepository<Categories> _categoryRepository;
         public CategoryService()
         {
-            _dbContext = new LuxuryContext();
             _categoryRepository = new Repository<Categories>(new LuxuryContext());
         }
 
