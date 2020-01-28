@@ -1,0 +1,293 @@
+﻿
+@{
+    ViewData["Title"] = "Yeni Tur Giriş Ekranı";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/css/pages/wizards/wizard-v2.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+
+
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet">
+        <div class="kt-portlet__body kt-portlet__body--fit">
+            <div class="kt-grid kt-grid--desktop-xl kt-grid--ver-desktop-xl  kt-wizard-v2" id="kt_wizard_v2" data-ktwizard-state="first">
+                <div class="kt-grid__item kt-wizard-v2__aside">
+
+                    <!--begin: Form Wizard Nav -->
+                    <div class="kt-wizard-v2__nav">
+                        <div class="kt-wizard-v2__nav-items">
+                            <!--doc: Replace A tag with SPAN tag to disable the step link click -->
+                            <a class="kt-wizard-v2__nav-item" href="#" data-ktwizard-type="step" data-ktwizard-state="current">
+                                <span>1</span><i class="fa fa-check"></i> Genel Tur Bilgileri
+                            </a>
+                            <a class="kt-wizard-v2__nav-item" href="#" data-ktwizard-type="step" data-ktwizard-state="pending">
+                                <span>2</span><i class="fa fa-check"></i> Tur Açıklamaları
+                            </a>
+                        </div>
+                    </div>
+                    <!--end: Form Wizard Nav -->
+
+                </div>
+                <div class="kt-grid__item kt-grid__item--fluid kt-wizard-v2__wrapper">
+                    <!--begin: Form Wizard Form-->
+                    <form class="kt-form" id="kt_form" novalidate="novalidate">
+
+                        <!--begin: Form Wizard Step 1-->
+                        <div class="kt-wizard-v2__content" data-ktwizard-type="step-content" data-ktwizard-state="current">
+                            <div class="kt-heading kt-heading--md">Genel Tur Bilgileri</div>
+                            <div class="kt-separator kt-separator--height-xs"></div>
+                            <div class="kt-form__section kt-form__section--first">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="form-group">
+                                            <label>Tur Adı:</label>
+                                            <input type="text" class="form-control" style="border: 2px solid lightgreen;" name="TourName">
+                                            <span class="form-text text-muted">Tur Adı çok önemli, Dikkatli belirle!</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="form-group">
+                                            <label>Kısa Tur Açıklaması:</label>
+                                            <div id="TourSpot"></div>
+                                            <span class="form-text text-muted">Olabildikçe Kısa Açıklama Yapınız!</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--end: Form Wizard Step 1-->
+                        <!--begin: Form Wizard Step 2-->
+                        <div class="kt-wizard-v2__content" data-ktwizard-type="step-content">
+                            <div class="kt-heading kt-heading--md">Tur Açıklamaları</div>
+                            <div class="kt-separator kt-separator--height-xs"></div>
+                            <div class="kt-form__section kt-form__section--first">
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="form-group">
+                                            <label>Tur Açıklaması:</label>
+                                            <div id="TourBody"></div>
+                                            <span class="form-text text-muted">Uzun uzun yazabilirsiniz. Rahat Olun :)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="form-group">
+                                                <label class="kt-checkbox kt-checkbox--solid kt-checkbox--success">
+                                                    <input type="checkbox" id="TourDaysChecked"> Gün Girişi Yap
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row dayschecked" style="display:none;">
+                                        <div class="col-xl-12">
+                                            <div class="form-group">
+                                                <label>Gün</label>
+                                                <input type="number" class="form-control" Id="TourDayNumber">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row dayschecked" style="display:none;">
+                                        <div class="col-xl-6">
+                                            <div class="form-group">
+                                                <label>Kısa Başlık</label>
+                                                <input type="text" class="form-control" Id="TourDayShortTitle">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="form-group">
+                                                <label>Kısa Açıklama</label>
+                                                <input type="text" class="form-control" Id="TourDayShortDescription">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row dayschecked" style="display:none;">
+                                        <div class="col-xl-6">
+                                            <div class="form-group">
+                                                <label>Uzun Başlık</label>
+                                                <input type="text" class="form-control" Id="TourDayLongTitle">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-6">
+                                            <div class="form-group">
+                                                <label>Uzun Açıklama</label>
+                                                <div id="TourDayLongDescription"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row dayschecked" style="display:none;">
+                                        <div class="col-xl-12">
+                                            <div class="form-group">
+                                                <button id="TourDaysAdd" class="btn btn-success btn-sm">Ekle</button>
+                                            </div>
+                                        </div>
+                                    </div>*@
+
+
+                                @*<div class="row dayschecked" style="display:none;">
+                                        <div class="col-xl-12">
+                                            <div class="kt-portlet__body">
+                                                <div class="kt-scroll ps ps--active-y" data-scroll="true" data-mobile-height="764" style="height: 945px; overflow: hidden;">
+                                                    <div class="kt-timeline">
+                                                        <div class="kt-timeline__item kt-timeline__item--accent">
+                                                            <div class="kt-timeline__item-section">
+                                                                <div class="kt-timeline__item-section-border">
+                                                                    <div class="kt-timeline__item-section-icon">
+                                                                        1
+                                                                    </div>
+                                                                </div>
+                                                                <span class="kt-timeline__item-datetime">01:20 AM</span>
+                                                            </div>
+                                                            <a href="#" class="kt-timeline__item-text">
+                                                                New secyrity alert by Firewall &amp; order to take<br> aktion on User references
+                                                            </a>
+                                                            <div class="kt-timeline__item-info">
+                                                                Security, Fieewall
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 946px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 300px;"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="kt-form__actions">
+                            <div class="btn btn-outline-brand btn-md btn-tall btn-wide btn-bold btn-upper" data-ktwizard-type="action-prev">
+                                GERİ
+                            </div>
+                            <div class="btn btn-brand btn-md btn-tall btn-wide btn-bold btn-upper tourcreate" data-ktwizard-type="action-submit">
+                                Turu Oluştur
+                            </div>
+                            <div class="btn btn-brand btn-md btn-tall btn-wide btn-bold btn-upper" data-ktwizard-type="action-next">
+                                İLERİ
+                            </div>
+                        </div>
+                        <!--end: Form Actions -->
+                    </form>
+                    <!--end: Form Wizard Form-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(function () {
+
+
+
+            $("#TourDaysChecked").click(function () {
+                if ($("#TourDaysChecked:checked").val() == "on") {
+                    $(".dayschecked").show();
+                }
+                else {
+                    $(".dayschecked").fadeOut();
+                }
+            });
+        });
+
+        var KTAppOptions = {
+            "colors": {
+                "state": {
+                    "brand": "#5578eb",
+                    "metal": "#c4c5d6",
+                    "light": "#ffffff",
+                    "accent": "#00c5dc",
+                    "primary": "#5867dd",
+                    "success": "#34bfa3",
+                    "info": "#36a3f7",
+                    "warning": "#ffb822",
+                    "danger": "#fd3995",
+                    "focus": "#9816f4"
+                },
+                "base": {
+                    "label": [
+                        "#c5cbe3",
+                        "#a1a8c3",
+                        "#3d4465",
+                        "#3e4466"
+                    ],
+                    "shape": [
+                        "#f0f3ff",
+                        "#d9dffa",
+                        "#afb4d4",
+                        "#646c9a"
+                    ]
+                }
+            }
+        };
+    </script>
+
+    <script>
+
+
+
+        //ClassicEditor
+        //    .create(document.querySelector('#TourDayLongDescription'))
+        //    .catch(error => {
+        //        console.error(error);
+        //    });
+
+        let TourSpot;
+         let TourBody;
+
+        ClassicEditor
+            .create(document.querySelector('#TourSpot'))
+            .then(newEditor => {
+                TourSpot = newEditor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+          ClassicEditor
+            .create(document.querySelector('#TourBody'))
+            .then(newEditor => {
+                TourBody = newEditor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+
+        // Assuming there is a <button id="submit">Submit</button> in your application.
+        document.querySelector('.tourcreate').addEventListener('click', () => {
+ 
+
+            $.ajax({
+                type: "POST",
+                url: "/Tour/NewTour",
+                data: {
+                    "TourName": $("input[name='TourName']").val(),
+                    "TourSpot": TourSpot.getData(),
+                    "TourBody": TourBody.getData()
+                },
+                success: function () {},
+                dataType: "json"
+            });
+        });
+ 
+    </script>
+}

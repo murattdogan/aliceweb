@@ -1,7 +1,7 @@
 ﻿@using Alice.Service.Model
 @model List<CategoriesDTO>
 @{
-    ViewData["Title"] = "Kategori Listesi";
+    ViewData["Title"] = "Tur Listesi";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="~/Content/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" />
@@ -68,21 +68,33 @@
                     </div>
                     <div class="col-sm-6 text-right">
                         <div class="dt-buttons btn-group">
-                            <button type="button" class="btn btn-success btn-elevate btn-elevate-air" id="newcategorytrigger">Yeni Kategori Ekle</button>
+                            <button type="button" class="btn btn-success btn-elevate btn-elevate-air" id="newtourtrigger">Yeni Tur Ekle</button>
                         </div>
                     </div>
                 </div>
                 <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Kategori Adı</th>
-                            <th>Url Yolu</th>
+                            <th>Tur Kodu</th>
+                            <th>Tur Tipi</th>
+                            <th>Tur Adı</th>
                             <th>#</th>
                         </tr>
                     </thead>
 
                     <tbody>
+                        @foreach (var item in (List<TourDTO>)ViewBag.TourList)
+                        {
+                            <tr>
+                                <td>@item.TourCode</td>
+                                <td>@item.TourType</td>
+                                <td>@item.TourName</td>
+                                <td>
+                                    <button class="btn btn-sm btn-danger tourdelete">Sil</button>
+                                    <button class="btn btn-sm btn-success tourupdate">Güncelle</button>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
 
                 </table>
@@ -92,5 +104,12 @@
     </div>
 
 </div>
-
-
+@section Scripts{
+    <script>
+        $(function () {
+            $("#newtourtrigger").click(function () {
+                window.location.href = "/tour/new";
+            });
+        });
+    </script>
+}

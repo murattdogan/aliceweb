@@ -160,6 +160,7 @@
         });
 
         function renderCategory() {
+            $("#TopCategory").append(`<option value="0">Seç</option>`);
             $.ajax({
                 type: "POST",
                 url: "/Categories/UpCategory",
