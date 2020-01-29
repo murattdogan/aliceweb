@@ -1,0 +1,233 @@
+﻿
+@model Alice.Service.Model.TourDTO
+@{
+    ViewData["Title"] = "Tur Detayı";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var categoryList = ((Alice.Admin.Models.TourCategoryViewModel)ViewBag.Categories);
+
+}
+
+<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+
+<input type="hidden" value="@Model.Id" id="TourId" />
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-portlet kt-portlet--tabs">
+        <div class="kt-portlet__head">
+            <div class="kt-portlet__head-toolbar">
+                <ul class="nav nav-tabs nav-tabs-line nav-tabs-line-success" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#kt_portlet_base_demo_1_1_tab_content" role="tab" aria-selected="true">
+                            <i class="la la-cog"></i> Genel Tur Bilgileri
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_2_tab_content" role="tab" aria-selected="false">
+                            <i class="la la-briefcase"></i> İşaretlemeler
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_3_tab_content" role="tab" aria-selected="false">
+                            <i class="la la-bell-o"></i>Gün Listesi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_3_tab_content" role="tab" aria-selected="false">
+                            <i class="la la-bell-o"></i>Otel Listesi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#kt_portlet_base_demo_1_3_tab_content" role="tab" aria-selected="false">
+                            <i class="la la-bell-o"></i>Galeri
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <div class="tab-content">
+                <div class="tab-pane active" id="kt_portlet_base_demo_1_1_tab_content" role="tabpanel">
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Tur Adı</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="@Model.TourName" id="TourName">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Tur Kısa Açıklama</label>
+                        <div class="col-10">
+                            <div id="TourSpot"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Tur Açıklama</label>
+                        <div class="col-10">
+                            <div id="TourBody"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label"> </label>
+                        <div class="col-10">
+                            <button class="btn btn-sm btn-success" id="TourInformationSave">Güncelle</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane" id="kt_portlet_base_demo_1_2_tab_content" role="tabpanel">
+                    <div class="kt-checkbox-list">
+
+                        @foreach (var item in categoryList.AllCategories.Where(x => x.MainCategoryId == 0))
+                        {
+                            var isChecked = categoryList.SelectAllCategories.Count(x => x.CategoriesId == item.Id);
+
+                            <label class="kt-checkbox">
+                                <input type="checkbox" @(isChecked == 1 ? "checked='checked'" : "") value="@item.Id" name="TourCategories"> <strong>@item.CategoryName</strong>
+                                <span></span>
+                            </label>
+                            @foreach (var subItem in categoryList.AllCategories.Where(x => x.MainCategoryId == item.Id))
+                            {
+                                var isSubChecked = categoryList.SelectAllCategories.Count(x => x.CategoriesId == subItem.Id);
+                                <label class="kt-checkbox" style="margin-left: 30px;">
+                                    <input type="checkbox" @(isSubChecked == 1 ? "checked='checked'" : "") value="@subItem.Id" name="TourCategories"> @subItem.CategoryName
+                                    <span></span>
+                                </label>
+                                @foreach (var bsubItem in categoryList.AllCategories.Where(x => x.MainCategoryId == subItem.Id))
+                                {
+                                    var isBSubChecked = categoryList.SelectAllCategories.Count(x => x.CategoriesId == bsubItem.Id);
+                                    <label class="kt-checkbox" style="margin-left: 60px;">
+                                        <input type="checkbox" @(isBSubChecked == 1 ? "checked='checked'" : "") value="@bsubItem.Id" name="TourCategories"> @bsubItem.CategoryName
+                                        <span></span>
+                                    </label>
+                                }
+                            }
+                        }
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <br /><br />
+                            <button class="btn btn-sm btn-success" id="TourCategoriesSave">Güncelle</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane" id="kt_portlet_base_demo_1_3_tab_content" role="tabpanel">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/Content/js/pages/components/extended/sweetalert2.js" type="text/javascript"></script>
+    <script>
+
+        let TourSpot;
+        let TourBody;
+
+        ClassicEditor
+            .create(document.querySelector('#TourSpot'))
+            .then(newEditor => {
+                newEditor.setData("@Html.Raw(Model.TourSpot)");
+                TourSpot = newEditor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+
+        ClassicEditor
+            .create(document.querySelector('#TourBody'))
+            .then(newEditor => {
+                newEditor.setData("@Html.Raw(Model.OverView)");
+                TourBody = newEditor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+
+        // Assuming there is a <button id="submit">Submit</button> in your application.
+        document.querySelector('#TourInformationSave').addEventListener('click', () => {
+
+
+            $.ajax({
+                type: "POST",
+                url: "/Tour/UpdateTour",
+                data: {
+                    "Id": parseInt($("#TourId").val()),
+                    "TourName": $("#TourName").val(),
+                    "TourSpot": TourSpot.getData(),
+                    "TourBody": TourBody.getData()
+                },
+                success: function (x) {
+                    if (x == false) {
+                        alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                    }
+                    else {
+                        swal.fire({
+                            title: "Genel Tur Bilgileri Güncelleniyor...",
+                            text: "Sandığın gibi değil, çok hızlı güncelliyorum :)",
+                            timer: 3000,
+                            onOpen: function () {
+                                swal.showLoading()
+                            }
+                        }).then(function (result) {
+                            if (result.dismiss === 'timer') {
+                                window.location.reload(false);
+                            }
+                        });
+                    }
+                },
+                dataType: "json"
+            });
+        });
+
+
+         document.querySelector('#TourCategoriesSave').addEventListener('click', () => {
+             var ids = [];
+$('input[name="TourCategories"]:checked').each(function(i, e) {
+    ids.push($(this).val());
+});
+
+            $.ajax({
+                type: "POST",
+                url: "/Tour/UpdateCategories",
+                data: {
+                    "Id": parseInt($("#TourId").val()),
+                    "CategoryList": ids
+                },
+                success: function (x) {
+                    if (x == false) {
+                        alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                    }
+                    else {
+                        swal.fire({
+                            title: "Genel Tur Bilgileri Güncelleniyor...",
+                            text: "Sandığın gibi değil, çok hızlı güncelliyorum :)",
+                            timer: 3000,
+                            onOpen: function () {
+                                swal.showLoading()
+                            }
+                        }).then(function (result) {
+                            if (result.dismiss === 'timer') {
+                                window.location.reload(false);
+                            }
+                        });
+                    }
+                },
+                dataType: "json"
+            });
+        });
+
+    </script>
+
+}

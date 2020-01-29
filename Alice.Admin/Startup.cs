@@ -41,6 +41,7 @@ namespace Alice.Admin
             services.AddSingleton<UserService>();
             services.AddSingleton<CategoryService>();
             services.AddSingleton<TourService>();
+            services.AddSingleton<TourCategoriesService>();
             services.AddScoped<AuthorizationAttribute>();
 
 

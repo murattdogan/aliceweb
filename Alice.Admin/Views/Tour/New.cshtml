@@ -250,7 +250,7 @@
         //    });
 
         let TourSpot;
-         let TourBody;
+        let TourBody;
 
         ClassicEditor
             .create(document.querySelector('#TourSpot'))
@@ -261,7 +261,7 @@
                 console.error(error);
             });
 
-          ClassicEditor
+        ClassicEditor
             .create(document.querySelector('#TourBody'))
             .then(newEditor => {
                 TourBody = newEditor;
@@ -274,7 +274,7 @@
 
         // Assuming there is a <button id="submit">Submit</button> in your application.
         document.querySelector('.tourcreate').addEventListener('click', () => {
- 
+
 
             $.ajax({
                 type: "POST",
@@ -284,10 +284,17 @@
                     "TourSpot": TourSpot.getData(),
                     "TourBody": TourBody.getData()
                 },
-                success: function () {},
+                success: function (x) {
+                    if (x == "0") {
+                        alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                    }
+                    else {
+                        window.location.href = "/Tour/TourUpdateView?Id=" + x;
+                    }
+                },
                 dataType: "json"
             });
         });
- 
+
     </script>
 }

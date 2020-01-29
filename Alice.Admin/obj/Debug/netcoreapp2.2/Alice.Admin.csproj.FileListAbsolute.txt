@@ -42,3 +42,4 @@ E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Home\Dashboard.g.
 E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Categories\List.g.cshtml.cs
 E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Tour\List.g.cshtml.cs
 E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Tour\New.g.cshtml.cs
+E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Tour\TourUpdateView.g.cshtml.cs
