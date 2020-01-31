@@ -42,6 +42,10 @@ namespace Alice.Admin
             services.AddSingleton<CategoryService>();
             services.AddSingleton<TourService>();
             services.AddSingleton<TourCategoriesService>();
+            services.AddSingleton<GalleryPoolService>();
+            services.AddSingleton<TourGalleriesService>();
+            services.AddSingleton<GalleryKeywordService>();
+            services.AddSingleton<KeywordPoolService>();
             services.AddScoped<AuthorizationAttribute>();
 
 

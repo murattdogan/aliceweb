@@ -12,6 +12,12 @@ namespace Alice.Data.Context
         public DbSet<Categories> Categories { get; set; }
         public DbSet<Tour> Tours { get; set; }
         public DbSet<TourCategories> TourCategories { get; set; }
+        public DbSet<KeywordPool> KeywordPool { get; set; }
+        public DbSet<GalleryKeyword> GalleryKeyword { get; set; }
+        public DbSet<GalleryPool> GalleryPool { get; set; }
+        public DbSet<TourGalleries> TourGalleries { get; set; }
+
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

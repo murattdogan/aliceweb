@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Redis.Core" Version="1.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
 
@@ -20,6 +21,7 @@
     <Folder Include="Content\Admin\css\demo2\" />
     <Folder Include="Content\Admin\js\demo2\" />
     <Folder Include="Content\UImage\Categories\" />
+    <Folder Include="Content\UI\Image\" />
   </ItemGroup>
 
 

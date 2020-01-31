@@ -2,18 +2,27 @@
 using Alice.Data.Model;
 using Alice.Data.Repository;
 using Alice.Service.Model;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Alice.Service.Service
 {
     public class KeywordPoolService
     {
+        private IMapper _iMapper;
         IRepository<KeywordPool> _keywordPoolRepository;
         public KeywordPoolService()
         {
             _keywordPoolRepository = new Repository<KeywordPool>(new LuxuryContext());
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<KeywordPool, KeywordPoolDTO>();
+            });
+            _iMapper = config.CreateMapper();
         }
 
         public bool Add(KeywordPoolDTO keywordpool)
@@ -36,6 +45,15 @@ namespace Alice.Service.Service
             return false;
         }
 
+        public List<KeywordPoolDTO> GetAll()
+        {
+            return _iMapper.Map<List<KeywordPool>, List<KeywordPoolDTO>>(_keywordPoolRepository.All().ToList());
+        }
+
+        public KeywordPoolDTO GetByKeyword(string keyword)
+        {
+            return _iMapper.Map<KeywordPool, KeywordPoolDTO>(_keywordPoolRepository.First(x => x.Keyword == keyword));
+        }
     }
 
 }
