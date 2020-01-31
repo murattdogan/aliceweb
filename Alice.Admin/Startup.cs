@@ -45,17 +45,29 @@ namespace Alice.Admin
             services.AddScoped<AuthorizationAttribute>();
 
 
-
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddLocalization(options =>
             {
                 options.ResourcesPath = "Resources";
             });
 
-            services.AddDistributedRedisCache(option =>
+            //services.AddDistributedRedisCache(option =>
+            //{
+            //    option.Configuration = "142.93.172.93:6379,password=luxuryredisserver";
+            //});
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
             {
-                option.InstanceName = "luxurydbadmin";
-                option.Configuration = "127.0.0.1:6379";
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
             });
+
+
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(10);

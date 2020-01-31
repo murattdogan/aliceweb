@@ -41,7 +41,7 @@ namespace Alice.Admin.Controllers
                     return View();
                 else
                 {
-                    if (HttpContext.Session.Get("luxurydbadmin") is null)
+                    if (HttpContext.Session.GetString("luxurydbadmin") == null)
                     {
                         HttpContext.Session.SetString("luxurydbadmin", JsonConvert.SerializeObject(q));
                     }
@@ -53,7 +53,7 @@ namespace Alice.Admin.Controllers
 
         public IActionResult Cikis()
         {
-            if (HttpContext.Session.Get("luxurydbadmin") != null)
+            if (HttpContext.Session.GetString("luxurydbadmin") != null)
                 HttpContext.Session.Remove("luxurydbadmin");
 
             return RedirectToAction("Login");

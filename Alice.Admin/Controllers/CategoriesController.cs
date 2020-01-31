@@ -44,7 +44,7 @@ namespace Alice.Admin.Controllers
             var upload = "";
             if (CategoryFile != null)
             {
-                upload = Path.Combine(_environment.ContentRootPath, "Content\\UImage\\Categories", $"{fileName}.{Path.GetExtension(CategoryFile.FileName)}");
+                upload = Path.Combine(_environment.ContentRootPath, "Content/UImage/Categories", $"{fileName}{Path.GetExtension(CategoryFile.FileName)}");
                 CategoryFile.CopyTo(new FileStream(upload, FileMode.Create));
             }
 

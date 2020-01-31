@@ -41,3 +41,5 @@ E:\alice\Alice\Alice.Admin\bin\Release\netcoreapp2.2\Alice.Data.pdb
 E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Razor\Views\Categories\List.g.cshtml.cs
 E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Razor\Views\Home\Dashboard.g.cshtml.cs
 E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Razor\Views\Tour\List.g.cshtml.cs
+E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Razor\Views\Tour\New.g.cshtml.cs
+E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Razor\Views\Tour\TourUpdateView.g.cshtml.cs
