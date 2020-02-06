@@ -44,3 +44,5 @@ E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Tour\List.g.cshtm
 E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Tour\New.g.cshtml.cs
 E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Tour\TourUpdateView.g.cshtml.cs
 E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\GalleryPool\List.g.cshtml.cs
+E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Tour\GetGallerybyText.g.cshtml.cs
+E:\alice\Alice\Alice.Admin\obj\Debug\netcoreapp2.2\Razor\Views\Tour\GetTourImages.g.cshtml.cs

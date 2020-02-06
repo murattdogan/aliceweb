@@ -6,9 +6,11 @@ namespace Alice.Data.Model
 {
     public class GalleryPool : BaseModel
     {
-        public string Path { get; set; }
-        public string Width{ get; set; }
-        public string Height { get; set; }
+        public string GalleryId { get; set; }
+        public string Thumbnail { get; set; }
+        public string Small { get; set; }
+        public string Medium { get; set; }
+        public string Large { get; set; }
         public DateTime RecordDate { get; set; }
     }
 }

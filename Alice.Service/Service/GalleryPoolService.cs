@@ -28,9 +28,11 @@ namespace Alice.Service.Service
         {
             return _galleryPoolRepository.Add(new GalleryPool()
             {
-                Height = gallery.Height,
-                Width = gallery.Width,
-                Path = gallery.Path,
+                GalleryId = gallery.GalleryId,
+                Thumbnail = gallery.Thumbnail,
+                Small = gallery.Small,
+                Medium = gallery.Medium,
+                Large = gallery.Large,
                 RecordDate = DateTime.Now
             });
         }
@@ -50,6 +52,11 @@ namespace Alice.Service.Service
             }
 
             return false;
+        }
+
+        public GalleryPoolDTO GetByGalleryId(string galleryId)
+        {
+            return _iMapper.Map<GalleryPool, GalleryPoolDTO>(_galleryPoolRepository.First(x => x.GalleryId == galleryId));
         }
 
     }

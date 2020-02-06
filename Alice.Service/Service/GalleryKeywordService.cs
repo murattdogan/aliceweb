@@ -2,18 +2,27 @@
 using Alice.Data.Model;
 using Alice.Data.Repository;
 using Alice.Service.Model;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Alice.Service.Service
 {
     public class GalleryKeywordService
     {
+        private IMapper _iMapper;
         IRepository<GalleryKeyword> _galleryKeywordRepository;
         public GalleryKeywordService()
         {
             _galleryKeywordRepository = new Repository<GalleryKeyword>(new LuxuryContext());
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<GalleryKeyword, GalleryKeywordDTO>();
+            });
+            _iMapper = config.CreateMapper();
         }
 
         public bool Add(GalleryKeywordDTO gallerykeyword)
@@ -35,6 +44,16 @@ namespace Alice.Service.Service
             }
 
             return false;
+        }
+
+        public List<GalleryKeywordDTO> GetAllbyKeywordId(int keywordId)
+        {
+            var keywordpool = _galleryKeywordRepository.Where(x => x.KeywordId == keywordId).ToList();
+            if (keywordpool.Any())
+            {
+                return _iMapper.Map<List<GalleryKeyword>, List<GalleryKeywordDTO>>(keywordpool);
+            }
+            return null;
         }
     }
 }

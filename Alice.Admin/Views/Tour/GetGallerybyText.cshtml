@@ -1,0 +1,26 @@
+﻿@model List<Alice.Service.Model.GalleryPoolDTO>
+<div class="kt-section">
+    <div class="kt-section__desc">Bulunan Resimler</div>
+    <div class="kt-section__content">
+        @foreach (var item in Model)
+        {
+            <a href="#" class="imageselect">
+                <img src="@item.Thumbnail" data-medium="@item.Medium" class="imagelistitem" alt="Seç" data-id="@item.GalleryId">
+            </a>
+        }
+
+        <input type="hidden" value="0" name="GetGalleryByText" />
+    </div>
+</div>
+
+<script>
+
+        $(function () {
+            $('.imageselect').click(function () {
+                var galleryId = $(this).children("img").data("id");
+                $("input[name='GetGalleryByText']").val(galleryId);
+                $('.imagelistitem').css("border", "0");
+                $(this).children("img").css("border", "2px solid red");
+            });
+        });
+</script>

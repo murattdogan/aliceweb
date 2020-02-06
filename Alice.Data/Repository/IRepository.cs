@@ -13,6 +13,8 @@ namespace Alice.Data.Repository
         bool Delete(T entity);
 
         IQueryable<T> All();
+        IQueryable<T> AllTake(int take);
+
         IQueryable<T> Where(Expression<Func<T, bool>> where);
         T First(Expression<Func<T, bool>> where);
         IQueryable<T> OrderBy<TKey>(Expression<Func<T, TKey>> orderBy, bool isDesc);

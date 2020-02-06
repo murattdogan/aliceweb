@@ -1,0 +1,9 @@
+@charset 'utf-8';
+.parallaxBox { margin-bottom: 70px; padding: 72px 0 72px; background-size: cover !important; background-repeat: no-repeat !important; }
+.parallax { max-width: 830px; text-align: center; display: table; margin: auto; }
+.parallax h3 { font-size: 60px; font-weight: bold; line-height: 1.05; letter-spacing: -2.4px; text-align: center; color: #f4f4f4; font-family: 'Playfair Display', serif; padding-bottom: 29px; position: relative; margin-bottom: 36px; }
+.parallax h3:after { content: ""; position: absolute; top: 100%; background-image: linear-gradient(to right, #fee5b6, #977235); left: 100px; display: block !important; height: 2px; width: calc(100% - 200px); right: 100px; opacity: 1; }
+.parallax p { font-size: 18px; font-weight: normal; font-stretch: normal; font-style: normal; line-height: 1.5; letter-spacing: -0.36px; text-align: center; color: #ffffff; }
+
+}
+ 

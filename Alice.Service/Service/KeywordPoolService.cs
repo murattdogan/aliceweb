@@ -50,6 +50,11 @@ namespace Alice.Service.Service
             return _iMapper.Map<List<KeywordPool>, List<KeywordPoolDTO>>(_keywordPoolRepository.All().ToList());
         }
 
+        public List<KeywordPoolDTO> GetTake(int take)
+        {
+            return _iMapper.Map<List<KeywordPool>, List<KeywordPoolDTO>>(_keywordPoolRepository.AllTake(take).ToList());
+        }
+
         public KeywordPoolDTO GetByKeyword(string keyword)
         {
             return _iMapper.Map<KeywordPool, KeywordPoolDTO>(_keywordPoolRepository.First(x => x.Keyword == keyword));

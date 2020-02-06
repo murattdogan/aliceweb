@@ -85,8 +85,8 @@
                         @foreach (var item in Model)
                         {
                             <tr data-id="@item.Id">
-                                <td><img src="@item.Path" /></td>
-                                <td>25</td>
+                                <td style="width:40px; height:40px;"><img src="@item.Thumbnail" width="40" height="40" /></td>
+                                <td><a href="#">Hangi Turlarda Kullanılıyor?</a></td>
                                 <td nowrap>
                                     <button type="button" class="btn btn-danger btn-elevate btn-elevate-air gallerydelete" data-id="@item.Id">Sil</button>
                                 </td>
@@ -106,15 +106,18 @@
     <script>
         $(function () {
             $(".gallerydelete").click(function () {
-                $.ajax({
-                    type: "POST",
-                    url: "/GalleryPool/Delete",
-                    data: { Id: parseInt($(this).data("id")) },
-                    success: function (e) {
-                        window.location.reload(false);
-                    },
-                    dataType: "json"
-                });
+                if (confirm("Silmek İstediğinize Emin misiniz?")) {
+                    $.ajax({
+                        type: "GET",
+                        url: "/GalleryPool/Delete",
+                        data: { Id: parseInt($(this).data("id")) },
+                        success: function () {
+
+                        },
+                        dataType: "json"
+                    });
+                    window.location.reload(false);
+                }
             });
             $('#newimagestrigger').click(function () {
                 $("#newimages").fadeIn();

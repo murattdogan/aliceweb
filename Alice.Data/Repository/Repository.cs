@@ -41,6 +41,11 @@ namespace Alice.Data.Repository
             return Table;
         }
 
+        public IQueryable<T> AllTake(int take)
+        {
+            return Table.Take(take);
+        }
+
         public IQueryable<T> Where(Expression<Func<T, bool>> where)
         {
             return Table.Where(where);

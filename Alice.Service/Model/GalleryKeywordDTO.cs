@@ -6,7 +6,7 @@ namespace Alice.Service.Model
 {
     public class GalleryKeywordDTO : BaseModel
     {
-        public int GalleryId { get; set; }
+        public string GalleryId { get; set; }
         public int KeywordId { get; set; }
     }
 }

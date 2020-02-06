@@ -19,57 +19,49 @@ namespace Alice.Admin.Controllers
     {
         private readonly GalleryPoolService _galleryPoolService;
         private readonly KeywordPoolService _keywordPoolService;
+        private readonly GalleryKeywordService _galleryKeywordService;
         private readonly IHostingEnvironment _environment;
 
-        public GalleryPoolController(GalleryPoolService galleryPoolService, KeywordPoolService keywordPoolService, IHostingEnvironment environment)
+        public GalleryPoolController(GalleryPoolService galleryPoolService, KeywordPoolService keywordPoolService, GalleryKeywordService galleryKeywordService, IHostingEnvironment environment)
         {
             _galleryPoolService = galleryPoolService;
             _keywordPoolService = keywordPoolService;
+            _galleryKeywordService = galleryKeywordService;
             _environment = environment;
         }
 
 
         public IActionResult List()
         {
-            ViewBag.KeywordPool = _keywordPoolService.GetAll();
+            ViewBag.KeywordPool = _keywordPoolService.GetTake(10).ToList();
             return View(_galleryPoolService.GetAll());
         }
 
         [HttpGet]
         public IActionResult Delete(int Id)
         {
-            return View(_galleryPoolService.Delete(new GalleryPoolDTO() { Id = Id }));
+            _galleryPoolService.Delete(new GalleryPoolDTO() { Id = Id });
+            return RedirectToAction("List");
         }
-
-        //public static Image ResizeImage(this Image image, int width, int height)
-        //{
-        //    var res = new Bitmap(width, height);
-        //    using (var graphic = Graphics.FromImage(res))
-        //    {
-        //        graphic.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        //        graphic.SmoothingMode = SmoothingMode.HighQuality;
-        //        graphic.PixelOffsetMode = PixelOffsetMode.HighQuality;
-        //        graphic.CompositingQuality = CompositingQuality.HighQuality;
-        //        graphic.DrawImage(image, 0, 0, width, height);
-        //    }
-        //    return res;
-        //}
 
         [HttpPost]
         public IActionResult Insert(int KeywordPool, string ImageCategoryName, IFormFile ImageFile)
         {
 
             string randomFileName = Guid.NewGuid().ToString();
-            var fileName = Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"{randomFileName}{Path.GetExtension(ImageFile.FileName)}");
-            string largeFileName = $"large-{fileName}", mediumFileName = $"medium-{fileName}", smallFileName = $"large-{fileName}";
+            string largeFileName = Path.Combine("/Content/UI/Image", $"large-{randomFileName}{Path.GetExtension(ImageFile.FileName)}");
+            string mediumFileName = Path.Combine("/Content/UI/Image", $"medium-{randomFileName}{Path.GetExtension(ImageFile.FileName)}");
+            string smallFileName = Path.Combine("/Content/UI/Image", $"small-{randomFileName}{Path.GetExtension(ImageFile.FileName)}");
+            string thumbnailFileName = Path.Combine("/Content/UI/Image", $"thumbnail-{randomFileName}{Path.GetExtension(ImageFile.FileName)}");
             using (var memoryStream = new MemoryStream())
             {
                 ImageFile.CopyToAsync(memoryStream);
                 using (var img = Image.FromStream(memoryStream))
                 {
-                    img.GetThumbnailImage(1024, 120, () => false, IntPtr.Zero).Save(largeFileName);
-                    img.GetThumbnailImage(768, 120, () => false, IntPtr.Zero).Save(mediumFileName);
-                    img.GetThumbnailImage(512, 120, () => false, IntPtr.Zero).Save(smallFileName);
+                    img.GetThumbnailImage(40, 40, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"thumbnail-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
+                    img.GetThumbnailImage(1024, 120, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"large-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
+                    img.GetThumbnailImage(768, 120, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"medium-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
+                    img.GetThumbnailImage(512, 120, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"small-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
                 }
             }
 
@@ -82,18 +74,23 @@ namespace Alice.Admin.Controllers
                     KeywordPool = keywordResult.Id;
                 }
             }
-            _galleryPoolService.Add(new GalleryPoolDTO()
+
+            _galleryKeywordService.Add(new GalleryKeywordDTO()
             {
-                Path = upload,
-                Height =
+                GalleryId = randomFileName,
+                KeywordId = KeywordPool
             });
 
+            _galleryPoolService.Add(new GalleryPoolDTO()
+            {
+                GalleryId = randomFileName,
+                Thumbnail = thumbnailFileName,
+                Small = smallFileName,
+                Large = largeFileName,
+                Medium = mediumFileName
+            });
 
-            return View();
+            return RedirectToAction("List");
         }
-
-
-
-
     }
 }

@@ -2,18 +2,26 @@
 using Alice.Data.Model;
 using Alice.Data.Repository;
 using Alice.Service.Model;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Alice.Service.Service
 {
     public class TourGalleriesService
     {
+        private IMapper _iMapper;
         IRepository<TourGalleries> _tourGalleriesRepository;
         public TourGalleriesService()
         {
             _tourGalleriesRepository = new Repository<TourGalleries>(new LuxuryContext());
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TourGalleries, TourGalleriesDTO>();
+            });
+            _iMapper = config.CreateMapper();
         }
 
 
@@ -37,5 +45,18 @@ namespace Alice.Service.Service
 
             return false;
         }
+
+        public List<TourGalleriesDTO> GetGalleriesByTourId(int tourId)
+        {
+            var tourGallery = _tourGalleriesRepository.Where(x => x.TourId == tourId).ToList();
+            if (tourGallery.Any())
+            {
+
+            }
+
+
+            return _iMapper.Map<List<TourGalleries>, List<TourGalleriesDTO>>(tourGallery);
+        }
+
     }
 }

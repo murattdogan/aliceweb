@@ -1,0 +1,12 @@
+@charset 'utf-8';
+.commentSlider .item p { font-size: 17px; font-weight: normal; font-stretch: normal; font-style: italic; line-height: 1.29; letter-spacing: -0.68px; text-align: center; margin-top: 35px; }
+.commentSlider .item img { text-align: center; display: block; margin: auto; }
+.commentSlider .item span { margin: 34px 0; display: block; text-align: center; font-size: 17px; font-weight: bold; font-stretch: normal; font-style: normal; line-height: normal; letter-spacing: -0.68px; text-align: center; color: #c8973e; }
+.commentSlider .item span strong { display: block; color: #454646; font-weight: 700; }
+.testimonials { margin-bottom: 72px; }
+.commentSlider .slick-dots li { pointer-events: inherit; }
+.commentNav { position: absolute; top: 99px; width: 100%; left: 0; right: 0; }
+.litlePrev, .litleNext { width: 25px; }
+.commentNav .litleNext { left: auto; right: 0; }
+.commentNav button {position: absolute;top: 0;background: #fff;}
+.itemContent {max-width: 800px;display: table;margin: auto;overflow: hidden;}

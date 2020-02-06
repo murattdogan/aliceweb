@@ -7,6 +7,6 @@ namespace Alice.Service.Model
     public class TourGalleriesDTO : BaseModel
     {
         public int TourId { get; set; }
-        public int GalleryId { get; set; }
+        public string GalleryId { get; set; }
     }
 }
