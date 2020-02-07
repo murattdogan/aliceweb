@@ -47,6 +47,7 @@ namespace Alice.Admin
             services.AddSingleton<GalleryKeywordService>();
             services.AddSingleton<KeywordPoolService>();
             services.AddScoped<AuthorizationAttribute>();
+            services.AddScoped<SiteSettingsService>();
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

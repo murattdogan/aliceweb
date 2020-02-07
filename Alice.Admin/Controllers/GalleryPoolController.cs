@@ -59,9 +59,9 @@ namespace Alice.Admin.Controllers
                 using (var img = Image.FromStream(memoryStream))
                 {
                     img.GetThumbnailImage(40, 40, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"thumbnail-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
-                    img.GetThumbnailImage(1024, 120, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"large-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
-                    img.GetThumbnailImage(768, 120, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"medium-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
-                    img.GetThumbnailImage(512, 120, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"small-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
+                    img.GetThumbnailImage(img.Width >= 1440 ? 1440 : img.Width, img.Height >= 800 ? 800 : img.Height, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"large-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
+                    img.GetThumbnailImage(257, 257, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"medium-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
+                    img.GetThumbnailImage(285, 285, () => false, IntPtr.Zero).Save(Path.Combine(_environment.ContentRootPath, "Content/UI/Image", $"small-{randomFileName}{Path.GetExtension(ImageFile.FileName)}"));
                 }
             }
 

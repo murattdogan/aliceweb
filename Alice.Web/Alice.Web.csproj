@@ -19,4 +19,9 @@
     <Folder Include="Content\" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\Alice.Service\Alice.Service.csproj" />
+  </ItemGroup>
+
 </Project>

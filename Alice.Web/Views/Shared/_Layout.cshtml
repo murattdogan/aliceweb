@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var homeModel = (Alice.Web.Models.LayoutModel)ViewBag.HomePage;
+
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,16 +12,18 @@
     <meta name="description" content="">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <environment include="Development">
+    <environment include="Production">
         <link rel="stylesheet" href="~/Content/css/cssPlugins.css">
         <link rel="stylesheet" href="~/Content/css/style.css">
     </environment>
     <environment exclude="Development">
+        <link rel="stylesheet" href="~/Content/css/cssPlugins.css">
+        <link rel="stylesheet" href="~/Content/css/style.css">
         @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-              asp-fallback-href="~/Content/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />*@
+            asp-fallback-href="~/Content/lib/bootstrap/dist/css/bootstrap.min.css"
+            asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+            crossorigin="anonymous"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />*@
     </environment>
 </head>
 <body>
@@ -86,22 +93,22 @@
             <div class="row">
                 <div class="col-12">
                     <ul>
-                        <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.3s">
+                        <li class="wow fadeIn" data-wow-duration="0.9s" data-wow-delay="0.3s">
                             <a href="javascript:;">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         </li>
-                        <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.6s">
+                        <li class="wow fadeIn" data-wow-duration="0.9s" data-wow-delay="0.6s">
                             <a href="javascript:;">
                                 <i class="fab fa-youtube"></i>
                             </a>
                         </li>
-                        <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.9s">
+                        <li class="wow fadeIn" data-wow-duration="0.9s" data-wow-delay="0.9s">
                             <a href="javascript:;">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                         </li>
-                        <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="1.2s">
+                        <li class="wow fadeIn" data-wow-duration="0.9s" data-wow-delay="1.2s">
                             <a href="javascript:;">
                                 <i class="fab fa-twitter"></i>
                             </a>
@@ -113,7 +120,7 @@
     </div>
     <section class="manset">
         <div class="mansetSlide">
-            <div class="item" style="background: url(/Content/img/bg1.jpg)">
+            <div class="item" style="background: url(http://localhost:5005@(Alice.Service.Helper.SliderHelper.SliderGetImagebyGalleryId(homeModel.SliderFirstImage).Replace("\\","/"))">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -130,16 +137,16 @@
                     </div>
                 </div>
             </div>
-            <div class="item" style="background: url(/Content/img/bg2.jpg)">
+            <div class="item" style="background: url(http://localhost:5005@(Alice.Service.Helper.SliderHelper.SliderGetImagebyGalleryId(homeModel.SliderSecondImage).Replace("\\","/")))">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="slideHeading animated fadeInLeft">
                                 <b>Just Dream!</b>
-                                <span style="color: #d5b141">Leave the rest us</span>
+                                <span style="color: #d5b141">@homeModel.SliderFirstTitle</span>
                                 <div class="btnTable">
                                     <a href="javascript:;" class="whiteBtn">
-                                        CALL TO ACTION <img src="/Content/img/littleArrow.png" alt="">
+                                        @homeModel.SliderFirstButtonTitle <img src="/Content/img/littleArrow.png" alt="">
                                     </a>
                                 </div>
                             </div>
@@ -147,12 +154,12 @@
                     </div>
                 </div>
             </div>
-            <div class="item" style="background: url(/Content/img/bg1.jpg)">
+            <div class="item" style="background: url(http://localhost:5005@(Alice.Service.Helper.SliderHelper.SliderGetImagebyGalleryId(homeModel.SliderThirdImage).Replace("\\","/")))">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
                             <div class="slideHeading animated fadeInLeft">
-                                <b>Live The World</b>
+                                <b>@homeModel.SliderSecondTitle</b>
                                 <span>With Luxury</span>
                                 <div class="btnTable">
                                     <a href="javascript:;" class="whiteBtn">
@@ -164,7 +171,7 @@
                     </div>
                 </div>
             </div>
-            <div class="item" style="background: url(/Content/img/bg2.jpg)">
+            <div class="item" style="background: url(http://localhost:5005@(Alice.Service.Helper.SliderHelper.SliderGetImagebyGalleryId(homeModel.SliderForthImage).Replace("\\","/")))">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -214,14 +221,10 @@
                 <div class="col-12">
                     <div class="line d-flex align-items-start">
                         <span class="wow slideInLeft">
-                            Our Line of <br> <b>Business</b>
+                            @homeModel.texttitle
                         </span>
                         <p class="wow slideInRight">
-                            Luxury Istanbul: as being the foremost luxury brand of Turkey; aims to find out the bests and bringing together the most prestigious brands and services. This is where you will find high quality hand-picked selections. Provides consulting services to its guests, such as; finest properties, luxury villas, best interior designers,
-                            luxury hotels, exclusive travel services, best event designers, unique wedding venues, haute couture designers, best antique sellers, handcrafted jewelry designers, limited edition items to signature gifts and many more. <br><br>
-
-                            Our consultants and expert partners are at the forefront of their respective fields, providing professional service to fulfill your requests.
-
+                            @Html.Raw(homeModel.textdescription)
                         </p>
                     </div>
                 </div>
@@ -539,10 +542,12 @@
         </div>
     </section>
 
-    <environment include="Development">
+    <environment include="Production">
         <script src='~/Content/js/plugins.js'></script>
     </environment>
     <environment exclude="Development">
+        <script src='~/Content/js/plugins.js'></script>
+
         @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
                     asp-fallback-src="~/Content/lib/jquery/dist/jquery.min.js"
                     asp-fallback-test="window.jQuery"

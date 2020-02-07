@@ -16,6 +16,7 @@ namespace Alice.Data.Context
         public DbSet<GalleryKeyword> GalleryKeyword { get; set; }
         public DbSet<GalleryPool> GalleryPool { get; set; }
         public DbSet<TourGalleries> TourGalleries { get; set; }
+        public DbSet<SiteSettings> SiteSettings { get; set; }
 
         
 

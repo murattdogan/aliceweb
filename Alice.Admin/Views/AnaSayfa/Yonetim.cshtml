@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
     <div class="kt-portlet kt-portlet--tabs">
         <div class="kt-portlet__head">
@@ -45,10 +45,81 @@
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="col-xl-12 alreadyimagelist">
+                                <div class="kt-section__content kt-section__content--border">
+                                    @{
+                                        var q = ((List<Alice.Service.Model.SiteSettingsDTO>)ViewBag.AlreadyImageList);
+                                    }
+                                    <div class="card-group">
+                                        <div class="card">
+                                            <div class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40">
+                                                <img class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderFirstImage").FieldValue))" />
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">@(q.First(x => x.FieldName == "SliderFirstTitle").FieldValue)</h5>
+                                                <p class="card-text">@(q.First(x => x.FieldName == "SliderFirstButtonTitle").FieldValue)</p>
+                                                <p class="card-text"><button data-id="SliderFirst" class="btn btn-info btn-sm sliderupdate">Güncelle</button></p>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40">
+                                                <img class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderSecondImage").FieldValue))" />
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">@(q.First(x => x.FieldName == "SliderSecondTitle").FieldValue)</h5>
+                                                <p class="card-text">@(q.First(x => x.FieldName == "SliderSecondButtonTitle").FieldValue)</p>
+                                                <p class="card-text"><button data-id="SliderSecond" class="btn btn-info btn-sm sliderupdate">Güncelle</button></p>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40">
+                                                <img class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderThirdImage").FieldValue))" />
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">@(q.First(x => x.FieldName == "SliderThirdTitle").FieldValue)</h5>
+                                                <p class="card-text">@(q.First(x => x.FieldName == "SliderThirdButtonTitle").FieldValue)</p>
+                                                <p class="card-text"><button data-id="SliderThird" class="btn btn-info btn-sm sliderupdate">Güncelle</button></p>
+                                            </div>
+                                        </div>
+                                        <div class="card">
+                                            <div class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40">
+                                                <img class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderForthImage").FieldValue))" />
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">@(q.First(x => x.FieldName == "SliderForthTitle").FieldValue)</h5>
+                                                <p class="card-text">@(q.First(x => x.FieldName == "SliderForthButtonTitle").FieldValue)</p>
+                                                <p class="card-text"><button data-id="SliderForth" class="btn btn-info btn-sm sliderupdate">Güncelle</button></p>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                </div>
                             </div>
-                            <br />
-                            <div class="col-xl-12">
+                            <br /><br /><br />
+                            <div class="col-xl-12 slideupdatepanel" style="display:none;">
+
+                                <input type="hidden" name="SliderNumber" value="0" />
+
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Slide Başlık</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="text" id="SlideTitle">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Slide Buton Başlık</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="text" id="SlideButtonTitle">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="example-text-input" class="col-2 col-form-label">Slide Buton Url</label>
+                                    <div class="col-10">
+                                        <input class="form-control" type="text" id="SlideButtonLink">
+                                    </div>
+                                </div>
+
                                 <div class="form-group">
                                     <label><strong>Aramak İstediğiniz Resim için Anahtar Kelime Seçin</strong></label>
                                     <div class="input-group">
@@ -80,6 +151,33 @@
                     </div>
                 </div>
 
+
+                <div class="tab-pane active" id="kt_portlet_base_demo_1_2_tab_content" role="tabpanel">
+
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Başlık</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" id="texttitle">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Açıklama</label>
+                        <div class="col-10">
+                            <div id="textdescription"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label"> </label>
+                        <div class="col-10">
+                            <button class="btn btn-primary btn-sm" id="metinsave">Güncelle</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>
@@ -89,10 +187,121 @@
     <script src="~/Content/js/pages/components/extended/sweetalert2.js" type="text/javascript"></script>
     <script>
         $(function () {
-             $('.resimara').click(function () {
+
+            let textdescription;
+
+            ClassicEditor
+                .create(document.querySelector('#textdescription'))
+                .then(newEditor => {
+                    newEditor.setData("dasdas");
+                    textdescription = newEditor;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            $("#metinsave").click(function () {
+                if (confirm("Güncelleme Yapmak İstediğine Emin misin?")) {
+                    $.ajax({
+                    type: "POST",
+                    url: "/AnaSayfa/TextUpdate",
+                    data: {
+                        "title": $("#texttitle").val(),
+                        "description": textdescription.getData()
+                    },
+                    success: function (x) {
+                        swal.fire({
+                            title: "Metin Güncellemesi Yapılıyor...",
+                            text: "Yine destan döktürmüşsün :) Hadi neyse güncelliyorum",
+                            timer: 5000,
+                            onOpen: function () {
+                                swal.showLoading()
+                            }
+                        }).then(function (result) {
+
+                        });
+                    },
+                    dataType: "json"
+                });
+                }
+            });
+
+            $('.sliderupdate').click(function () {
+
+                var fieldName = $(this).data("id");
+                $.ajax({
+                    type: "POST",
+                    url: "/AnaSayfa/GetSingleSlider",
+                    data: {
+                        "fieldName": fieldName
+                    },
+                    success: function (x) {
+                        swal.fire({
+                            title: "Slider Getiriliyor...",
+                            text: "Getiriyorum hemen :)",
+                            timer: 2000,
+                            onOpen: function () {
+                                swal.showLoading()
+                            }
+                        }).then(function (result) {
+                            if (result.dismiss === 'timer') {
+                                $("input[name='SliderNumber']").val(fieldName);
+                                $("input[Id='SlideTitle']").val(x["slideTitle"]);
+                                $("input[Id='SlideButtonTitle']").val(x.slideButtonTitle);
+                                $("input[Id='SlideButtonLink']").val(x.slideButtonLink);
+                                $(".slideupdatepanel").fadeIn();
+                            }
+                        });
+                    },
+                    dataType: "json"
+                });
+            });
+
+            $('.sliderupdate').click(function () {
+                var id = $(this).data("id");
+                $("input[name='SliderNumber']").val(id);
+            });
+
+            $('.resimara').click(function () {
                 var text = $("select[name='ImageSearch']").val();
                 $(".galeriload").load("/Tour/GetGallerybyText?text=" + text);
                 $('.imageselect').bind("click");
+            });
+
+            $('.resimekletamamla').click(function () {
+                if (confirm("Güncellemek İstediğine Emin misin?")) {
+                    var galleryId = $("input[name='GetGalleryByText']").val();
+                    var sliderNumberId = $("input[name='SliderNumber']").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/AnaSayfa/UpdateSlider",
+                        data: {
+                            "galleryId": galleryId,
+                            "sliderNumberId": sliderNumberId,
+                            "slideTitle": $("#SlideTitle").val(),
+                            "slideButtonTitle": $("#SlideButtonTitle").val(),
+                            "slideButtonLink": $("#SlideButtonLink").val()
+                        },
+                        success: function (x) {
+                            if (x == false) {
+                                alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                            }
+                            else {
+                                swal.fire({
+                                    title: "Slider Güncelleniyor",
+                                    text: "Slide Güncelleme konusunda üstüme tanımam :) az bekle güncelliyorum.",
+                                    timer: 1000,
+                                    onOpen: function () {
+                                        swal.showLoading()
+                                    }
+                                }).then(function (result) {
+                                    window.location.reload(false);
+                                });
+                            }
+                        },
+                        dataType: "json"
+                    });
+                }
             });
         });
     </script>

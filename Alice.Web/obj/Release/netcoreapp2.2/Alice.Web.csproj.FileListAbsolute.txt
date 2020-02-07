@@ -5,8 +5,6 @@ E:\alice\Alice\Alice.Web\bin\Release\netcoreapp2.2\Alice.Web.dll
 E:\alice\Alice\Alice.Web\bin\Release\netcoreapp2.2\Alice.Web.pdb
 E:\alice\Alice\Alice.Web\bin\Release\netcoreapp2.2\Alice.Web.Views.dll
 E:\alice\Alice\Alice.Web\bin\Release\netcoreapp2.2\Alice.Web.Views.pdb
-E:\alice\Alice\Alice.Web\bin\Release\netcoreapp2.2\Alice.Data.dll
-E:\alice\Alice\Alice.Web\bin\Release\netcoreapp2.2\Alice.Data.pdb
 E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Alice.Web.csprojAssemblyReference.cache
 E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Alice.Web.csproj.CoreCompileInputs.cache
 E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Alice.Web.RazorAssemblyInfo.cache

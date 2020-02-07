@@ -28,3 +28,7 @@ E:\alice\Alice\Alice.Web\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.csht
 E:\alice\Alice\Alice.Web\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
 E:\alice\Alice\Alice.Web\obj\Debug\netcoreapp2.2\Alice.Web.csprojAssemblyReference.cache
 E:\alice\Alice\Alice.Web\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
+E:\alice\Alice\Alice.Web\bin\Debug\netcoreapp2.2\Alice.Data.dll
+E:\alice\Alice\Alice.Web\bin\Debug\netcoreapp2.2\Alice.Service.dll
+E:\alice\Alice\Alice.Web\bin\Debug\netcoreapp2.2\Alice.Service.pdb
+E:\alice\Alice\Alice.Web\bin\Debug\netcoreapp2.2\Alice.Data.pdb

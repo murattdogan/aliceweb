@@ -5,13 +5,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Alice.Web.Models;
+using Alice.Service.Service;
 
 namespace Alice.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SiteSettingsService _siteSettingsService;
+
+        public HomeController(SiteSettingsService siteSettingsService)
+        {
+            _siteSettingsService = siteSettingsService;
+        }
         public IActionResult Index()
         {
+            ViewBag.HomePage = new LayoutModel(_siteSettingsService);
             return View();
         }
 
