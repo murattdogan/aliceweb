@@ -46,6 +46,21 @@ namespace Alice.Admin.Controllers
             return Json(true);
         }
 
+        public JsonResult UpdateCategoryBox(string galleryId, string categorySliderFieldName, string categorytitle)
+        {
+            var imageResult = _siteSettingsService.GetFirstByFieldName(categorySliderFieldName);
+            var titleResult = _siteSettingsService.GetFirstByFieldName($"{categorySliderFieldName}Title");
+
+            if (imageResult != null && titleResult != null)
+            {
+                imageResult.FieldValue = galleryId;
+                titleResult.FieldValue = categorytitle;
+                _siteSettingsService.Update(imageResult);
+                return Json(true);
+            }
+            return Json(false);
+        }
+
 
         public JsonResult UpdateSlider(string galleryId, string sliderNumberId, string slideTitle, string slideButtonTitle, string slideButtonLink)
         {
@@ -133,6 +148,7 @@ namespace Alice.Admin.Controllers
 
             return Json(true);
         }
+
 
 
         public JsonResult GetSingleSlider(string fieldName)

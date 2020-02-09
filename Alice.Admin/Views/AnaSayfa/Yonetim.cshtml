@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
 <div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
     <div class="kt-portlet kt-portlet--tabs">
         <div class="kt-portlet__head">
@@ -181,9 +181,69 @@
                 </div>
 
                 <div class="tab-pane" id="kt_portlet_base_demo_1_4_tab_content" role="tabpanel">
-                   
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Başlık</label>
+                        <div class="col-10">
+                            <input class="form-control" type="text" value="" id="categorytitle">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Resim Alanı</label>
+                        <div class="col-10">
+                            <table cellpadding="30" cellspacing="30" style="width:250px; height:250px;background-color:silver; border-radius:10px">
+                                <tr>
+                                    <td valign="top" class="categoryfield" data-fieldname="HomeCategoryImageOne" style="background-color:silver; cursor:pointer;">SEÇ</td>
+                                    <td valign="top" class="categoryfield" data-fieldname="HomeCategoryImageTwo" style="background-color:whitesmoke; cursor:pointer;">SEÇ</td>
+                                    <td valign="top" class="categoryfield" data-fieldname="HomeCategoryImageThree" style="background-color:lightgoldenrodyellow; cursor:pointer;">SEÇ</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" class="categoryfield" data-fieldname="HomeCategoryImageFour" rowspan="2" style="background-color:thistle; cursor:pointer;">SEÇ</td>
+                                    <td valign="top" class="categoryfield" data-fieldname="HomeCategoryImageFive" colspan="2" style="background-color:powderblue; cursor:pointer;">SEÇ</td>
+                                </tr>
+                                <tr>
+                                    <td valign="top" class="categoryfield" data-fieldname="HomeCategoryImageSix" style="background-color:darkseagreen; cursor:pointer;">SEÇ</td>
+                                    <td valign="top" class="categoryfield" data-fieldname="HomeCategoryImageSeven" style="background-color:seashell; cursor:pointer;">SEÇ</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
 
 
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label"><strong>Aramak İstediğiniz Resim için Anahtar Kelime Seçin</strong></label>
+                        <div class="col-10 input-group">
+                            <select name="ImageSearch2" class="form-control selectpicker col-10" style="border:1px solid #5578eb;">
+                                @foreach (var item in (List<Alice.Service.Model.KeywordPoolDTO>)ViewBag.SelectAllKeyword)
+                                {
+                                    <option value="@item.Keyword">@item.Keyword</option>
+                                }
+                            </select>
+                            <div class="input-group-append" style="height: 38px;">
+                                <input type="hidden" value="0" name="CategorySliderFieldName" />
+                                <button class="btn btn-info resimara2" type="button">Galeride Ara</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label"></label>
+                        <div class="col-10">
+                            <div class="form-group galeriload2">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label"> </label>
+                        <div class="col-10">
+                            <button class="btn btn-primary btn-sm" id="categorysave">Güncelle</button>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -211,26 +271,26 @@
             $("#metinsave").click(function () {
                 if (confirm("Güncelleme Yapmak İstediğine Emin misin?")) {
                     $.ajax({
-                    type: "POST",
-                    url: "/AnaSayfa/TextUpdate",
-                    data: {
-                        "title": $("#texttitle").val(),
-                        "description": textdescription.getData()
-                    },
-                    success: function (x) {
-                        swal.fire({
-                            title: "Metin Güncellemesi Yapılıyor...",
-                            text: "Yine destan döktürmüşsün :) Hadi neyse güncelliyorum",
-                            timer: 3000,
-                            onOpen: function () {
-                                swal.showLoading()
-                            }
-                        }).then(function (result) {
+                        type: "POST",
+                        url: "/AnaSayfa/TextUpdate",
+                        data: {
+                            "title": $("#texttitle").val(),
+                            "description": textdescription.getData()
+                        },
+                        success: function (x) {
+                            swal.fire({
+                                title: "Metin Güncellemesi Yapılıyor...",
+                                text: "Yine destan döktürmüşsün :) Hadi neyse güncelliyorum",
+                                timer: 3000,
+                                onOpen: function () {
+                                    swal.showLoading()
+                                }
+                            }).then(function (result) {
 
-                        });
-                    },
-                    dataType: "json"
-                });
+                            });
+                        },
+                        dataType: "json"
+                    });
                 }
             });
 
@@ -276,6 +336,58 @@
                 $('.imageselect').bind("click");
             });
 
+            $('.resimara2').click(function () {
+                var text = $("select[name='ImageSearch2']").val();
+                $(".galeriload2").load("/Tour/GetGallerybyText?text=" + text);
+            });
+
+            $('.categoryfield').click(function () {
+                var text = $(this).data("fieldname");
+                $('.categoryfield').css({
+                    "font-weight": "normal",
+                    "font-size":"13px"
+                });
+                $(this).css({
+                    "font-weight": "bold",
+                     "font-size":"17px"
+                });
+
+                $("input[name='CategorySliderFieldName']").val(text);
+            });
+
+            $('#categorysave').click(function () {
+                if (confirm("Güncellemek İstediğine Emin misin?")) {
+                    var galleryId = $("input[name='GetGalleryByText']").val();
+                    var sliderNumberId = $("input[name='CategorySliderFieldName']").val();
+                    $.ajax({
+                        type: "POST",
+                        url: "/AnaSayfa/UpdateCategoryBox",
+                        data: {
+                            "galleryId": galleryId,
+                            "categorySliderFieldName": sliderNumberId
+                        },
+                        success: function (x) {
+                            if (x == false) {
+                                alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                            }
+                            else {
+                                swal.fire({
+                                    title: "Güncelleniyor",
+                                    text: "Yine mi yaaaaa :) tamam tamam hadi güncelliyorum.",
+                                    timer: 2000,
+                                    onOpen: function () {
+                                        swal.showLoading()
+                                    }
+                                }).then(function (result) {
+                                    window.location.reload(false);
+                                });
+                            }
+                        },
+                        dataType: "json"
+                    });
+                }
+            });
+
             $('.resimekletamamla').click(function () {
                 if (confirm("Güncellemek İstediğine Emin misin?")) {
                     var galleryId = $("input[name='GetGalleryByText']").val();
@@ -310,7 +422,10 @@
                         dataType: "json"
                     });
                 }
+
+
             });
+
         });
     </script>
 }
