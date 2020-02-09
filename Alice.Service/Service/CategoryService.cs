@@ -12,9 +12,11 @@ namespace Alice.Service.Service
     public class CategoryService
     {
         IRepository<Categories> _categoryRepository;
-        public CategoryService()
+        private readonly LuxuryContext _context;
+        public CategoryService(LuxuryContext context)
         {
-            _categoryRepository = new Repository<Categories>(new LuxuryContext());
+            _context = context;
+            _categoryRepository = new Repository<Categories>(_context);
         }
 
         public IEnumerable<CategoriesDTO> GetAllCategories()

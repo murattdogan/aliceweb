@@ -13,10 +13,12 @@ namespace Alice.Service.Service
     public class KeywordPoolService
     {
         private IMapper _iMapper;
+        private readonly LuxuryContext _context;
         IRepository<KeywordPool> _keywordPoolRepository;
-        public KeywordPoolService()
+        public KeywordPoolService(LuxuryContext context)
         {
-            _keywordPoolRepository = new Repository<KeywordPool>(new LuxuryContext());
+            _context = context;
+            _keywordPoolRepository = new Repository<KeywordPool>(_context);
 
             var config = new MapperConfiguration(cfg =>
             {

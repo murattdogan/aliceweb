@@ -14,9 +14,11 @@ namespace Alice.Service.Service
     {
         private IMapper _iMapper;
         IRepository<TourCategories> _tourCategoriesRepository;
-        public TourCategoriesService()
+        private readonly LuxuryContext _context;
+        public TourCategoriesService(LuxuryContext context)
         {
-            _tourCategoriesRepository = new Repository<TourCategories>(new LuxuryContext());
+            _context = context;
+            _tourCategoriesRepository = new Repository<TourCategories>(_context);
 
             var config = new MapperConfiguration(cfg =>
             {

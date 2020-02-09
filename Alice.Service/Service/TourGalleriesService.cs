@@ -14,9 +14,11 @@ namespace Alice.Service.Service
     {
         private IMapper _iMapper;
         IRepository<TourGalleries> _tourGalleriesRepository;
-        public TourGalleriesService()
+        private readonly LuxuryContext _context;
+        public TourGalleriesService(LuxuryContext context)
         {
-            _tourGalleriesRepository = new Repository<TourGalleries>(new LuxuryContext());
+            _context = context;
+            _tourGalleriesRepository = new Repository<TourGalleries>(_context);
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<TourGalleries, TourGalleriesDTO>();

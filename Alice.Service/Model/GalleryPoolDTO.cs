@@ -8,9 +8,9 @@ namespace Alice.Service.Model
     {
         public string GalleryId { get; set; }
         public string Thumbnail { get; set; }
-        public string Small { get; set; }
-        public string Medium { get; set; }
-        public string Large { get; set; }
+        public string ImageSize { get; set; }
+        public string ImagePath { get; set; }
+        public string PathExtension { get; set; }
         public DateTime RecordDate { get; set; }
     }
 }

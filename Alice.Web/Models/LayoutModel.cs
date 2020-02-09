@@ -13,24 +13,34 @@ namespace Alice.Web.Models
         public LayoutModel(SiteSettingsService siteSettingsService)
         {
             _siteSettingsService = siteSettingsService;
-            SliderFirstTitle = _siteSettingsService.GetFirstByFieldName("SliderFirstTitle").FieldValue;
-            SliderFirstButtonTitle = _siteSettingsService.GetFirstByFieldName("SliderFirstButtonTitle").FieldValue;
-            SliderSecondTitle = _siteSettingsService.GetFirstByFieldName("SliderSecondTitle").FieldValue;
-            SliderSecondButtonTitle = _siteSettingsService.GetFirstByFieldName("SliderSecondButtonTitle").FieldValue;
-            SliderThirdTitle = _siteSettingsService.GetFirstByFieldName("SliderThirdTitle").FieldValue;
-            SliderThirdButtonTitle = _siteSettingsService.GetFirstByFieldName("SliderThirdButtonTitle").FieldValue;
-            SliderForthTitle = _siteSettingsService.GetFirstByFieldName("SliderForthTitle").FieldValue;
-            SliderForthButtonTitle = _siteSettingsService.GetFirstByFieldName("SliderForthButtonTitle").FieldValue;
-            SliderFirstImage = _siteSettingsService.GetFirstByFieldName("SliderFirstImage").FieldValue;
-            SliderSecondImage = _siteSettingsService.GetFirstByFieldName("SliderSecondImage").FieldValue;
-            SliderThirdImage = _siteSettingsService.GetFirstByFieldName("SliderThirdImage").FieldValue;
-            SliderForthImage = _siteSettingsService.GetFirstByFieldName("SliderForthImage").FieldValue;
-            SliderFirstButtonLink = _siteSettingsService.GetFirstByFieldName("SliderFirstButtonLink").FieldValue;
-            SliderSecondButtonLink = _siteSettingsService.GetFirstByFieldName("SliderSecondButtonLink").FieldValue;
-            SliderThirdButtonLink = _siteSettingsService.GetFirstByFieldName("SliderThirdButtonLink").FieldValue;
-            SliderForthButtonLink = _siteSettingsService.GetFirstByFieldName("SliderForthButtonLink").FieldValue;
-            texttitle = _siteSettingsService.GetFirstByFieldName("texttitle").FieldValue;
-            textdescription = _siteSettingsService.GetFirstByFieldName("textdescription").FieldValue;
+            var allSettings = _siteSettingsService.GetAll();
+
+            SliderFirstTitle = allSettings.First(x => x.FieldName == "SliderFirstTitle").FieldValue;
+            SliderFirstButtonTitle = allSettings.First(x => x.FieldName == "SliderFirstButtonTitle").FieldValue;
+            SliderSecondTitle = allSettings.First(x => x.FieldName == "SliderSecondTitle").FieldValue;
+            SliderSecondButtonTitle = allSettings.First(x => x.FieldName == "SliderSecondButtonTitle").FieldValue;
+            SliderThirdTitle = allSettings.First(x => x.FieldName == "SliderThirdTitle").FieldValue;
+            SliderThirdButtonTitle = allSettings.First(x => x.FieldName == "SliderThirdButtonTitle").FieldValue;
+            SliderForthTitle = allSettings.First(x => x.FieldName == "SliderForthTitle").FieldValue;
+            SliderForthButtonTitle = allSettings.First(x => x.FieldName == "SliderForthButtonTitle").FieldValue;
+            SliderFirstImage = allSettings.First(x => x.FieldName == "SliderFirstImage").FieldValue;
+            SliderSecondImage = allSettings.First(x => x.FieldName == "SliderSecondImage").FieldValue;
+            SliderThirdImage = allSettings.First(x => x.FieldName == "SliderThirdImage").FieldValue;
+            SliderForthImage = allSettings.First(x => x.FieldName == "SliderForthImage").FieldValue;
+            SliderFirstButtonLink = allSettings.First(x => x.FieldName == "SliderFirstButtonLink").FieldValue;
+            SliderSecondButtonLink = allSettings.First(x => x.FieldName == "SliderSecondButtonLink").FieldValue;
+            SliderThirdButtonLink = allSettings.First(x => x.FieldName == "SliderThirdButtonLink").FieldValue;
+            SliderForthButtonLink = allSettings.First(x => x.FieldName == "SliderForthButtonLink").FieldValue;
+            texttitle = allSettings.First(x => x.FieldName == "texttitle").FieldValue;
+            textdescription = allSettings.First(x => x.FieldName == "textdescription").FieldValue;
+            HomeCategoryImageOne = allSettings.First(x => x.FieldName == "HomeCategoryImageOne").FieldValue;
+            HomeCategoryImageTwo = allSettings.First(x => x.FieldName == "HomeCategoryImageTwo").FieldValue;
+            HomeCategoryImageThree = allSettings.First(x => x.FieldName == "HomeCategoryImageThree").FieldValue;
+            HomeCategoryImageFour = allSettings.First(x => x.FieldName == "HomeCategoryImageFour").FieldValue;
+            HomeCategoryImageFive = allSettings.First(x => x.FieldName == "HomeCategoryImageFive").FieldValue;
+            HomeCategoryImageSix = allSettings.First(x => x.FieldName == "HomeCategoryImageSix").FieldValue;
+            HomeCategoryImageSeven = allSettings.First(x => x.FieldName == "HomeCategoryImageSeven").FieldValue;
+
         }
 
         public string SliderFirstTitle { get; set; }
@@ -51,6 +61,13 @@ namespace Alice.Web.Models
         public string SliderForthButtonLink { get; set; }
         public string texttitle { get; set; }
         public string textdescription { get; set; }
+        public string HomeCategoryImageOne { get; set; }
+        public string HomeCategoryImageTwo { get; set; }
+        public string HomeCategoryImageThree { get; set; }
+        public string HomeCategoryImageFour { get; set; }
+        public string HomeCategoryImageFive { get; set; }
+        public string HomeCategoryImageSix { get; set; }
+        public string HomeCategoryImageSeven { get; set; }
 
     }
 }

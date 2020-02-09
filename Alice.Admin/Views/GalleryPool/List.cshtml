@@ -7,55 +7,139 @@
 @*<link href="~/Content/css/vendors/custom/datatables/datatables.bundle.css" rel="stylesheet" />
     <script src="~/Content/css/vendors/custom/datatables/datatables.bundle.js"></script>*@
 
-<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
 
-    <div class="kt-notification kt-margin-t-30 kt-margin-b-20 kt-scroll" data-scroll="true" data-mobile-height="220">
-        <div class="kt-portlet kt-portlet--mobile" id="newimages" style="display:none;">
-
-            <div class="kt-portlet__body">
-                <form class="kt-form" action="/GalleryPool/Insert" method="post" enctype="multipart/form-data">
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid" id="newimages" style="display:none;">
+    <form class="kt-form" action="/GalleryPool/Insert" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3>Resim Ayarları</h3>
+                        </div>
+                    </div>
                     <div class="kt-portlet__body">
-                        <div class="form-group form-group-last">
-                            <div class="alert alert-secondary" role="alert">
-                                <div class="alert-icon"><i class="flaticon-warning kt-font-brand"></i></div>
-                                <div class="alert-text">
-                                    Resim eklemeden önce lütfen resminizin adını kontrol ediniz. Türkçe karakter içermeyen bir isim vermelisiniz!
+                        <div class="form-group">
+                            <label class="kt-font-bold kt-font-success">AnaSayfa Boyutları</label>
+                            <div class="kt-checkbox-list">
+                                <label class="kt-checkbox kt-checkbox--success">
+                                    <input type="checkbox" name="Genellogo_168_57" value="1"> Genellogo_168_57
+                                    <span></span>
+                                </label>
+                                <label class="kt-checkbox kt-checkbox--success">
+                                    <input type="checkbox" name="AnaSayfa_401x289" value="1"> AnaSayfa_401x289
+                                    <span></span>
+                                </label>
+                                <label class="kt-checkbox kt-checkbox--success">
+                                    <input type="checkbox" value="1" name="AnaSayfa_401x592"> AnaSayfa_401x592s
+                                    <span></span>
+                                </label>
+                                <label class="kt-checkbox kt-checkbox--success">
+                                    <input type="checkbox" value="1" name="AnaSayfa_815x289"> AnaSayfa_815x289
+                                    <span></span>
+                                </label>
+                                <label class="kt-checkbox kt-checkbox--success">
+                                    <input type="checkbox" value="1" name="AnasayfaSlider_1440_800"> AnasayfaSlider_1440_800
+                                    <span></span>
+                                </label>
+                                <label class="kt-checkbox kt-checkbox--success">
+                                    <input type="checkbox" value="1" name="AnasayfaSlider_1440_534"> AnasayfaSlider_1440_534
+                                    <span></span>
+                                </label>
+
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="kt-font-bolder kt-font-info">Kategori Boyutları</label>
+                            <div class="kt-checkbox-list">
+                                <label class="kt-checkbox kt-checkbox--info">
+                                    <input type="checkbox" value="1" name="KategoriDetay_285x285"> KategoriDetay_285x285
+                                    <span></span>
+                                </label>
+                                <label class="kt-checkbox kt-checkbox--info">
+                                    <input type="checkbox" value="1" name="KategoriAltDetay_389_280"> KategoriAltDetay_389_280
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="kt-font-bold kt-font-danger">Tur Detay Boyutları</label>
+                            <div class="kt-checkbox-list">
+                                <label class="kt-checkbox kt-checkbox--danger">
+                                    <input type="checkbox" value="1" name="TourDetail_1440_550"> TourDetail_1440_550
+                                    <span></span>
+                                </label>
+                                <label class="kt-checkbox kt-checkbox--danger">
+                                    <input type="checkbox" value="1" name="TourGallery_257_257"> TourGallery_257_257
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-9">
+                <div class="kt-portlet">
+                    <div class="kt-portlet__head">
+                        <div class="kt-portlet__head-label">
+                            <h3 class="kt-portlet__head-title">Resim Detayları</h3>
+                        </div>
+                    </div>
+                    <div class="kt-portlet__body">
+
+                        <div class="kt-portlet__body">
+
+                            <div class="form-group">
+                                <label>Resim Kategori Adı</label>
+                                <select class="form-control" name="KeywordPool">
+                                    <option value="0">Seç</option>
+                                    @foreach (var item in ((List<Alice.Service.Model.KeywordPoolDTO>)ViewBag.KeywordPool).OrderBy(x => x.Keyword))
+                                    {
+                                        <option value="@item.Id">@item.Keyword</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Resim Kategori Adı</label>
+                                <input type="text" name="ImageCategoryName" class="form-control" aria-describedby="emailHelp" placeholder="Otel, Oda, Deniz v.b.">
+                            </div>
+                            <div class="form-group">
+                                <label id="categoryimage">Resim</label>
+                                <div></div>
+                                <div class="custom-file">
+                                    <input type="file" name="ImageFile" class="custom-file-input" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Resim Seç</label>
                                 </div>
                             </div>
+
                         </div>
-                        <div class="form-group">
-                            <label>Resim Kategori Adı</label>
-                            <select class="form-control" name="KeywordPool">
-                                <option value="0">Seç</option>
-                                @foreach (var item in ((List<Alice.Service.Model.KeywordPoolDTO>)ViewBag.KeywordPool).OrderBy(x => x.Keyword))
-                                {
-                                    <option value="@item.Id">@item.Keyword</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Resim Kategori Adı</label>
-                            <input type="text" name="ImageCategoryName" class="form-control" aria-describedby="emailHelp" placeholder="Otel, Oda, Deniz v.b.">
-                        </div>
-                        <div class="form-group">
-                            <label id="categoryimage">Resim</label>
-                            <div></div>
-                            <div class="custom-file">
-                                <input type="file" name="ImageFile" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Resim Seç</label>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <button type="submit" class="btn btn-primary">Kaydet</button>
+                                <button type="reset" class="btn btn-secondary" id="cancelnewimage">İptal Et</button>
                             </div>
                         </div>
 
                     </div>
-                    <div class="kt-portlet__foot">
-                        <div class="kt-form__actions">
-                            <button type="submit" class="btn btn-primary">Kaydet</button>
-                            <button type="reset" class="btn btn-secondary" id="cancelnewimage">İptal Et</button>
-                        </div>
-                    </div>
-                </form>
+                </div>
+
             </div>
         </div>
+    </form>
+</div>
+
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+    <div class="kt-notification kt-margin-t-30 kt-margin-b-20 kt-scroll" data-scroll="true" data-mobile-height="220">
+
+
+
+        
 
         <div class="kt-portlet kt-portlet--mobile">
 
@@ -84,13 +168,14 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr data-id="@item.Id">
-                                <td style="width:40px; height:40px;"><img src="@item.Thumbnail" width="40" height="40" /></td>
-                                <td><a href="#">Hangi Turlarda Kullanılıyor?</a></td>
-                                <td nowrap>
-                                    <button type="button" class="btn btn-danger btn-elevate btn-elevate-air gallerydelete" data-id="@item.Id">Sil</button>
-                                </td>
-                            </tr>
+                        <tr data-id="@item.Id">
+                            <td style="width:40px; height:40px;"><img src="@($"{item.Thumbnail}\\{item.GalleryId}{item.PathExtension}")" width="40" height="40" /></td>
+                            <td>@item.ImageSize</td>
+                            <td><a href="#">Hangi Turlarda Kullanılıyor?</a></td>
+                            <td nowrap>
+                                <button type="button" class="btn btn-danger btn-elevate btn-elevate-air gallerydelete" data-id="@item.Id">Sil</button>
+                            </td>
+                        </tr>
                         }
                     </tbody>
 
@@ -123,6 +208,20 @@
                 $("#newimages").fadeIn();
                 //renderCategory();
             });
+
+
+            $('#AnaSayfa_401x289').click(function (e) {
+                swal.fire({
+                    title: 'Sweet!',
+                    text: 'Modal with a custom image.',
+                    imageUrl: 'https://unsplash.it/400/200',
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                    animation: false
+                });
+            });
+
 
             $('#cancelnewimage').click(function () {
                 $('#newimages').fadeOut();

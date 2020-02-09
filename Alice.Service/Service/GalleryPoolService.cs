@@ -13,10 +13,13 @@ namespace Alice.Service.Service
     public class GalleryPoolService
     {
         IRepository<GalleryPool> _galleryPoolRepository;
+        private readonly LuxuryContext _context;
         private IMapper _iMapper;
-        public GalleryPoolService()
+        public GalleryPoolService(LuxuryContext context)
         {
-            _galleryPoolRepository = new Repository<GalleryPool>(new LuxuryContext());
+            _context = context;
+
+            _galleryPoolRepository = new Repository<GalleryPool>(_context);
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<GalleryPool, GalleryPoolDTO>();
@@ -30,9 +33,9 @@ namespace Alice.Service.Service
             {
                 GalleryId = gallery.GalleryId,
                 Thumbnail = gallery.Thumbnail,
-                Small = gallery.Small,
-                Medium = gallery.Medium,
-                Large = gallery.Large,
+                ImagePath= gallery.ImagePath,
+                ImageSize= gallery.ImageSize,
+                PathExtension= gallery.PathExtension,
                 RecordDate = DateTime.Now
             });
         }

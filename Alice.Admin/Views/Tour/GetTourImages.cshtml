@@ -6,7 +6,7 @@
         @foreach (var item in Model)
         {
             <a href="#" class="alreadyimageremove">
-                <img src="@item.Thumbnail" class="alreadyimagelistitem" alt="Sil" data-id="@item.GalleryId">
+                <img src="@($"{item.Thumbnail}\\{item.GalleryId}{item.PathExtension}")" class="alreadyimagelistitem" alt="Sil" data-id="@item.GalleryId">
             </a>
         }
 

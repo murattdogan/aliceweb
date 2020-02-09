@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Alice.Admin.Filters;
+using Alice.Data.Context;
 using Alice.Service;
 using Alice.Service.Service;
 using Microsoft.AspNetCore.Builder;
@@ -37,17 +38,18 @@ namespace Alice.Admin
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
-            services.AddSingleton<UserService>();
-            services.AddSingleton<CategoryService>();
-            services.AddSingleton<TourService>();
-            services.AddSingleton<TourCategoriesService>();
-            services.AddSingleton<GalleryPoolService>();
-            services.AddSingleton<TourGalleriesService>();
-            services.AddSingleton<GalleryKeywordService>();
-            services.AddSingleton<KeywordPoolService>();
-            services.AddScoped<AuthorizationAttribute>();
-            services.AddScoped<SiteSettingsService>();
+            services.AddDbContext<LuxuryContext>(ServiceLifetime.Transient);
+            //services.AddSingleton<LuxuryContext>();
+            services.AddTransient<UserService>();
+            services.AddTransient<CategoryService>();
+            services.AddTransient<TourService>();
+            services.AddTransient<TourCategoriesService>();
+            services.AddTransient<GalleryPoolService>();
+            services.AddTransient<TourGalleriesService>();
+            services.AddTransient<GalleryKeywordService>();
+            services.AddTransient<KeywordPoolService>();
+            services.AddTransient<AuthorizationAttribute>();
+            services.AddTransient<SiteSettingsService>();
 
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();

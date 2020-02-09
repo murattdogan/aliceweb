@@ -13,12 +13,13 @@ namespace Alice.Service.Service
     public class SiteSettingsService
     {
         private IMapper _iMapper;
-        private readonly LuxuryContext _dbContext;
+        private readonly LuxuryContext _context;
+        private readonly IRepository<SiteSettings> _sitesettingsRepository;
 
-        public SiteSettingsService()
+        public SiteSettingsService(LuxuryContext context)
         {
-            _dbContext = new LuxuryContext();
-
+            _context = context;
+            _sitesettingsRepository = new Repository<SiteSettings>(_context);
             var config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<SiteSettings, SiteSettingsDTO>();
@@ -29,28 +30,24 @@ namespace Alice.Service.Service
 
         public IEnumerable<SiteSettingsDTO> GetAll()
         {
-            IRepository<SiteSettings> sitesettingsRepository = new Repository<SiteSettings>(_dbContext);
-            return _iMapper.Map<List<SiteSettings>, List<SiteSettingsDTO>>(sitesettingsRepository.All().ToList());
+            return _iMapper.Map<List<SiteSettings>, List<SiteSettingsDTO>>(_sitesettingsRepository.All().ToList());
         }
 
 
         public SiteSettingsDTO GetFirstByFieldName(string fieldName)
         {
-            IRepository<SiteSettings> sitesettingsRepository = new Repository<SiteSettings>(_dbContext);
-            return _iMapper.Map<SiteSettings, SiteSettingsDTO>(sitesettingsRepository.First(x => x.FieldName == fieldName));
+            return _iMapper.Map<SiteSettings, SiteSettingsDTO>(_sitesettingsRepository.First(x => x.FieldName == fieldName));
         }
 
         public bool Delete(int Id)
         {
-            IRepository<SiteSettings> sitesettingsRepository = new Repository<SiteSettings>(_dbContext);
-            var entity = sitesettingsRepository.First(x => x.Id == Id);
-            return sitesettingsRepository.Delete(entity);
+            var entity = _sitesettingsRepository.First(x => x.Id == Id);
+            return _sitesettingsRepository.Delete(entity);
         }
 
         public bool Insert(SiteSettingsDTO siteSettings)
         {
-            IRepository<SiteSettings> sitesettingsRepository = new Repository<SiteSettings>(_dbContext);
-            return sitesettingsRepository.Add(new SiteSettings()
+            return _sitesettingsRepository.Add(new SiteSettings()
             {
                 FieldName = siteSettings.FieldName,
                 FieldValue = siteSettings.FieldValue
@@ -59,13 +56,12 @@ namespace Alice.Service.Service
 
         public bool Update(SiteSettingsDTO siteSettings)
         {
-            IRepository<SiteSettings> sitesettingsRepository = new Repository<SiteSettings>(_dbContext);
-            var entity = sitesettingsRepository.First(x => x.Id == siteSettings.Id);
+            var entity = _sitesettingsRepository.First(x => x.Id == siteSettings.Id);
             if (entity != null)
             {
                 entity.FieldName = siteSettings.FieldName;
                 entity.FieldValue = siteSettings.FieldValue;
-                return sitesettingsRepository.Update(entity);
+                return _sitesettingsRepository.Update(entity);
             }
             else return false;
         }

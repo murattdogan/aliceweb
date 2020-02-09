@@ -13,11 +13,13 @@ namespace Alice.Service.Service
     public class TourService
     {
         private IMapper _iMapper;
-        private readonly LuxuryContext _dbContext;
+        private readonly LuxuryContext _context;
+        private readonly IRepository<Tour> _tourRepository;
 
-        public TourService()
+        public TourService(LuxuryContext context)
         {
-            _dbContext = new LuxuryContext();
+            _context = context;
+            _tourRepository = new Repository<Tour>(_context);
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -29,33 +31,28 @@ namespace Alice.Service.Service
 
         public IEnumerable<TourDTO> GetAllTours()
         {
-            IRepository<Tour> tourRepository = new Repository<Tour>(_dbContext);
-            return tourRepository.All().Select(x => new TourDTO() { Id = x.Id, TourName = x.TourName, OverView = x.OverView, TourActivity = x.TourActivity, TourCode = x.TourCode, TourMap = x.TourMap, TourSpot = x.TourSpot, TourType = x.TourType }).ToList();
+            return _tourRepository.All().Select(x => new TourDTO() { Id = x.Id, TourName = x.TourName, OverView = x.OverView, TourActivity = x.TourActivity, TourCode = x.TourCode, TourMap = x.TourMap, TourSpot = x.TourSpot, TourType = x.TourType }).ToList();
         }
 
         public TourDTO GetTourByTourCode(string tourCode)
         {
-            IRepository<Tour> tourRepository = new Repository<Tour>(_dbContext);
-            return _iMapper.Map<Tour, TourDTO>(tourRepository.First(x => x.TourCode == tourCode));
+            return _iMapper.Map<Tour, TourDTO>(_tourRepository.First(x => x.TourCode == tourCode));
         }
 
         public TourDTO GetTourById(int Id)
         {
-            IRepository<Tour> tourRepository = new Repository<Tour>(_dbContext);
-            return _iMapper.Map<Tour, TourDTO>(tourRepository.First(x => x.Id == Id));
+            return _iMapper.Map<Tour, TourDTO>(_tourRepository.First(x => x.Id == Id));
         }
 
         public bool Delete(int Id)
         {
-            IRepository<Tour> tourRepository = new Repository<Tour>(_dbContext);
-            var tourEntity = tourRepository.First(x => x.Id == Id);
-            return tourRepository.Delete(tourEntity);
+            var tourEntity = _tourRepository.First(x => x.Id == Id);
+            return _tourRepository.Delete(tourEntity);
         }
 
         public bool Insert(TourDTO tour)
         {
-            IRepository<Tour> tourRepository = new Repository<Tour>(_dbContext);
-            return tourRepository.Add(new Tour()
+            return _tourRepository.Add(new Tour()
             {
                 OverView = tour.OverView,
                 TourActivity = tour.TourActivity,
@@ -70,8 +67,7 @@ namespace Alice.Service.Service
 
         public bool Update(TourDTO tour)
         {
-            IRepository<Tour> tourRepository = new Repository<Tour>(_dbContext);
-            var tourEntity = tourRepository.First(x => x.Id == tour.Id);
+            var tourEntity = _tourRepository.First(x => x.Id == tour.Id);
             if (tourEntity != null)
             {
                 tourEntity.OverView = tour.OverView;
@@ -81,7 +77,7 @@ namespace Alice.Service.Service
                 tourEntity.TourName = tour.TourName;
                 tourEntity.TourSpot = tour.TourSpot;
                 tourEntity.TourType = tour.TourType;
-                return tourRepository.Update(tourEntity);
+                return _tourRepository.Update(tourEntity);
             }
             else return false;
         }

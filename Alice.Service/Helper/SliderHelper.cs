@@ -10,12 +10,12 @@ namespace Alice.Service.Helper
     {
         public static string SliderGetImagebyGalleryId(string galleryId)
         {
-            GalleryPoolService _galleryPoolService = new GalleryPoolService();
-            var q = _galleryPoolService.GetByGalleryId(galleryId);
-            if (q != null)
-            {
-                return _galleryPoolService.GetByGalleryId(galleryId)?.Large?.ToString() ?? string.Empty;
-            }
+            //    GalleryPoolService _galleryPoolService = new GalleryPoolService();
+            //    var q = _galleryPoolService.GetByGalleryId(galleryId);
+            //    if (q != null)
+            //    {
+            //        return _galleryPoolService.GetByGalleryId(galleryId)?.ImagePath?.ToString() ?? string.Empty;
+            //    }
             return "";
         }
     }

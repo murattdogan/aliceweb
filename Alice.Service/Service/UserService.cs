@@ -11,23 +11,23 @@ namespace Alice.Service.Service
 {
     public class UserService
     {
-        private readonly LuxuryContext _dbContext;
+        private readonly LuxuryContext _context;
+        private readonly IRepository<User> _userRepository;
 
-        public UserService()
+        public UserService(LuxuryContext context)
         {
-            _dbContext = new LuxuryContext();
+            _context = context;
+            _userRepository = new Repository<User>(_context);
         }
 
         public IEnumerable<UserDTO> GetAllUsers()
         {
-            IRepository<User> userRepository = new Repository<User>(_dbContext);
-            return userRepository.All().Select(x => new UserDTO() { Id = x.Id, Name = x.Name, Email = x.Email, UserType = x.UserType, LastLoginDate = x.LastLoginDate }).ToList();
+            return _userRepository.All().Select(x => new UserDTO() { Id = x.Id, Name = x.Name, Email = x.Email, UserType = x.UserType, LastLoginDate = x.LastLoginDate }).ToList();
         }
 
         public UserDTO isLoginControl(string username, string password)
         {
-            IRepository<User> userRepository = new Repository<User>(_dbContext);
-            return userRepository.Where(o => o.Email == username && o.Password == password)?.Select(x => new UserDTO() { Id = x.Id, Name = x.Name, Email = x.Email, UserType = x.UserType, LastLoginDate = x.LastLoginDate })?.First() ?? null;
+            return _userRepository.Where(o => o.Email == username && o.Password == password)?.Select(x => new UserDTO() { Id = x.Id, Name = x.Name, Email = x.Email, UserType = x.UserType, LastLoginDate = x.LastLoginDate })?.First() ?? null;
         }
 
     }

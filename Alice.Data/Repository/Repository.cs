@@ -11,9 +11,10 @@ namespace Alice.Data.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
         private readonly LuxuryContext dbContext;
-        public Repository(LuxuryContext dbContext)
+        private bool _disposed = false;
+        public Repository(LuxuryContext _dbContext)
         {
-            this.dbContext = dbContext;
+            this.dbContext = _dbContext;
             this.Table = dbContext.Set<T>();
         }
         public DbSet<T> Table { get; set; }
@@ -38,22 +39,22 @@ namespace Alice.Data.Repository
 
         public IQueryable<T> All()
         {
-            return Table;
+            return Table.AsNoTracking();
         }
 
         public IQueryable<T> AllTake(int take)
         {
-            return Table.Take(take);
+            return Table.AsNoTracking().Take(take);
         }
 
         public IQueryable<T> Where(Expression<Func<T, bool>> where)
         {
-            return Table.Where(where);
+            return Table.AsNoTracking().Where(where);
         }
 
         public T First(Expression<Func<T, bool>> where)
         {
-            return Table.First(where);
+            return Table.AsNoTracking().First(where);
         }
 
         public IQueryable<T> OrderBy<TKey>(Expression<Func<T, TKey>> orderBy, bool isDesc)
@@ -62,7 +63,6 @@ namespace Alice.Data.Repository
                 return Table.OrderByDescending(orderBy);
             return Table.OrderBy(orderBy);
         }
-
 
         private bool Save()
         {
@@ -76,6 +76,23 @@ namespace Alice.Data.Repository
                 // TODO: Log Exceptions
                 return false;
             }
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this._disposed)
+            {
+                if (disposing)
+                {
+                    dbContext.Dispose();
+                }
+            }
+            this._disposed = true;
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

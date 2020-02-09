@@ -14,9 +14,11 @@ namespace Alice.Service.Service
     {
         private IMapper _iMapper;
         IRepository<GalleryKeyword> _galleryKeywordRepository;
-        public GalleryKeywordService()
+        private readonly LuxuryContext _context;
+        public GalleryKeywordService(LuxuryContext context)
         {
-            _galleryKeywordRepository = new Repository<GalleryKeyword>(new LuxuryContext());
+            _context = context;
+            _galleryKeywordRepository = new Repository<GalleryKeyword>(_context);
 
             var config = new MapperConfiguration(cfg =>
             {

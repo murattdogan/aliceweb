@@ -44,15 +44,16 @@
                 <div class="tab-pane active" id="kt_portlet_base_demo_1_1_tab_content" role="tabpanel">
                     <div class="row">
                         <div class="col-xl-12">
-                            <div class="col-xl-12 alreadyimagelist">
+                            <div class="col-xl-8 alreadyimagelist">
                                 <div class="kt-section__content kt-section__content--border">
                                     @{
                                         var q = ((List<Alice.Service.Model.SiteSettingsDTO>)ViewBag.AlreadyImageList);
                                     }
-                                    <div class="card-group">
+
+                                    <div class="card-deck">
                                         <div class="card">
-                                            <div class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40">
-                                                <img class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderFirstImage").FieldValue))" />
+                                            <div class="kt-bg-metal w-100 kt-padding-t-0 kt-padding-b-0">
+                                                <img class="kt-bg-metal w-100 kt-padding-t-0 kt-padding-b-0" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderFirstImage").FieldValue))" />
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">@(q.First(x => x.FieldName == "SliderFirstTitle").FieldValue)</h5>
@@ -61,8 +62,8 @@
                                             </div>
                                         </div>
                                         <div class="card">
-                                            <div class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40">
-                                                <img class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderSecondImage").FieldValue))" />
+                                            <div class="kt-bg-metal w-100 kt-padding-t-0 kt-padding-b-0">
+                                                <img class="kt-bg-metal w-100 kt-padding-t-0 kt-padding-b-0" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderSecondImage").FieldValue))" />
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">@(q.First(x => x.FieldName == "SliderSecondTitle").FieldValue)</h5>
@@ -71,8 +72,8 @@
                                             </div>
                                         </div>
                                         <div class="card">
-                                            <div class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40">
-                                                <img class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderThirdImage").FieldValue))" />
+                                            <div class="kt-bg-metal w-100 kt-padding-t-0 kt-padding-b-0">
+                                                <img class="kt-bg-metal w-100 kt-padding-t-0 kt-padding-b-0" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderThirdImage").FieldValue))" />
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">@(q.First(x => x.FieldName == "SliderThirdTitle").FieldValue)</h5>
@@ -81,8 +82,8 @@
                                             </div>
                                         </div>
                                         <div class="card">
-                                            <div class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40">
-                                                <img class="kt-bg-metal w-100 kt-padding-t-40 kt-padding-b-40" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderForthImage").FieldValue))" />
+                                            <div class="kt-bg-metal w-100 kt-padding-t-0 kt-padding-b-0">
+                                                <img class="kt-bg-metal w-100 kt-padding-t-0 kt-padding-b-0" src="@(Alice.Admin.Helper.SliderHelper.SliderGetImagebyGalleryId(q.First(x => x.FieldName == "SliderForthImage").FieldValue))" />
                                             </div>
                                             <div class="card-body">
                                                 <h5 class="card-title">@(q.First(x => x.FieldName == "SliderForthTitle").FieldValue)</h5>
@@ -152,7 +153,7 @@
                 </div>
 
 
-                <div class="tab-pane active" id="kt_portlet_base_demo_1_2_tab_content" role="tabpanel">
+                <div class="tab-pane" id="kt_portlet_base_demo_1_2_tab_content" role="tabpanel">
 
 
                     <div class="form-group row">
@@ -176,6 +177,13 @@
                             <button class="btn btn-primary btn-sm" id="metinsave">Güncelle</button>
                         </div>
                     </div>
+
+                </div>
+
+                <div class="tab-pane" id="kt_portlet_base_demo_1_4_tab_content" role="tabpanel">
+                   
+
+
 
                 </div>
             </div>
@@ -213,7 +221,7 @@
                         swal.fire({
                             title: "Metin Güncellemesi Yapılıyor...",
                             text: "Yine destan döktürmüşsün :) Hadi neyse güncelliyorum",
-                            timer: 5000,
+                            timer: 3000,
                             onOpen: function () {
                                 swal.showLoading()
                             }

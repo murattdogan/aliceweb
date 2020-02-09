@@ -1,4 +1,5 @@
-﻿using Alice.Service.Service;
+﻿using Alice.Data.Context;
+using Alice.Service.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,20 @@ namespace Alice.Admin.Helper
 {
     public class SliderHelper
     {
+        //private readonly LuxuryContext _context;
+        //public SliderHelper(LuxuryContext context)
+        //{
+        //    _context = context;
+        //}
+
         public static string SliderGetImagebyGalleryId(string galleryId)
         {
-            GalleryPoolService _galleryPoolService = new GalleryPoolService();
+            if (galleryId == null) return "";
+            GalleryPoolService _galleryPoolService = new GalleryPoolService(new LuxuryContext());
             var q = _galleryPoolService.GetByGalleryId(galleryId);
             if (q != null)
             {
-                return _galleryPoolService.GetByGalleryId(galleryId)?.Small?.ToString() ?? string.Empty;
+                    return $"{q.Thumbnail}\\{q.GalleryId}{q.PathExtension}";
             }
             return "";
         }
