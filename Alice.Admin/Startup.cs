@@ -63,7 +63,7 @@ namespace Alice.Admin
             //    option.Configuration = "142.93.172.93:6379,password=luxuryredisserver";
             //});
 
-            services.AddDistributedMemoryCache();
+            //services.AddDistributedMemoryCache();
 
             services.AddSession(options =>
             {

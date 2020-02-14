@@ -45,6 +45,11 @@ namespace Alice.Service.Service
             return _iMapper.Map<List<GalleryPool>, List<GalleryPoolDTO>>(_galleryPoolRepository.All().ToList());
         }
 
+        public GalleryPoolDTO GetFirst(int Id)
+        {
+            return _iMapper.Map<GalleryPool, GalleryPoolDTO>(_galleryPoolRepository.First(x=> x.Id== Id));
+        }
+
         public bool Delete(GalleryPoolDTO gallery)
         {
             var category = _galleryPoolRepository.First(x => x.Id == gallery.Id);
