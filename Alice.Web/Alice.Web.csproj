@@ -17,6 +17,9 @@
 
   <ItemGroup>
     <Folder Include="Content\" />
+    <Content Include="Resource\*">
+      <CopyToPublishDirectory>always</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 

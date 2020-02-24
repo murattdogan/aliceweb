@@ -35,7 +35,7 @@ namespace Alice.Admin
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             services.AddDbContext<LuxuryContext>(ServiceLifetime.Transient);
@@ -52,7 +52,7 @@ namespace Alice.Admin
             services.AddTransient<SiteSettingsService>();
 
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddLocalization(options =>
             {
                 options.ResourcesPath = "Resources";
@@ -68,19 +68,12 @@ namespace Alice.Admin
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromDays(1);
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
-
-
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(10);
-            });
-
-            services.SetUpAppDependencies();
+            //services.SetUpAppDependencies();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

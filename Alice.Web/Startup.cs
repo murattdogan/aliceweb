@@ -37,6 +37,7 @@ namespace Alice.Web
 
             services.AddDbContext<LuxuryContext>(ServiceLifetime.Transient);
             services.AddTransient<SiteSettingsService>();
+            services.AddTransient<GalleryPoolService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -57,7 +58,7 @@ namespace Alice.Web
             app.UseStaticFiles(new StaticFileOptions()
             {
                 FileProvider = new PhysicalFileProvider(
-            Path.Combine(Directory.GetCurrentDirectory(), @"Content")),
+            Path.Combine(Directory.GetCurrentDirectory(), "Content")),
                 RequestPath = new PathString("/Content")
             });
             app.UseCookiePolicy();

@@ -31,7 +31,7 @@ namespace Alice.Service.Service
 
         public IEnumerable<TourDTO> GetAllTours()
         {
-            return _tourRepository.All().Select(x => new TourDTO() { Id = x.Id, TourName = x.TourName, OverView = x.OverView, TourActivity = x.TourActivity, TourCode = x.TourCode, TourMap = x.TourMap, TourSpot = x.TourSpot, TourType = x.TourType }).ToList();
+            return _iMapper.Map<List<Tour>, List<TourDTO>>(_tourRepository.All().ToList());
         }
 
         public TourDTO GetTourByTourCode(string tourCode)

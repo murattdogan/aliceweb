@@ -8,15 +8,19 @@ namespace Alice.Service.Helper
 {
     public class SliderHelper
     {
-        public static string SliderGetImagebyGalleryId(string galleryId)
-        {
-            //    GalleryPoolService _galleryPoolService = new GalleryPoolService();
-            //    var q = _galleryPoolService.GetByGalleryId(galleryId);
-            //    if (q != null)
-            //    {
-            //        return _galleryPoolService.GetByGalleryId(galleryId)?.ImagePath?.ToString() ?? string.Empty;
-            //    }
-            return "";
-        }
+        //private readonly GalleryPoolService _galleryPoolService;
+        //public SliderHelper(GalleryPoolService galleryPoolService)
+        //{
+        //    _galleryPoolService = galleryPoolService;
+        //}
+        //public string SliderGetImagebyGalleryId(string galleryId)
+        //{
+        //    var q = _galleryPoolService.GetByGalleryId(galleryId);
+        //    if (q != null)
+        //    {
+        //        return _galleryPoolService.GetByGalleryId(galleryId)?.ImagePath?.ToString() ?? string.Empty;
+        //    }
+        //    return "";
+        //}
     }
 }

@@ -62,6 +62,7 @@ namespace Alice.Admin.Controllers
                 }
             }
 
+
             if (AnaSayfa_401x289 == 1)
                 GalleryPoolHelper.SaveGalleryPool(_environment,randomFileName, ImageFile, root, nameof(AnaSayfa_401x289), _galleryKeywordService, _galleryPoolService, KeywordPool, 401, 289);
             if (AnaSayfa_401x592 == 1)

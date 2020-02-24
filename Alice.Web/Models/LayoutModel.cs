@@ -10,9 +10,14 @@ namespace Alice.Web.Models
     {
         private readonly SiteSettingsService _siteSettingsService;
 
-        public LayoutModel(SiteSettingsService siteSettingsService)
+        private readonly GalleryPoolService _galleryPoolService;
+
+
+        public LayoutModel(SiteSettingsService siteSettingsService, GalleryPoolService galleryPoolService)
         {
             _siteSettingsService = siteSettingsService;
+            _galleryPoolService = galleryPoolService;
+
             var allSettings = _siteSettingsService.GetAll();
 
             SliderFirstTitle = allSettings.First(x => x.FieldName == "SliderFirstTitle").FieldValue;
@@ -23,25 +28,47 @@ namespace Alice.Web.Models
             SliderThirdButtonTitle = allSettings.First(x => x.FieldName == "SliderThirdButtonTitle").FieldValue;
             SliderForthTitle = allSettings.First(x => x.FieldName == "SliderForthTitle").FieldValue;
             SliderForthButtonTitle = allSettings.First(x => x.FieldName == "SliderForthButtonTitle").FieldValue;
-            SliderFirstImage = allSettings.First(x => x.FieldName == "SliderFirstImage").FieldValue;
-            SliderSecondImage = allSettings.First(x => x.FieldName == "SliderSecondImage").FieldValue;
-            SliderThirdImage = allSettings.First(x => x.FieldName == "SliderThirdImage").FieldValue;
-            SliderForthImage = allSettings.First(x => x.FieldName == "SliderForthImage").FieldValue;
+            SliderFirstImage = GetImage(allSettings.First(x => x.FieldName == "SliderFirstImage").FieldValue);
+            SliderSecondImage = GetImage(allSettings.First(x => x.FieldName == "SliderSecondImage").FieldValue);
+            SliderThirdImage = GetImage(allSettings.First(x => x.FieldName == "SliderThirdImage").FieldValue);
+            SliderForthImage = GetImage(allSettings.First(x => x.FieldName == "SliderForthImage").FieldValue);
             SliderFirstButtonLink = allSettings.First(x => x.FieldName == "SliderFirstButtonLink").FieldValue;
             SliderSecondButtonLink = allSettings.First(x => x.FieldName == "SliderSecondButtonLink").FieldValue;
             SliderThirdButtonLink = allSettings.First(x => x.FieldName == "SliderThirdButtonLink").FieldValue;
             SliderForthButtonLink = allSettings.First(x => x.FieldName == "SliderForthButtonLink").FieldValue;
             texttitle = allSettings.First(x => x.FieldName == "texttitle").FieldValue;
             textdescription = allSettings.First(x => x.FieldName == "textdescription").FieldValue;
-            HomeCategoryImageOne = allSettings.First(x => x.FieldName == "HomeCategoryImageOne").FieldValue;
-            HomeCategoryImageTwo = allSettings.First(x => x.FieldName == "HomeCategoryImageTwo").FieldValue;
-            HomeCategoryImageThree = allSettings.First(x => x.FieldName == "HomeCategoryImageThree").FieldValue;
-            HomeCategoryImageFour = allSettings.First(x => x.FieldName == "HomeCategoryImageFour").FieldValue;
-            HomeCategoryImageFive = allSettings.First(x => x.FieldName == "HomeCategoryImageFive").FieldValue;
-            HomeCategoryImageSix = allSettings.First(x => x.FieldName == "HomeCategoryImageSix").FieldValue;
-            HomeCategoryImageSeven = allSettings.First(x => x.FieldName == "HomeCategoryImageSeven").FieldValue;
+            HomeCategoryImageOne =   GetImage(allSettings.First(x => x.FieldName == "HomeCategoryImageOne").FieldValue);
+            HomeCategoryImageTwo =   GetImage(allSettings.First(x => x.FieldName == "HomeCategoryImageTwo").FieldValue);
+            HomeCategoryImageThree = GetImage(allSettings.First(x => x.FieldName == "HomeCategoryImageThree").FieldValue);
+            HomeCategoryImageFour =  GetImage(allSettings.First(x => x.FieldName == "HomeCategoryImageFour").FieldValue);
+            HomeCategoryImageFive =  GetImage(allSettings.First(x => x.FieldName == "HomeCategoryImageFive").FieldValue);
+            HomeCategoryImageSix =   GetImage(allSettings.First(x => x.FieldName == "HomeCategoryImageSix").FieldValue);
+            HomeCategoryImageSeven = GetImage(allSettings.First(x => x.FieldName == "HomeCategoryImageSeven").FieldValue);
+            HomeCategoryImageOneTitle = allSettings.First(x => x.FieldName == "HomeCategoryImageOneTitle").FieldValue;
+            HomeCategoryImageTwoTitle = allSettings.First(x => x.FieldName == "HomeCategoryImageTwoTitle").FieldValue;
+            HomeCategoryImageThreeTitle = allSettings.First(x => x.FieldName == "HomeCategoryImageThreeTitle").FieldValue;
+            HomeCategoryImageFourTitle = allSettings.First(x => x.FieldName == "HomeCategoryImageFourTitle").FieldValue;
+            HomeCategoryImageFiveTitle = allSettings.First(x => x.FieldName == "HomeCategoryImageFiveTitle").FieldValue;
+            HomeCategoryImageSixTitle = allSettings.First(x => x.FieldName == "HomeCategoryImageSixTitle").FieldValue;
+            HomeCategoryImageSevenTitle = allSettings.First(x => x.FieldName == "HomeCategoryImageSevenTitle").FieldValue;
 
         }
+
+        private string GetImage(string galleryId)
+        {
+            string image = "";
+            var t = _galleryPoolService.GetByGalleryId(galleryId);
+            if (t != null)
+            {
+                image = $"http://localhost:5005{t.ImagePath}\\{t.GalleryId}{t.PathExtension}";
+            }
+            return image;
+        }
+
+
+
+
 
         public string SliderFirstTitle { get; set; }
         public string SliderFirstButtonTitle { get; set; }
@@ -68,6 +95,13 @@ namespace Alice.Web.Models
         public string HomeCategoryImageFive { get; set; }
         public string HomeCategoryImageSix { get; set; }
         public string HomeCategoryImageSeven { get; set; }
+        public string HomeCategoryImageOneTitle { get; set; }
+        public string HomeCategoryImageTwoTitle { get; set; }
+        public string HomeCategoryImageThreeTitle { get; set; }
+        public string HomeCategoryImageFourTitle { get; set; }
+        public string HomeCategoryImageFiveTitle { get; set; }
+        public string HomeCategoryImageSixTitle { get; set; }
+        public string HomeCategoryImageSevenTitle { get; set; }
 
     }
 }

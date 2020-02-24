@@ -12,14 +12,16 @@ namespace Alice.Web.Controllers
     public class HomeController : Controller
     {
         private readonly SiteSettingsService _siteSettingsService;
+        private readonly GalleryPoolService _galleryPoolService;
 
-        public HomeController(SiteSettingsService siteSettingsService)
+        public HomeController(SiteSettingsService siteSettingsService, GalleryPoolService galleryPoolService)
         {
             _siteSettingsService = siteSettingsService;
+            _galleryPoolService = galleryPoolService;
         }
         public IActionResult Index()
         {
-            ViewBag.HomePage = new LayoutModel(_siteSettingsService);
+            ViewBag.HomePage = new LayoutModel(_siteSettingsService, _galleryPoolService);
             return View();
         }
 
