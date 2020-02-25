@@ -61,7 +61,8 @@ namespace Alice.Web.Models
             var t = _galleryPoolService.GetByGalleryId(galleryId);
             if (t != null)
             {
-                image = $"http://localhost:5005{t.ImagePath}\\{t.GalleryId}{t.PathExtension}";
+                image = $"console.luxuryistanbul.com\\{t.ImagePath}\\{t.GalleryId}{t.PathExtension}".Replace("\\", @"/").Replace("//", "/");
+                image = $"http://{image}";
             }
             return image;
         }

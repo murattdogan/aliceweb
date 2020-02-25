@@ -2,6 +2,7 @@
 using Alice.Data.Model;
 using Alice.Data.Repository;
 using Alice.Service.Model;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,24 @@ namespace Alice.Service.Service
     public class CategoryService
     {
         IRepository<Categories> _categoryRepository;
+        private IMapper _iMapper;
         private readonly LuxuryContext _context;
         public CategoryService(LuxuryContext context)
         {
             _context = context;
             _categoryRepository = new Repository<Categories>(_context);
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Categories, CategoriesDTO>();
+            });
+            _iMapper = config.CreateMapper();
         }
 
+        public CategoriesDTO GetByUrl(string path)
+        {
+            return _iMapper.Map<Categories, CategoriesDTO>(_categoryRepository.First(x => x.Path == path));
+
+        }
         public IEnumerable<CategoriesDTO> GetAllCategories()
         {
             return _categoryRepository.All().Select(x => new CategoriesDTO() { Id = x.Id, CategoryName = x.CategoryName, Path = x.Path, MainCategoryId = x.MainCategoryId }).ToList();

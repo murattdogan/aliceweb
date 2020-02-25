@@ -38,6 +38,7 @@ namespace Alice.Web
             services.AddDbContext<LuxuryContext>(ServiceLifetime.Transient);
             services.AddTransient<SiteSettingsService>();
             services.AddTransient<GalleryPoolService>();
+            services.AddTransient<CategoryService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -63,8 +64,13 @@ namespace Alice.Web
             });
             app.UseCookiePolicy();
 
+
+
             app.UseMvc(routes =>
             {
+                routes.MapRoute("category", "{categoryName}",
+            defaults: new { controller = "Category", action = "Detail" });
+
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

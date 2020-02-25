@@ -8,7 +8,7 @@
 
 <section class="manset">
     <div class="mansetSlide">
-        <div class="item" style="background:url('@(homeModel.SliderFirstImage.Replace("\\",@"/"))'">
+        <div class="item" style="background:url('@(homeModel.SliderFirstImage)'">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="item" style="background: url(@(homeModel.SliderSecondImage.Replace("\\",@"/"))">
+        <div class="item" style="background: url(@(homeModel.SliderSecondImage)">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -40,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="item" style="background: url(@(homeModel.SliderThirdImage.Replace("\\",@"/"))">
+        <div class="item" style="background: url(@(homeModel.SliderThirdImage)">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -56,7 +56,7 @@
                 </div>
             </div>
         </div>
-        <div class="item" style="background: url(@(homeModel.SliderForthImage.Replace("\\",@"/"))">
+        <div class="item" style="background: url(@(homeModel.SliderForthImage)">
             <div class="container">
                 <div class="row">
                     <div class="col-12">
@@ -79,7 +79,7 @@
                 <div class="col-12">
                     <div class="whiteNavigation">
                         <div class="slideNumbers">
-                            <div class="item"><strong class="active">01</strong> <span class="totalSlide">04</span> </div> <!-- Total Slide yukarıdaki slide item kaç taneyse o kadar olacak -->
+                            <div class="item"><strong class="active">01</strong> <span class="totalSlide">02</span> </div> <!-- Total Slide yukarıdaki slide item kaç taneyse o kadar olacak -->
                             <div class="item"><strong class="active">02</strong> <span class="totalSlide">04</span> </div>
                             <div class="item"><strong class="active">03</strong> <span class="totalSlide">04</span> </div>
                             <div class="item"><strong class="active">04</strong> <span class="totalSlide">04</span> </div>
@@ -120,7 +120,7 @@
         <div class="row">
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="blurBox col4 wow fadeIn" data-wow-delay="0.1s">
-                    <a href="category.html">
+                    <a href="@($"/{Alice.Web.Helper.ConstHelper.UrlFriendly(homeModel.HomeCategoryImageOneTitle)}")">
                         <picture>
                             <img src="@homeModel.HomeCategoryImageOne" data-src="@homeModel.HomeCategoryImageOne" data-loadMode="0"  alt="Travel">
                         </picture>
@@ -131,23 +131,23 @@
             </div>
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="blurBox col4 wow fadeIn" data-wow-delay="0.2s">
-                    <a href="category.html">
+                    <a href="@($"/{Alice.Web.Helper.ConstHelper.UrlFriendly(homeModel.HomeCategoryImageTwoTitle)}")">
                         <picture>
                             <img src="@homeModel.HomeCategoryImageTwo" data-src="@homeModel.HomeCategoryImageTwo" data-loadMode="0"  alt="Travel">
                         </picture>
-                        <span class="visibleText">Event</span>
-                        <i class="middleText"><span>Event</span></i>
+                        <span class="visibleText">@homeModel.HomeCategoryImageTwoTitle</span>
+                        <i class="middleText"><span>@homeModel.HomeCategoryImageTwoTitle</span></i>
                     </a>
                 </div>
             </div>
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="blurBox col4 wow fadeIn" data-wow-delay="0.3s">
-                    <a href="category.html">
+                    <a href="@($"/{Alice.Web.Helper.ConstHelper.UrlFriendly(homeModel.HomeCategoryImageThreeTitle)}")">
                         <picture>
                             <img src="@homeModel.HomeCategoryImageThree" data-src="@homeModel.HomeCategoryImageThree" data-loadMode="0" alt="Travel">
                         </picture>
-                        <span class="visibleText">Wedding</span>
-                        <i class="middleText"><span>Wedding</span></i>
+                        <span class="visibleText">@homeModel.HomeCategoryImageThreeTitle</span>
+                        <i class="middleText"><span>@homeModel.HomeCategoryImageThreeTitle</span></i>
                     </a>
                 </div>
             </div>
@@ -155,46 +155,46 @@
         <div class="row">
             <div class="col-12 col-md-4 col-lg-4">
                 <div class="blurBox col4Vertical wow fadeIn" data-wow-delay="0.4s">
-                    <a href="category.html">
+                    <a href="@($"/{Alice.Web.Helper.ConstHelper.UrlFriendly(homeModel.HomeCategoryImageFourTitle)}")">
                         <picture>
                             <img src="@homeModel.HomeCategoryImageFour" data-src="@homeModel.HomeCategoryImageFour" data-loadMode="0" alt="Travel">
                         </picture>
-                        <span class="visibleText">Real Estate</span>
-                        <i class="middleText"><span>Real Estate</span></i>
+                        <span class="visibleText">@homeModel.HomeCategoryImageFourTitle</span>
+                        <i class="middleText"><span>@homeModel.HomeCategoryImageFourTitle</span></i>
                     </a>
                 </div>
             </div>
             <div class="col-12 col-md-8 col-lg-8">
                 <div class="w-100">
                     <div class="blurBox col8 wow fadeIn" data-wow-delay="0.5s">
-                        <a href="category.html">
+                        <a href="@($"/{Alice.Web.Helper.ConstHelper.UrlFriendly(homeModel.HomeCategoryImageFiveTitle)}")">
                             <picture>
                                 <img src="@homeModel.HomeCategoryImageFive" data-src="@homeModel.HomeCategoryImageFive" data-loadMode="0" alt="Travel">
                             </picture>
-                            <span class="visibleText">Signature Gifts</span>
-                            <i class="middleText"><span>Signature Gifts</span></i>
+                            <span class="visibleText">@homeModel.HomeCategoryImageFiveTitle</span>
+                            <i class="middleText"><span>@homeModel.HomeCategoryImageFiveTitle</span></i>
                         </a>
                     </div>
                 </div>
                 <div class="w-50">
                     <div class="blurBox col4 wow fadeIn" data-wow-delay="0.6s">
-                        <a href="category.html">
+                        <a href="@($"/{Alice.Web.Helper.ConstHelper.UrlFriendly(homeModel.HomeCategoryImageSixTitle)}")">
                             <picture>
                                 <img  src="@homeModel.HomeCategoryImageSix" data-src="@homeModel.HomeCategoryImageSix" data-loadMode="0" alt="Travel">
                             </picture>
-                            <span class="visibleText">Lifestyle & Concierge</span>
-                            <i class="middleText"><span>Lifestyle & Concierge</span></i>
+                            <span class="visibleText">@homeModel.HomeCategoryImageSixTitle</span>
+                            <i class="middleText"><span>@homeModel.HomeCategoryImageSixTitle</span></i>
                         </a>
                     </div>
                 </div>
                 <div class="w-50">
                     <div class="blurBox col4 wow fadeIn" data-wow-delay="0.7s">
-                        <a href="category.html">
+                        <a href="@($"/{Alice.Web.Helper.ConstHelper.UrlFriendly(homeModel.HomeCategoryImageSevenTitle)}")">
                             <picture>
                                 <img src="@homeModel.HomeCategoryImageSeven" data-src="@homeModel.HomeCategoryImageSeven" data-loadMode="0" alt="Travel">
                             </picture>
-                            <span class="visibleText">Business Consultanct</span>
-                            <i class="middleText"><span>Business Consultanct</span></i>
+                            <span class="visibleText">@homeModel.HomeCategoryImageSevenTitle</span>
+                            <i class="middleText"><span>@homeModel.HomeCategoryImageSevenTitle</span></i>
                         </a>
                     </div>
                 </div>

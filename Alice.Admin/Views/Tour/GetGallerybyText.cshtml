@@ -5,7 +5,7 @@
         @foreach (var item in Model)
         {
             <a href="#" class="imageselect">
-                <img src="@($"{item.Thumbnail}\\{item.GalleryId}{item.PathExtension}")" data-medium="@($"{item.ImagePath}\\{item.GalleryId}{item.PathExtension}")" class="imagelistitem" alt="Seç" data-id="@item.GalleryId">
+                <img src="@($"{item.Thumbnail}/{item.GalleryId}{item.PathExtension}")" data-medium="@($"{item.Thumbnail}/{item.GalleryId}{item.PathExtension}")" class="imagelistitem" alt="Seç" data-id="@item.GalleryId">
             </a>
         }
 

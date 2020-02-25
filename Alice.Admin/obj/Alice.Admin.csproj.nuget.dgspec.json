@@ -81,9 +81,9 @@
               "target": "Package",
               "version": "[2.2.4, )"
             },
-            "System.Drawing.Common": {
+            "SixLabors.ImageSharp": {
               "target": "Package",
-              "version": "[4.6.2, )"
+              "version": "[1.0.0-beta0006, )"
             }
           },
           "imports": [

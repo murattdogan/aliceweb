@@ -1,9 +1,9 @@
 E:\alice\Alice\Alice.Data\bin\Debug\netcoreapp2.2\Alice.Data.deps.json
 E:\alice\Alice\Alice.Data\bin\Debug\netcoreapp2.2\Alice.Data.dll
 E:\alice\Alice\Alice.Data\bin\Debug\netcoreapp2.2\Alice.Data.pdb
-E:\alice\Alice\Alice.Data\obj\Debug\netcoreapp2.2\Alice.Data.csprojAssemblyReference.cache
 E:\alice\Alice\Alice.Data\obj\Debug\netcoreapp2.2\Alice.Data.csproj.CoreCompileInputs.cache
 E:\alice\Alice\Alice.Data\obj\Debug\netcoreapp2.2\Alice.Data.AssemblyInfoInputs.cache
 E:\alice\Alice\Alice.Data\obj\Debug\netcoreapp2.2\Alice.Data.AssemblyInfo.cs
 E:\alice\Alice\Alice.Data\obj\Debug\netcoreapp2.2\Alice.Data.dll
 E:\alice\Alice\Alice.Data\obj\Debug\netcoreapp2.2\Alice.Data.pdb
+E:\alice\Alice\Alice.Data\obj\Debug\netcoreapp2.2\Alice.Data.csprojAssemblyReference.cache
