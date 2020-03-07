@@ -35,12 +35,17 @@ namespace Alice.Service.Service
         {
             return _categoryRepository.All().Select(x => new CategoriesDTO() { Id = x.Id, CategoryName = x.CategoryName, Path = x.Path, MainCategoryId = x.MainCategoryId }).ToList();
         }
+
+        public IEnumerable<CategoriesDTO> GetAllSubCategories(int mainCategoryId)
+        {
+            return _iMapper.Map<List<Categories>, List<CategoriesDTO>>(_categoryRepository.All().Where(x => x.MainCategoryId == mainCategoryId).ToList());
+        }
         public CategoriesDTO GetById(int Id)
         {
             var category = _categoryRepository.First(x => x.Id == Id);
             if (category != null)
             {
-                return new CategoriesDTO() { Id = category.Id, CategoryName = category.CategoryName, Path = category.Path, MainCategoryId = category.MainCategoryId, ImagePath = category.ImagePath };
+                return new CategoriesDTO() { Id = category.Id, CategoryName = category.CategoryName, Path = category.Path, MainCategoryId = category.MainCategoryId, ImagePath = category.ImagePath, SEOTitle = category.SEOTitle, SEODescription = category.SEODescription, Title = category.Title, Description=category.Description };
             }
 
             return null;
@@ -66,6 +71,11 @@ namespace Alice.Service.Service
                 oldCategory.MainCategoryId = categories.MainCategoryId;
                 if (categories.ImagePath != "")
                     oldCategory.ImagePath = categories.ImagePath;
+                oldCategory.SEODescription = categories.SEODescription;
+                oldCategory.SEOTitle = categories.SEOTitle;
+                oldCategory.Description = categories.Description;
+                oldCategory.Title = categories.Title;
+
             }
             return _categoryRepository.Update(oldCategory);
         }

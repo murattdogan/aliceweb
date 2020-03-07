@@ -50,6 +50,8 @@ namespace Alice.Admin
             services.AddTransient<KeywordPoolService>();
             services.AddTransient<AuthorizationAttribute>();
             services.AddTransient<SiteSettingsService>();
+            services.AddTransient<CategoriesSlidersService>();
+            services.AddTransient<StaticPagesService>();
 
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();

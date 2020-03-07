@@ -10,5 +10,10 @@ namespace Alice.Service.Model
         public string Path { get; set; }
         public string ImagePath { get; set; }
         public int MainCategoryId { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string SEOTitle { get; set; }
+        public string SEODescription { get; set; }
+        public List<GalleryPoolDTO> SliderGallery { get; set; }
     }
 }

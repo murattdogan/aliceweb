@@ -39,6 +39,8 @@ namespace Alice.Web
             services.AddTransient<SiteSettingsService>();
             services.AddTransient<GalleryPoolService>();
             services.AddTransient<CategoryService>();
+            services.AddTransient<CategoriesSlidersService>();
+            services.AddTransient<StaticPagesService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

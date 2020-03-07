@@ -47,3 +47,5 @@ E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Alice.Admin.Views.pdb
 E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Alice.Admin.csproj.CopyComplete
 E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Alice.Admin.dll
 E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Alice.Admin.pdb
+E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Razor\Views\Categories\GetGalleryImages.g.cshtml.cs
+E:\alice\Alice\Alice.Admin\obj\Release\netcoreapp2.2\Razor\Views\StaticPages\List.g.cshtml.cs

@@ -58,27 +58,32 @@
                         <!-- Sadece anasyafa da diğerlerinden farklı olaarak homeMenu classı eklenicek -->
                         <ul class="d-flex align-items-center justify-content-center">
                             <li>
-                                <a href="index.html">
+                                <a href="/">
                                     HOME
                                 </a>
                             </li>
                             <li>
-                                <a href="our-services.html">
+                                <a href="/Page/our-services">
                                     OUR SERVICES
                                 </a>
                             </li>
                             <li>
-                                <a href="about.html">
+                                <a href="/Page/about-us">
                                     ABOUT
                                 </a>
                             </li>
                             <li>
-                                <a href="why-luxury-istanbul.html">
+                                <a href="/Page/why-luxury-istanbul">
                                     WHY LUXURY ISTANBUL
                                 </a>
                             </li>
                             <li>
-                                <a href="contact-us.html">
+                                <a href="/Page/destinations">
+                                    DESTINATIONS
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Page/contact-us">
                                     CONTACT US
                                 </a>
                             </li>
@@ -198,29 +203,29 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="/Page/terms-condations">
                                         TERMS & CONDATIONS
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="/Page/privacy-policy">
                                         PRIVACY POLICY
                                     </a>
                                 </li>
                             </ul>
                             <ul>
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="/Page/agents">
                                         AGENTS
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="/Page/faqs">
                                         FAQ'S
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="/Page/sitemap">
                                         SITEMAP
                                     </a>
                                 </li>
@@ -270,5 +275,11 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+    <script>
+        $(function () {
+            $('.fixedBottomMenu').addClass("homeMenu");
+        });
+    </script>
 </body>
 </html>

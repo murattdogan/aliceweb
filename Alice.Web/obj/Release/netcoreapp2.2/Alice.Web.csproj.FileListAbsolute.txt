@@ -32,3 +32,5 @@ E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Alice.Web.Views.pdb
 E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Alice.Web.csproj.CopyComplete
 E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Alice.Web.dll
 E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Alice.Web.pdb
+E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Razor\Views\Category\Detail.g.cshtml.cs
+E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Razor\Views\StaticPages\Page.g.cshtml.cs

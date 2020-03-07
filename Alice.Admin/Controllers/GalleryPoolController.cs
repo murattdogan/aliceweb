@@ -50,11 +50,11 @@ namespace Alice.Admin.Controllers
 
 
         [HttpPost]
-        public IActionResult Insert(int KeywordPool, string ImageCategoryName, IFormFile ImageFile, int AnaSayfa_401x289, int AnaSayfa_401x592, int Genellogo_168_57, int AnaSayfa_815x289, int AnasayfaSlider_1440_534, int AnasayfaSlider_1440_800,
+        public IActionResult Insert(string imageNamePrefix ,int KeywordPool, string ImageCategoryName, IFormFile ImageFile, int AnaSayfa_401x289, int AnaSayfa_401x592, int Genellogo_168_57, int AnaSayfa_815x289, int AnasayfaSlider_1440_534, int AnasayfaSlider_1440_800,
             int KategoriDetay_285x285, int KategoriAltDetay_389_280, int TourDetail_1440_550, int TourGallery_257_257)
         {
 
-            string randomFileName = Guid.NewGuid().ToString();
+            string randomFileName = $"{imageNamePrefix}-{Guid.NewGuid().ToString()}";
 
             if (KeywordPool == 0 && !string.IsNullOrEmpty(ImageCategoryName))
             {

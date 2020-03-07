@@ -15,12 +15,18 @@ namespace Alice.Admin.Controllers
     public class CategoriesController : Controller
     {
         private readonly CategoryService _categoryService;
+        private readonly CategoriesSlidersService _categoriesSliderService;
+        private readonly KeywordPoolService _keywordPoolService;
+        private readonly GalleryPoolService _galleryPoolService;
         private readonly IHostingEnvironment _environment;
 
-        public CategoriesController(CategoryService categoryService, IHostingEnvironment environment)
+        public CategoriesController(CategoryService categoryService, CategoriesSlidersService categoriesSliderService, KeywordPoolService keywordPoolService, GalleryPoolService galleryPoolService, IHostingEnvironment environment)
         {
             _categoryService = categoryService;
+            _categoriesSliderService = categoriesSliderService;
             _environment = environment;
+            _keywordPoolService = keywordPoolService;
+            _galleryPoolService = galleryPoolService;
         }
 
         public IActionResult Index()
@@ -31,31 +37,27 @@ namespace Alice.Admin.Controllers
         [ServiceFilter(typeof(AuthorizationAttribute))]
         public IActionResult List()
         {
+            ViewBag.SelectAllKeyword = _keywordPoolService.GetAll();
             var model = _categoryService.GetAllCategories();
             return View(model);
         }
 
         [ServiceFilter(typeof(AuthorizationAttribute))]
         [HttpPost]
-        public IActionResult Insert(string Id, string CategoryName, string CategoryPath, int TopCategory, IFormFile CategoryFile)
+        public IActionResult Insert(string id, string CategoryName, string CategoryPath, int TopCategory, string Title, string Description, string SEOTitle, string SEODescription)
         {
-
-            string fileName = Guid.NewGuid().ToString();
-            var upload = "";
-            if (CategoryFile != null)
-            {
-                upload = Path.Combine(_environment.ContentRootPath, "Content/UImage/Categories", $"{fileName}{Path.GetExtension(CategoryFile.FileName)}");
-                CategoryFile.CopyTo(new FileStream(upload, FileMode.Create));
-            }
-
-            if (Id == "0")
+            if (id == "0")
             {
                 var category = new CategoriesDTO()
                 {
                     CategoryName = CategoryName,
                     Path = CategoryPath,
-                    ImagePath = upload,
-                    MainCategoryId = TopCategory
+                    ImagePath = "",
+                    MainCategoryId = TopCategory,
+                    Description = Description,
+                    Title = Title,
+                    SEODescription = SEODescription,
+                    SEOTitle = SEOTitle
                 };
                 _categoryService.AddCategory(category);
             }
@@ -63,11 +65,15 @@ namespace Alice.Admin.Controllers
             {
                 _categoryService.UploadCategory(new CategoriesDTO()
                 {
-                    Id = int.Parse(Id),
+                    Id = int.Parse(id),
                     CategoryName = CategoryName,
-                    ImagePath = upload,
+                    ImagePath = "",
                     MainCategoryId = TopCategory,
-                    Path = CategoryPath
+                    Path = CategoryPath,
+                    Description = Description,
+                    Title = Title,
+                    SEODescription = SEODescription,
+                    SEOTitle = SEOTitle
                 });
             }
             return RedirectToAction("List");
@@ -82,9 +88,60 @@ namespace Alice.Admin.Controllers
         }
 
         [ServiceFilter(typeof(AuthorizationAttribute))]
+        [HttpGet]
+        public JsonResult CategoryGalleryDelete(int categoryId, string galleryId)
+        {
+            var categoryGallery = _categoriesSliderService.GetGalleriesByCategoryId(categoryId)?.First(x => x.GalleryId == galleryId) ?? null;
+            return Json(categoryGallery != null ? _categoriesSliderService.DeleteCategory(categoryGallery) : false);
+
+        }
+
+        [ServiceFilter(typeof(AuthorizationAttribute))]
+        [HttpGet]
+        public PartialViewResult GetGalleryImages(int Id)
+        {
+            var categoryGalleries = new List<GalleryPoolDTO>();
+            var categoryGallery = _categoriesSliderService.GetGalleriesByCategoryId(Id);
+            if (categoryGallery.Any())
+            {
+                foreach (var item in categoryGallery)
+                {
+                    categoryGalleries.Add(_galleryPoolService.GetByGalleryId(item.GalleryId));
+                }
+            }
+            return PartialView(categoryGalleries);
+        }
+
+        public JsonResult UpdateCategoryBox(string galleryId, int categoryId)
+        {
+            _categoriesSliderService.AddCategory(new CategoriesSlidersDTO()
+            {
+                GalleryId = galleryId,
+                CategoryId = categoryId
+            });
+            return Json(true);
+        }
+
+
+        public JsonResult CategoryPictureUpdate(string galleryId, int categoryId)
+        {
+            var t = _categoryService.GetById(categoryId);
+            if (t != null)
+            {
+                t.ImagePath = galleryId;
+                _categoryService.UploadCategory(t);
+                return Json(true);
+            }
+            return Json(false);
+        }
+
+
+
+        [ServiceFilter(typeof(AuthorizationAttribute))]
         public JsonResult GetById(int Id)
         {
-            return Json(_categoryService.GetById(Id));
+            var t = _categoryService.GetById(Id);
+            return Json(t);
         }
 
         [ServiceFilter(typeof(AuthorizationAttribute))]

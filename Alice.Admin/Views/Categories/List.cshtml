@@ -24,6 +24,10 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label>Id</label>
+                            <input type="number" name="id" class="form-control" placeholder="Id">
+                        </div>
+                        <div class="form-group">
                             <label>Kategori Adı</label>
                             <input type="text" name="CategoryName" class="form-control" aria-describedby="emailHelp" placeholder="Travel, Hotel vb.">
                         </div>
@@ -36,19 +40,59 @@
                             <select class="form-control" name="TopCategory" id="TopCategory">
                             </select>
                         </div>
+
                         <div class="form-group">
-                            <label id="categoryimage">Resim</label>
-                            <div></div>
-                            <div class="custom-file">
-                                <input type="file" name="CategoryFile" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Resim Seç</label>
+                            <label for="exampleSelect1">Kategori Başlık</label>
+                            <input type="text" class="form-control" name="Title" id="Title">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelect1">Kategori Açıklama</label>
+                            <input type="text" class="form-control" name="Description" id="Description">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleSelect1">SEO Title</label>
+                            <input type="text" class="form-control" name="SEOTitle" id="SEOTitle">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleSelect1">SEO Description</label>
+                            <input type="text" class="form-control" name="SEODescription" id="SEODescription">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleSelect1">SEO Description</label>
+
+                            <div class="col-xl-12 alreadyimagelist">
+
                             </div>
                         </div>
 
+                        <div class="form-group updateimages" style="display:none;">
+                            <label><strong>Aramak İstediğiniz Resim için Anahtar Kelime Seçin</strong></label>
+                            <div class="input-group">
+                                <select name="ImageSearch" class="form-control selectpicker col-10" style="border:1px solid #5578eb;">
+                                    @foreach (var item in (List<Alice.Service.Model.KeywordPoolDTO>)ViewBag.SelectAllKeyword)
+                                    {
+                                        <option value="@item.Keyword">@item.Keyword</option>
+                                    }
+                                </select>
+                                <div class="input-group-append">
+                                    <button class="btn btn-info resimara" type="button">Galeride Ara</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group galeriload">
+
+                        </div>
+                        <div class="kt-portlet__foot">
+                            <div class="kt-form__actions">
+                                <button type="button" class="resmiekle btn btn-primary btn-sm">Slider Olarak Ekle</button>
+                                <button type="button" class="currentresmiekle btn btn-info btn-sm">Kategori Resmi Olarak Seç</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="kt-portlet__foot">
                         <div class="kt-form__actions">
-                            <input type="hidden" name="Id" class="custom-file-input" id="CategoryId" value="0">
                             <button type="submit" class="btn btn-primary">Kaydet</button>
                             <button type="reset" class="btn btn-secondary" id="cancelnewcategory">İptal Et</button>
                         </div>
@@ -119,25 +163,105 @@
     <script>
         $(function () {
 
+
+            $('.resimara').click(function () {
+                var text = $("select[name='ImageSearch']").val();
+                $(".galeriload").load("/Tour/GetGallerybyText?text=" + text);
+                $('.imageselect').bind("click");
+            });
+
+
             $(".categoryupdate").click(function () {
+                var Id = $(this).data("id");
+                $("input[name='id']").val(Id);
+
                 $.ajax({
                     type: "POST",
                     url: "/Categories/GetById",
-                    data: { Id: parseInt($(this).data("id")) },
+                    data: { Id: parseInt(Id) },
                     success: function (e) {
-                        $("#categoryimage").css({ "color": "red" }).text("Kategori'nin resmini güncellemek istiyorsanız. Yeni resim seçebilirsiniz.");
                         renderCategory();
                         $("input[name='CategoryName']").val(e.categoryName);
-                        $("input[name='CategoryPath']").val(e.categoryPath);
+                        $("input[name='CategoryPath']").val(e.path);
                         $('select[name="TopCategory"]').val(e.mainCategoryId).change();
-                        $("#CategoryId").val(e.id);
-
+                        $("input[name='Title']").val(e.title);
+                        $("input[name='Description']").val(e.description);
+                        $("input[name='SEOTitle']").val(e.seoTitle);
+                        $("input[name='SEODescription']").val(e.seoDescription);
+                        $("input[name='id']").val(e.id);
                         $('#newcategory').fadeIn();
+                        $('.updateimages').fadeIn();
                     },
                     dataType: "json"
                 });
             });
 
+            
+            $('.currentresmiekle').click(function () {
+                if (confirm("Bu Resmi Kategori Resmi olarak eklemek istediğine Emin misin?")) {
+                    var galleryId = $("input[name='GetGalleryByText']").val();
+                    var categoryId = parseInt($("input[name='id']").val());
+                    $.ajax({
+                        type: "POST",
+                        url: "/Categories/CategoryPictureUpdate",
+                        data: {
+                            "galleryId": galleryId,
+                            "categoryId": categoryId
+                        },
+                        success: function (x) {
+                            if (x == false) {
+                                alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                            }
+                            else {
+                                swal.fire({
+                                    title: "Ekleniyor...",
+                                    text: "Kategoriye Resim Ekleyeceğiz Demek vay beeee :) tamam hadi ekliyorum.",
+                                    timer: 2000,
+                                    onOpen: function () {
+                                        swal.showLoading()
+                                    }
+                                }).then(function (result) {
+                                    $(".alreadyimagelist").load("/Categories/GetGalleryImages?Id=" + $("#CategoryId").val());
+                                });
+                            }
+                        },
+                        dataType: "json"
+                    });
+                }
+            });
+
+            $('.resmiekle').click(function () {
+                if (confirm("Güncellemek İstediğine Emin misin?")) {
+                    var galleryId = $("input[name='GetGalleryByText']").val();
+                    var categoryId = parseInt($("input[name='id']").val());
+                    $.ajax({
+                        type: "POST",
+                        url: "/Categories/UpdateCategoryBox",
+                        data: {
+                            "galleryId": galleryId,
+                            "categoryId": categoryId
+                        },
+                        success: function (x) {
+                            if (x == false) {
+                                alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                            }
+                            else {
+                                swal.fire({
+                                    title: "Ekleniyor...",
+                                    text: "Kategoriye Resim Ekleyeceğiz Demek vay beeee :) tamam hadi ekliyorum.",
+                                    timer: 2000,
+                                    onOpen: function () {
+                                        swal.showLoading()
+                                    }
+                                }).then(function (result) {
+                                    $(".alreadyimagelist").load("/Categories/GetGalleryImages?Id=" + $("#CategoryId").val());
+                                });
+                            }
+                        },
+                        dataType: "json"
+                    });
+                }
+            });
             $(".categorydelete").click(function () {
                 $.ajax({
                     type: "POST",
@@ -151,6 +275,7 @@
             });
             $('#newcategorytrigger').click(function () {
                 $("#categoryimage").css({ "color": "black" }).text("Resim");
+                $('.updateimages').fadeOut();
                 renderCategory();
             });
 

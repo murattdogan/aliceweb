@@ -54,7 +54,7 @@ namespace Alice.Data.Repository
 
         public T First(Expression<Func<T, bool>> where)
         {
-            return Table.AsNoTracking().First(where);
+            return Table.AsNoTracking().FirstOrDefault(where);
         }
 
         public IQueryable<T> OrderBy<TKey>(Expression<Func<T, TKey>> orderBy, bool isDesc)

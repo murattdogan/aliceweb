@@ -1,0 +1,55 @@
+﻿@model List<Alice.Service.Model.GalleryPoolDTO>
+
+<div class="kt-section">
+    <div class="kt-section__desc">Kategoriye Ait Resimler (<small>Kategori resimlerini silmek için üzerine tıklamanız gerekiyor</small>)</div>
+    <div class="kt-section__content">
+        @foreach (var item in Model)
+        {
+            <a href="#" class="alreadyimageremove">
+                <img src="@($"{item.Thumbnail}/{item.GalleryId}{item.PathExtension}")" class="alreadyimagelistitem" alt="Sil" data-id="@item.GalleryId">
+            </a>
+        }
+
+        <input type="hidden" value="0" name="GetGalleryByText" />
+    </div>
+</div>
+<hr />
+<script>
+
+    $(function () {
+        $('.alreadyimageremove').click(function () {
+            if (confirm("Seçtiğiniz Resmi Silmek İstediğinize Emin misiniz?")) {
+                var galleryId = $(this).children("img").data("id");
+
+                $.ajax({
+                type: "GET",
+                url: "/Category/CategoryGalleryDelete",
+                data: {
+                    "categoryId": parseInt($("#categoryId").val()),
+                    "galleryId" : galleryId
+                },
+                success: function (x) {
+                    if (x == false) {
+                        alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                    }
+                    else {
+                        swal.fire({
+                            title: "Resim Siliniyor",
+                            text: "Bu resimden sıkıldın anlaşılan, napalım silicez artık :)",
+                            timer: 5000,
+                            onOpen: function () {
+                                swal.showLoading()
+                            }
+                        }).then(function (result) {
+                            if (result.dismiss === 'timer') {
+                                 $(".alreadyimagelist").load("/Categories/GetGalleryImages?Id=" + $("#categoryId").val());
+                            }
+                        });
+                    }
+                },
+                dataType: "json"
+            });
+            }
+        });
+    });
+</script>
