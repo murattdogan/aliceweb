@@ -144,11 +144,13 @@
 
                                 <div class="form-group galeriload">
 
-                                </div> 
+                                </div>
 
                                 <div class="form-group">
                                     <div class="custom-file">
-                                        <button type="submit" class="btn btn-primary resimekletamamla">Ekle</button>
+                                        <button type="submit" class="btn btn-primary resimekletamamla" data-id="1">Tur Galerisine Ekle</button>
+                                        <button type="submit" class="btn btn-info resimekletamamla" data-id="2">Tur Kapak Resmi Ekle</button>
+                                        <button type="submit" class="btn btn-success resimekletamamla" data-id="3">Tur Slider'ı Ekle</button>
                                     </div>
                                 </div>
                             </div>
@@ -156,30 +158,45 @@
                     </div>
                 </div>
                 <div class="tab-pane" id="kt_portlet_base_demo_1_4_tab_content" role="tabpanel">
-                    <div class="row dayschecked" style="display:none;">
+                    <div class="row dayschecked">
                         <div class="col-xl-12">
                             <div class="kt-portlet__body">
-                                <div class="kt-scroll ps ps--active-y" data-scroll="true" data-mobile-height="764" style="height: 945px; overflow: hidden;">
-                                    <div class="kt-timeline">
-                                        <div class="kt-timeline__item kt-timeline__item--accent">
-                                            <div class="kt-timeline__item-section">
-                                                <div class="kt-timeline__item-section-border">
-                                                    <div class="kt-timeline__item-section-icon">
-                                                        1
-                                                    </div>
-                                                </div>
-                                                <span class="kt-timeline__item-datetime">01:20 AM</span>
-                                            </div>
-                                            <a href="#" class="kt-timeline__item-text">
-                                                New secyrity alert by Firewall &amp; order to take<br> aktion on User references
-                                            </a>
-                                            <div class="kt-timeline__item-info">
-                                                Security, Fieewall
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 946px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 300px;"></div></div>
-                                </div>
+
+                                <table class="table table-bordered dayinfo" style="display:none;">
+                                    <tr style="display:none;">
+                                        <td>Id (Bu Alana Dokunma)</td>
+                                        <td><input type="number" class="form-control" name="Id" value="0" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gün</td>
+                                        <td><input type="number" class="form-control" name="Day" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gün Başlık</td>
+                                        <td><input type="text" class="form-control" name="DayTitle" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Gün Açıklama</td>
+                                        <td><input type="text" class="form-control" name="DayDetail" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td><button class="btn btn-info btn-sm dayAdds" style="width:80px;">Ekle</button></td>
+                                    </tr>
+                                </table>
+
+                                <button class="btn btn-success btn-sm dayAdd" style="width:120px;">Yeni Gün Ekle</button>
+
+                                <table class="table table-bordered">
+                                    @foreach (var item in ((Alice.Admin.Models.TourCategoryViewModel)ViewBag.Categories).TourPlanList)
+                                    {
+                                        <tr>
+                                            <td>@item.Day</td>
+                                            <td>@item.DayTitle</td>
+                                            <td><button class="btn btn-danger btn-sm daydelete" data-id="@item.Id">Sil</button></td>
+                                        </tr>
+                                    }
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -196,18 +213,94 @@
 
         $(function () {
 
-            $(".alreadyimagelist").load("/Tour/GetTourImages?Id=" + $("#TourId").val());
 
+            $(".dayAdd").click(function () {
+                $(".dayinfo").show();
+                //$("input[name='Id']").val();
+            });
+
+
+            $(".dayAdds").click(function () {
+
+                $.ajax({
+                type: "POST",
+                url: "/Tour/AddTourDayOrUpdate",
+                data: {
+                    "tourDayId": parseInt($("input[name='Id']").val()),
+                    "tourDay": parseInt($("input[name='Day']").val()),
+                    "tourDayTitle": $("input[name='DayTitle']").val(),
+                    "tourDayDetail": $("input[name='DayDetail']").val(),
+                    "tourId": parseInt($("#TourId").val())
+                },
+                success: function (x) {
+                    if (x == false) {
+                        alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                    }
+                    else {
+                        swal.fire({
+                            title: "Bu Gün Kayıtı Siliniyor.",
+                            text: "Bu aralar çok hızlıyım, merak etme hemen siliyorum :)",
+                            timer: 4000,
+                            onOpen: function () {
+                                swal.showLoading()
+                            }
+                        }).then(function (result) {
+                            if (result.dismiss === 'timer') {
+                                window.location.reload(false);
+                            }
+                        });
+                    }
+                },
+                dataType: "json"
+            });
+            });
+
+
+
+            $(".alreadyimagelist").load("/Tour/GetTourImages?Id=" + $("#TourId").val());
+        $('.daydelete').click(function () {
+                var tourDayId = $(this).attr("data-id");
+                $.ajax({
+                type: "GET",
+                url: "/Tour/TourDayDelete",
+                data: {
+                    "tourDayId": parseInt(tourDayId)
+                },
+                success: function (x) {
+                    if (x == false) {
+                        alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                    }
+                    else {
+                        swal.fire({
+                            title: "Bu Gün Kayıtı Siliniyor.",
+                            text: "Bu aralar çok hızlıyım, merak etme hemen siliyorum :)",
+                            timer: 4000,
+                            onOpen: function () {
+                                swal.showLoading()
+                            }
+                        }).then(function (result) {
+                            if (result.dismiss === 'timer') {
+                                window.location.reload(false);
+                            }
+                        });
+                    }
+                },
+                dataType: "json"
+            });
+
+            });
 
             $('.resimekletamamla').click(function () {
                 var galleryId = $("input[name='GetGalleryByText']").val();
                 var tourId = $("#TourId").val();
+                var imageType = $(this).attr("data-id");
                 $.ajax({
                 type: "POST",
                 url: "/Tour/AddTourGalleries",
                 data: {
                     "tourId": parseInt(tourId),
-                    "galleryId" : galleryId
+                    "galleryId": galleryId,
+                    "imageType": parseInt(imageType)
                 },
                 success: function (x) {
                     if (x == false) {
@@ -233,6 +326,9 @@
             });
 
             });
+
+
+
 
             $('.imageselect').click(function () {
                 var galleryId = $(this).children("img").data("id");

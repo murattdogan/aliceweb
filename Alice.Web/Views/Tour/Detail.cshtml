@@ -1,0 +1,413 @@
+﻿@using Alice.Service.Model
+@model TourDTO
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <section class="mansetNoneSlide">
+        <div class="littleBg" style="background: url(@Model.TourSliderImage)">
+            <div class="topSocialMedia">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <ul>
+                                <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.3s">
+                                    <a href="javascript:;">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.6s">
+                                    <a href="javascript:;">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                </li>
+                                <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.9s">
+                                    <a href="javascript:;">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="1.2s">
+                                    <a href="javascript:;">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="littleManset">
+                            <h3>
+                                <span>A Italian</span> <br>
+                                Family Adventure
+                            </h3>
+                        </div>
+                        <div class="featureList">
+                            <ul>
+                                <li>
+                                    <a href="overview.html" class="active">
+                                        <i class="flaticon-info"></i>
+                                        Overview
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="tour-plan.html">
+                                        <i class="flaticon-map-1"></i>
+                                        Tour Plan
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="tour-map.html">
+                                        <i class="flaticon-map"></i>
+                                        Tour Map
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="hotels.html">
+                                        <i class="flaticon-urban"></i>
+                                        Hotels
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="conditions.html">
+                                        <i class="flaticon-accept"></i>
+                                        Conditions
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="gallery.html">
+                                        <i class="flaticon-art"></i>
+                                        Gallery
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<section class="tabSects">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="avaiBox">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb withMarginSpace">
+                            <!-- burda class eklendi farklı olarak withMarginSpace -->
+                            <li class="breadcrumb-item active"><a href="#">HOME</a></li>
+                            <li class="breadcrumb-item"><a href="#">Travel</a></li>
+                            <li class="breadcrumb-item"><a href="#">Tour packages </a></li>
+                            <li class="breadcrumb-item " aria-current="page">Family</li>
+                            <li class="breadcrumb-item " aria-current="page">Overview</li>
+                        </ol>
+                    </nav>
+                    <div class="contentDetail">
+                        <div class="contentLeft">
+                            <div class="col-12 col-md-12 col-lg-8">
+                                <div class="boldContextText containerText">
+                                    <!-- burda class eklendi farklı olarak containerText -->
+                                    <h3 class="bigText">@Model.TourName</h3>
+                                </div>
+                                <div class="downTitle">
+                                    Tour Code : <span>@Model.TourCode</span>
+                                    <br>
+                                    Tour Activity : <span>@Model.TourActivity</span>
+                                </div>
+                                <p class="marginBt-60">
+                                    <!-- burda class eklendi farklı olarak marginBt-60 -->
+                                    @Model.TourSpot
+                                </p>
+                                <div class="daysDetail">
+                                    <p><i>Day 1:</i><span>Lorem Ipsum <em> is simply dummy text of the printing and typesetting industry.</em></span> </p>
+
+                                    <p><i>Day 2:</i><span>Departure<em> is simply dummy  and typesetting industry.</em></span>  </p>
+
+                                    <p><i>Day 3:</i><span>Departure Time <em> is simply dummy text of the printing and typesetting industry.</em> </span> </p>
+
+                                    <p><i>Day 4:</i><span>Return Time</span></p>
+
+                                    <p><i>Day 5:</i><span>Included <em> Not is simply dummy text</em></span> </p>
+                                </div>
+                                <div class="daysWeather">
+                                    <h3>
+                                        Best Time to Visit
+                                    </h3>
+                                    <div class="degreeItem">
+                                        <ul class="degree">
+                                            <li class="redBorder">
+                                                Jan °C 5.8
+                                            </li>
+                                            <li class="redBorder">
+                                                Feb °C 5.8
+                                            </li>
+                                            <li class="lowBorder">
+                                                Mar °C 7.3
+                                            </li>
+                                            <li class="mediumBorder">
+                                                Apr °C 11,2
+                                            </li>
+                                            <li class="highBorder">
+                                                May °C 5.8
+                                            </li>
+                                            <li class="highBorder">
+                                                Jun °C 5.8
+                                            </li>
+                                            <li class="highBorder">
+                                                Jul °C 5.8
+                                            </li>
+                                            <li class="highBorder">
+                                                Aug °C 5.8
+                                            </li>
+                                            <li class="highBorder">
+                                                Sep °C 5.8
+                                            </li>
+                                            <li class="mediumBorder">
+                                                Oct °C 11,2
+                                            </li>
+                                            <li class="lowBorder">
+                                                Nov °C 11.0
+                                            </li>
+                                            <li class="redBorder">
+                                                Dec °C 5.8
+                                            </li>
+                                        </ul>
+                                        <ul class="colorBox">
+                                            <li class="red">
+                                                Lower
+                                            </li>
+                                            <li class="pink">
+                                                Low
+                                            </li>
+                                            <li class="highGreen">
+                                                Medium
+                                            </li>
+                                            <li class="yellow">
+                                                High
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-4">
+                                <div class="fixedFormBox">
+                                    <h6>Book This Tour</h6>
+                                    <form action="" method="" post="">
+                                        <div class="form-div">
+                                            <input type="text" class="form-control" placeholder="Your Name">
+                                        </div>
+                                        <div class="form-div">
+                                            <input type="text" class="form-control" placeholder="Phone Number">
+                                        </div>
+                                        <div class="form-div">
+                                            <input type="mail" class="form-control" placeholder="Email Address">
+                                        </div>
+                                        <div class="form-div">
+                                            <textarea name="" id="" class="form-control" placeholder="Notes"></textarea>
+                                        </div>
+                                        <div class="form-div form-flex">
+                                            <div class="input-group">
+                                                <label class="input-group-btn">
+                                                    <span class="btn download-btn">
+                                                        <i class="flaticon-download"></i>
+                                                        <input type="file" name="ozgecmis" style="display: none;" accept=".doc, .docx, .pdf">
+                                                    </span>
+                                                </label>
+                                                <input type="text" class="form-control" readonly="">
+                                            </div>
+                                            <div class="sendFried">
+                                                <a href="javascript:;">
+                                                    <i class="flaticon-send"></i>
+                                                    <span>Send to  friends</span>
+                                                </a>
+                                            </div>
+                                            <div class="sendBtn">
+                                                <input type="submit" class="form-control" value="SEND">
+                                            </div>
+                                        </div>
+                                        <div class="tailor">
+                                            <a href="javascript:;" data-toggle="modal" data-target="#tailor">
+                                                <span>TAILOR MY TRIP </span><i class="fas fa-caret-right"></i>
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="populerTours">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="leftTitle">
+                    <h3>
+                        Most Popular  <br> <span>Family Tours</span>
+                    </h3>
+                </div>
+                <div class="tours withAbsoloute">
+                    <div class="tab-content">
+                        <ul>
+                            <li class="animated fadeIn">
+                                <figure class="borderBox">
+                                    <a href="overview.html">
+                                        <span class="wrap">
+                                            <picture>
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t1.jpg" data-loadMode="0" class="lazyload" alt="" />
+                                            </picture>
+                                        </span>
+                                    </a>
+                                    <figcaption class="whiteBox">
+                                        <a href="overview.html">
+                                            <b class="title">
+                                                New Zeland
+                                            </b>
+                                            <i>$ 3,268</i>
+                                            <em>
+                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            </em>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+                            </li>
+                            <li class="animated fadeIn">
+                                <figure class="borderBox">
+                                    <a href="overview.html">
+                                        <span class="wrap">
+                                            <picture>
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t2.jpg" data-loadMode="0" class="lazyload" alt="" />
+                                            </picture>
+                                            <strong class="overrideText">
+                                                <em>
+                                                    Last Offer
+                                                </em>
+                                            </strong>
+                                        </span>
+                                    </a>
+                                    <figcaption class="whiteBox">
+                                        <a href="overview.html">
+                                            <b class="title">
+                                                Thailand
+                                            </b>
+                                            <i>$ 3,268</i>
+                                            <em>
+                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            </em>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+                            </li>
+                            <li class="animated fadeIn">
+                                <figure class="borderBox">
+                                    <a href="overview.html">
+                                        <span class="wrap">
+                                            <picture>
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t3.jpg" data-loadMode="0" class="lazyload" alt="" />
+                                            </picture>
+                                        </span>
+                                    </a>
+                                    <figcaption class="whiteBox">
+                                        <a href="overview.html">
+                                            <b class="title">
+                                                Shangai
+                                            </b>
+                                            <i>$ 3,268</i>
+                                            <em>
+                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            </em>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+                            </li>
+                            <li class="animated fadeIn">
+                                <figure class="borderBox">
+                                    <a href="overview.html">
+                                        <span class="wrap">
+                                            <picture>
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t4.jpg" data-loadMode="0" class="lazyload" alt="" />
+                                            </picture>
+                                            <strong class="overrideText">
+                                                <em>
+                                                    Last Offer
+                                                </em>
+                                            </strong>
+                                        </span>
+                                    </a>
+                                    <figcaption class="whiteBox">
+                                        <a href="overview.html">
+                                            <b class="title">
+                                                Costa Rica
+                                            </b>
+                                            <i>$ 3,268</i>
+                                            <em>
+                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            </em>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+                            </li>
+                            <li class="animated fadeIn">
+                                <figure class="borderBox">
+                                    <a href="overview.html">
+                                        <span class="wrap">
+                                            <picture>
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t3.jpg" data-loadMode="0" class="lazyload" alt="" />
+                                            </picture>
+                                            <strong class="overrideText">
+                                                <em>
+                                                    Last Offer
+                                                </em>
+                                            </strong>
+                                        </span>
+                                    </a>
+                                    <figcaption class="whiteBox">
+                                        <a href="overview.html">
+                                            <b class="title">
+                                                India
+                                            </b>
+                                            <i>$ 3,268</i>
+                                            <em>
+                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            </em>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+                            </li>
+                            <li class="animated fadeIn">
+                                <figure class="borderBox">
+                                    <a href="overview.html">
+                                        <span class="wrap">
+                                            <picture>
+                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t5.jpg" data-loadMode="0" class="lazyload" alt="" />
+                                            </picture>
+                                        </span>
+                                    </a>
+                                    <figcaption class="whiteBox">
+                                        <a href="overview.html">
+                                            <b class="title">
+                                                South Africa
+                                            </b>
+                                            <i>$ 3,268</i>
+                                            <em>
+                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            </em>
+                                        </a>
+                                    </figcaption>
+                                </figure>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

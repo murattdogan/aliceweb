@@ -37,6 +37,11 @@ namespace Alice.Service.Service
             return _iMapper.Map<List<TourCategories>, List<TourCategoriesDTO>>(_tourCategoriesRepository.Where(x => x.TourId == TourId).ToList());
         }
 
+        public IEnumerable<TourCategoriesDTO> GetAllByCategoriesofTours(int categoryId)
+        {
+            return _iMapper.Map<List<TourCategories>, List<TourCategoriesDTO>>(_tourCategoriesRepository.Where(x => x.CategoriesId == categoryId).ToList());
+        }
+
         public bool Insert(TourCategoriesDTO data)
         {
             return _tourCategoriesRepository.Add(new TourCategories()

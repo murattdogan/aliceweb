@@ -1,6 +1,7 @@
 ﻿using Alice.Data.Context;
 using Alice.Data.Model;
 using Alice.Data.Repository;
+using Alice.Service.Helper;
 using Alice.Service.Model;
 using AutoMapper;
 using System;
@@ -15,11 +16,13 @@ namespace Alice.Service.Service
         private IMapper _iMapper;
         private readonly LuxuryContext _context;
         private readonly IRepository<Tour> _tourRepository;
+        IRepository<TourCategories> _tourCategoriesService;
 
         public TourService(LuxuryContext context)
         {
             _context = context;
             _tourRepository = new Repository<Tour>(_context);
+            _tourCategoriesService = new Repository<TourCategories>(_context);
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -44,6 +47,16 @@ namespace Alice.Service.Service
             return _iMapper.Map<Tour, TourDTO>(_tourRepository.First(x => x.Id == Id));
         }
 
+        public TourDTO GetTourByUrl(string tourUrl)
+        {
+            return _iMapper.Map<Tour, TourDTO>(_tourRepository.First(x => x.TourUrl == tourUrl));
+        }
+
+        public List<TourCategoriesDTO> GetTourByCategoryId(int categoryId)
+        {
+            return _iMapper.Map<List<TourCategories>, List<TourCategoriesDTO>>(_tourCategoriesService.Where(x => x.CategoriesId == categoryId).ToList());
+        }
+
         public bool Delete(int Id)
         {
             var tourEntity = _tourRepository.First(x => x.Id == Id);
@@ -61,6 +74,8 @@ namespace Alice.Service.Service
                 TourMap = "",
                 TourName = tour.TourName,
                 TourSpot = tour.TourSpot,
+                TourSliderImage = tour.TourSliderImage,
+                TourImage = tour.TourImage,
                 TourType = 0
             });
         }
@@ -77,6 +92,8 @@ namespace Alice.Service.Service
                 tourEntity.TourName = tour.TourName;
                 tourEntity.TourSpot = tour.TourSpot;
                 tourEntity.TourType = tour.TourType;
+                tourEntity.TourImage = tour.TourImage;
+                tourEntity.TourSliderImage = tour.TourSliderImage;
                 return _tourRepository.Update(tourEntity);
             }
             else return false;

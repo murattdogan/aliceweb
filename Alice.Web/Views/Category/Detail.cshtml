@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="~/Content/css/style.css">
 
 <section class="mansetNoneSlide">
-    <div class="catSlide">
+    <div class="catSlid onlyOneIteme">
         <!-- eğer 1 tane olacaksa catSlide divine onlyOneItem class'ı ekle -->
         @{
             foreach (var item in ((Alice.Web.Models.CategoryModel)ViewBag.CategorySlider).ImagePath)
@@ -20,37 +20,7 @@
         }
 
     </div>
-    <div class="topSocialMedia">
-        <!-- iç sayfalarda bu div bunun içinde yer almalı -->
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <ul>
-                        <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.3s">
-                            <a href="javascript:;">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                        <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.6s">
-                            <a href="javascript:;">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </li>
-                        <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.9s">
-                            <a href="javascript:;">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        </li>
-                        <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="1.2s">
-                            <a href="javascript:;">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
 </section>
 <section class="generallyInfo basicPages">
     <div class="container">
@@ -60,9 +30,9 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item active"><a href="/">HOME</a></li>
-                            <li class="breadcrumb-item"><a href="@Model.Path">@(Model.Title.ToUpper())</a></li>
+                            <li class="breadcrumb-item"><a href="@Model.Path">@(Model.Title?.ToUpper())</a></li>
                             @*<li class="breadcrumb-item"><a href="#">Tour packages </a></li>
-                            <li class="breadcrumb-item " aria-current="page">Family</li>*@
+                                <li class="breadcrumb-item " aria-current="page">Family</li>*@
                         </ol>
                     </nav>
                     <h1 class="pageTitle wow slideInLeft">
@@ -108,6 +78,52 @@
                     </div>
                 }
             }
+
+            <section class="tours">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="domesticTours" role="tabpanel" aria-labelledby="domesticTours-tab">
+                                    <ul>
+                                        @foreach (var item in ((List<Alice.Service.Model.TourDTO>)ViewBag.TourList))
+                                        {
+                                            <li class="animated fadeIn">
+                                                <figure class="borderBox">
+                                                    <a href="overview.html">
+                                                        <span class="wrap">
+                                                            <picture>
+                                                                <img src="@item.TourImage" data-src="@item.TourImage" data-loadMode="0" alt="" />
+                                                            </picture>
+                                                            @*<i class="price">From $ 4,218 pp</i>*@
+                                                        </span>
+                                                    </a>
+                                                    <figcaption class="whiteBox">
+                                                        <a href="@($"{Model.Path}/{Alice.Web.Helper.ConstHelper.UrlFriendly(item.TourName)}")">
+                                                            <b class="title">
+                                                                @item.TourName
+                                                            </b>
+                                                            <span>@item.TourSpot</span>
+                                                            <em>
+                                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                            </em>
+                                                        </a>
+                                                    </figcaption>
+                                                </figure>
+                                            </li>
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
 
             @*<div class="col-12 col-md-4 col-lg-3">
                     <div class="blurBox col3 wow fadeIn" data-wow-delay="0.2s">

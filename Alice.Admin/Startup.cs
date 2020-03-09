@@ -52,6 +52,7 @@ namespace Alice.Admin
             services.AddTransient<SiteSettingsService>();
             services.AddTransient<CategoriesSlidersService>();
             services.AddTransient<StaticPagesService>();
+            services.AddTransient<TourPlanService>();
 
 
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();

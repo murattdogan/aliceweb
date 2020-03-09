@@ -254,7 +254,7 @@
                                         swal.showLoading()
                                     }
                                 }).then(function (result) {
-                                    $(".alreadyimagelist").load("/Categories/GetGalleryImages?Id=" + $("#CategoryId").val());
+                                    $(".alreadyimagelist").load("/Categories/GetGalleryImages?Id=" +$("input[name='id']").val());
                                 });
                             }
                         },

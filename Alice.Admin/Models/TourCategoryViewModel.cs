@@ -12,5 +12,6 @@ namespace Alice.Admin.Models
         public IEnumerable<KeywordPoolDTO> SelectAllKeyword { get; set; }
         public IEnumerable<TourCategoriesDTO> SelectAllCategories { get; set; }
         public IEnumerable<GalleryPoolDTO> GalleryPhotos { get; set; }
+        public IEnumerable<TourPlanListDTO> TourPlanList { get; set; }
     }
 }

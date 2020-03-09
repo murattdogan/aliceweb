@@ -34,3 +34,4 @@ E:\alice\Alice\Alice.Web\obj\Debug\netcoreapp2.2\Alice.Web.dll
 E:\alice\Alice\Alice.Web\obj\Debug\netcoreapp2.2\Alice.Web.pdb
 E:\alice\Alice\Alice.Web\obj\Debug\netcoreapp2.2\Razor\Views\Category\Detail.g.cshtml.cs
 E:\alice\Alice\Alice.Web\obj\Debug\netcoreapp2.2\Razor\Views\StaticPages\Page.g.cshtml.cs
+E:\alice\Alice\Alice.Web\obj\Debug\netcoreapp2.2\Razor\Views\Tour\Detail.g.cshtml.cs

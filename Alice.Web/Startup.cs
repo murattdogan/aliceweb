@@ -41,6 +41,8 @@ namespace Alice.Web
             services.AddTransient<CategoryService>();
             services.AddTransient<CategoriesSlidersService>();
             services.AddTransient<StaticPagesService>();
+            services.AddTransient<TourCategoriesService>();
+            services.AddTransient<TourService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -72,6 +74,16 @@ namespace Alice.Web
             {
                 routes.MapRoute("category", "{categoryName}",
             defaults: new { controller = "Category", action = "Detail" });
+
+                routes.MapRoute("subCategory", "{parentCategoryName}/{categoryName}",
+            defaults: new { controller = "Category", action = "Detail" });
+
+
+                routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}",
+            defaults: new { controller = "Category", action = "Detail" });
+
+                routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}/{tourUrl}",
+           defaults: new { controller = "Tour", action = "Detail" });
 
                 routes.MapRoute(
                     name: "default",

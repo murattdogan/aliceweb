@@ -19,9 +19,9 @@ namespace Alice.Admin.Controllers
         private readonly GalleryKeywordService _galleryKeywordService;
         private readonly GalleryPoolService _galleryPoolService;
         private readonly TourGalleriesService _tourGalleryService;
+        private readonly TourPlanService _tourPlanListService;
 
-
-        public TourController(TourService tourService, CategoryService categoryService, TourCategoriesService tourCategoryService, KeywordPoolService keywordPoolService, GalleryKeywordService galleryKeywordService, GalleryPoolService galleryPoolService, TourGalleriesService tourGalleryService)
+        public TourController(TourPlanService tourPlanListService, TourService tourService, CategoryService categoryService, TourCategoriesService tourCategoryService, KeywordPoolService keywordPoolService, GalleryKeywordService galleryKeywordService, GalleryPoolService galleryPoolService, TourGalleriesService tourGalleryService)
         {
             _tourService = tourService;
             _categoryService = categoryService;
@@ -30,6 +30,7 @@ namespace Alice.Admin.Controllers
             _galleryKeywordService = galleryKeywordService;
             _galleryPoolService = galleryPoolService;
             _tourGalleryService = tourGalleryService;
+            _tourPlanListService = tourPlanListService;
         }
 
         public IActionResult Index()
@@ -77,6 +78,45 @@ namespace Alice.Admin.Controllers
             else return Json(false);
         }
 
+
+
+        [ServiceFilter(typeof(AuthorizationAttribute))]
+        [HttpPost]
+        public JsonResult AddTourDayOrUpdate(int tourDayId, int tourDay, string tourDayTitle, string tourDayDetail, int tourId)
+        {
+            if (tourDayId == 0)
+            {
+                return Json(_tourPlanListService.Add(new TourPlanListDTO()
+                {
+                    DayTitle = tourDayTitle,
+                    DayDetail = tourDayDetail,
+                    Day = tourDay,
+                    TourId = tourId
+                }));
+            }
+            else
+            {
+                var tourDayList = _tourPlanListService.GetById(tourDayId);
+                if (tourDayList != null)
+                {
+                    tourDayList.Day = tourDay;
+                    tourDayList.DayTitle = tourDayTitle;
+                    tourDayList.DayDetail = tourDayDetail;
+                    tourDayList.TourId = tourId;
+                    return Json(_tourPlanListService.Update(tourDayList));
+                }
+            }
+            return Json(false);
+
+        }
+        [ServiceFilter(typeof(AuthorizationAttribute))]
+        [HttpGet]
+        public JsonResult TourDayDelete(int tourDayId)
+        {
+            var tourDayList = _tourPlanListService.Delete(tourDayId);
+            return Json(tourDayList);
+
+        }
         [ServiceFilter(typeof(AuthorizationAttribute))]
         public IActionResult TourUpdateView(string Id)
         {
@@ -98,7 +138,8 @@ namespace Alice.Admin.Controllers
                     SelectAllCategories = _tourCategoryService.GetAllByTourIdCategories(tour.Id),
                     AllCategories = _categoryService.GetAllCategories(),
                     SelectAllKeyword = _keywordPoolService.GetAll(),
-                    GalleryPhotos = tourGalleries
+                    GalleryPhotos = tourGalleries,
+                    TourPlanList = _tourPlanListService.GetAll()
                 };
                 return View(tour);
             }
@@ -179,9 +220,40 @@ namespace Alice.Admin.Controllers
         }
         [ServiceFilter(typeof(AuthorizationAttribute))]
         [HttpPost]
-        public JsonResult AddTourGalleries(int tourId, string galleryId)
+        public JsonResult AddTourGalleries(int tourId, string galleryId, int imageType)
         {
-            return Json(_tourGalleryService.Add(new TourGalleriesDTO() { TourId = tourId, GalleryId = galleryId }));
+            var tour = _tourService.GetTourById(tourId);
+            var galleryPath = _galleryPoolService.GetByGalleryId(galleryId);
+            var image = "";
+            if (galleryPath != null)
+            {
+                image = $"console.luxuryistanbul.com\\{galleryPath.ImagePath}\\{galleryPath.GalleryId}{galleryPath.PathExtension}".Replace("\\", @"/").Replace("//", "/");
+                image = $"http://{image}";
+            }
+
+            if (imageType == 1)
+            {
+                _tourGalleryService.Add(new TourGalleriesDTO() { TourId = tourId, GalleryId = galleryId });
+            }
+            else if (imageType == 2)
+            {
+                if (galleryPath != null)
+                {
+                    tour.TourImage = image;
+                    _tourService.Update(tour);
+                }
+            }
+            else if (imageType == 3)
+            {
+                if (galleryPath != null)
+                {
+                    tour.TourSliderImage = image;
+                    _tourService.Update(tour);
+                }
+            }
+
+
+            return Json(true);
         }
 
     }
