@@ -9,16 +9,14 @@
 <link rel="stylesheet" href="~/Content/css/style.css">
 
 <section class="mansetNoneSlide">
-    <div class="catSlid onlyOneIteme">
+    <div class="catSlide">
         <!-- eğer 1 tane olacaksa catSlide divine onlyOneItem class'ı ekle -->
         @{
             foreach (var item in ((Alice.Web.Models.CategoryModel)ViewBag.CategorySlider).ImagePath)
             {
                 <div class="fullBg" style="background:url(@item)"></div> <!-- eğer 1 tane olacaksa catSlide divine onlyOneItem class'ı ekle -->
             }
-
         }
-
     </div>
  
 </section>
