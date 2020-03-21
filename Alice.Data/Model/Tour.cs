@@ -17,5 +17,7 @@ namespace Alice.Data.Model
         public string TourSpot { get; set; }
         public string TourUrl { get; set; }
         public DateTime RecordDate { get; set; }
+        public string SEOTitle { get; set; }
+        public string SEODescription { get; set; }
     }
 }

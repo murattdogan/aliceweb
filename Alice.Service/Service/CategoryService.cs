@@ -40,6 +40,11 @@ namespace Alice.Service.Service
         {
             return _iMapper.Map<List<Categories>, List<CategoriesDTO>>(_categoryRepository.All().Where(x => x.MainCategoryId == mainCategoryId).ToList());
         }
+
+        public CategoriesDTO GetParentCategoryName(int categoryId)
+        {
+            return _iMapper.Map<Categories, CategoriesDTO>(_categoryRepository.First(x => x.Id == categoryId));
+        }
         public CategoriesDTO GetById(int Id)
         {
             var category = _categoryRepository.First(x => x.Id == Id);

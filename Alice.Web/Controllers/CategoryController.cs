@@ -60,17 +60,23 @@ namespace Alice.Web.Controllers
             subCategory.ForEach(x => imgs.Add(x.Id, x.ImagePath));
 
             CategoryModel cm = new CategoryModel(_galleryPoolService, s, imgs);
-            ViewBag.SubCategories = subCategory;
+            //ViewBag.SubCategories = subCategory;
             ViewBag.CategorySlider = cm;
+            var subCategoryList = _categoryService.GetAllSubCategories(categoryModel.Id).ToList();
 
+            foreach (var item in subCategoryList)
+            {
+                subCategoryList.FirstOrDefault(x => x.Id == item.Id).SubCategory = _categoryService.GetAllSubCategories(item.Id).ToList();
+            }
+
+            ViewBag.SubCategories = subCategoryList;
             var tourList = new List<TourDTO>();
-
             if (_categoryService.GetAllSubCategories(categoryModel.Id).Count() == 0)
             {
                 var categoryTours = _tourCategoryService.GetAllByCategoriesofTours(categoryModel.Id).ToList();
                 foreach (var item in categoryTours)
                 {
-                    tourList.Add(_tourService.GetTourById(item.Id));
+                    tourList.Add(_tourService.GetTourById(item.TourId));
                 }
             }
             ViewBag.TourList = tourList;

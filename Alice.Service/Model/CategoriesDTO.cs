@@ -15,5 +15,7 @@ namespace Alice.Service.Model
         public string SEOTitle { get; set; }
         public string SEODescription { get; set; }
         public List<GalleryPoolDTO> SliderGallery { get; set; }
+        public List<CategoriesDTO> SubCategory { get; set; }
+
     }
 }

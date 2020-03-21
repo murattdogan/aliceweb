@@ -46,7 +46,7 @@ namespace Alice.Admin.Controllers
         [HttpPost]
         public IActionResult Insert(string id, string CategoryName, string CategoryPath, int TopCategory, string Title, string Description, string SEOTitle, string SEODescription)
         {
-            if (id == "0")
+            if (id == "0" || id == null)
             {
                 var category = new CategoriesDTO()
                 {

@@ -8,5 +8,6 @@ namespace Alice.Service.Model
     {
         public int TourId { get; set; }
         public int CategoriesId { get; set; }
+        public string CategoriesName { get; set; }
     }
 }

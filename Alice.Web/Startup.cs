@@ -43,6 +43,7 @@ namespace Alice.Web
             services.AddTransient<StaticPagesService>();
             services.AddTransient<TourCategoriesService>();
             services.AddTransient<TourService>();
+            services.AddTransient<TourPlanService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -82,8 +83,12 @@ namespace Alice.Web
                 routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}",
             defaults: new { controller = "Category", action = "Detail" });
 
-                routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}/{tourUrl}",
-           defaults: new { controller = "Tour", action = "Detail" });
+                routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}/{tourUrl}/{tourPage?}", defaults: new { controller = "Tour", action = "Detail"  });
+                //routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}/{tourUrl}/Tour-Plan", defaults: new { controller = "Tour", action = "SubDetail" });
+                //routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}/{tourUrl}/Tour-Map", defaults: new { controller = "Tour", action = "SubDetail" });
+                //routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}/{tourUrl}/Hotel", defaults: new { controller = "Tour", action = "SubDetail" });
+                //routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}/{tourUrl}/Conditions", defaults: new { controller = "Tour", action = "SubDetail" });
+                //routes.MapRoute("perSubCategory", "{parentCategoryName}/{subParentCategoryName}/{categoryName}/{tourUrl}/Gallery", defaults: new { controller = "Tour", action = "SubDetail" });
 
                 routes.MapRoute(
                     name: "default",

@@ -1,0 +1,219 @@
+﻿@using Alice.Service.Model
+@model TourDTO
+@{
+    ViewData["Title"] = "tourplan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="mansetNoneSlide">
+    <div class="littleBg" style="background: url(@Model.TourSliderImage)">
+        <div class="topSocialMedia">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.3s">
+                                <a href="javascript:;">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.6s">
+                                <a href="javascript:;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.9s">
+                                <a href="javascript:;">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="1.2s">
+                                <a href="javascript:;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="littleManset">
+                        <h3>
+                            <span>@Model.TourName</span>
+                        </h3>
+                    </div>
+                    <div class="featureList">
+                        <ul>
+                            <li>
+                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}")">
+                                    <i class="flaticon-info"></i>
+                                    Overview
+                                </a>
+                            </li>
+                            <li>
+                                <a class="active" href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/tour-plan")">
+                                    <i class="flaticon-map-1"></i>
+                                    Tour Plan
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/tour-map")">
+                                    <i class="flaticon-map"></i>
+                                    Tour Map
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/hotel")">
+                                    <i class="flaticon-urban"></i>
+                                    Hotels
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/conditions")">
+                                    <i class="flaticon-accept"></i>
+                                    Conditions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/gallery")">
+                                    <i class="flaticon-art"></i>
+                                    Gallery
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="tabSects">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="avaiBox">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb withMarginSpace">
+                            <!-- burda class eklendi farklı olarak withMarginSpace -->
+                            <li class="breadcrumb-item active"><a href="/">HOME</a></li>
+                            @*<li class="breadcrumb-item"><a href="#">Travel</a></li>
+                                <li class="breadcrumb-item"><a href="#">Tour packages </a></li>
+                                <li class="breadcrumb-item " aria-current="page">Family</li>*@
+                            <li class="breadcrumb-item " aria-current="page">@Model.TourName</li>
+                        </ol>
+                    </nav>
+                    <div class="contentDetail">
+                        <div class="contentLeft">
+                            <div class="col-12 col-md-12 col-lg-8">
+                                <div class="boldContextText containerText">
+                                    <h3 class="bigText">@Model.TourName</h3>
+                                </div>
+
+                                <div id="accordion" class="difAccordColor">
+                                    @{
+                                        var countCollapse = 0;
+                                        foreach (var item in ((List<Alice.Service.Model.TourPlanListDTO>)ViewBag.TourDays))
+                                        {
+                                            countCollapse++;
+                                            var oneClass = "headingOne";
+                                            if (countCollapse != 1)
+                                            {
+                                                oneClass = "";
+                                            }
+                                            <div class="card">
+                                                <div class="card-header" id="@oneClass">
+                                                    <h5 class="mb-0">
+                                                        <button class="btn btn-link" data-toggle="collapse" data-target="@($"#collapse{item.Day}")" aria-expanded="true" aria-controls="@oneClass">
+                                                            <span>Day @item.Day:</span> @item.DayTitle <i class="flaticon-arrow"></i>
+                                                        </button>
+                                                    </h5>
+                                                </div>
+                                                <div id="@($"collapse{item.Day}")" class="collapse show" aria-labelledby="@oneClass" data-parent="#accordion">
+                                                    <div class="card-body">
+                                                        <p>
+                                                            @item.DayDetail
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-4">
+                                <div class="fixedFormBox">
+                                    <h6>Book This Tour</h6>
+                                    <form action="/Tour/MessagePost" method="post" post="">
+                                        <div class="form-div">
+                                            <input type="text" class="form-control" name="Name" placeholder="Your Name">
+                                        </div>
+                                        <div class="form-div">
+                                            <input type="text" class="form-control" name="Phone" placeholder="Phone Number">
+                                        </div>
+                                        <div class="form-div">
+                                            <input type="mail" class="form-control" name="Email" placeholder="Email Address">
+                                        </div>
+                                        <div class="form-div">
+                                            <textarea id="" class="form-control" name="Notes" placeholder="Notes"></textarea>
+                                        </div>
+                                        @*<div class="form-div form-flex">
+                                            <div class="input-group">
+                                                <label class="input-group-btn">
+                                                    <span class="btn download-btn">
+                                                        <i class="flaticon-download"></i>
+                                                        <input type="file" name="ozgecmis" style="display: none;" accept=".doc, .docx, .pdf">
+                                                    </span>
+                                                </label>
+                                                <input type="text" class="form-control" readonly="">
+                                            </div>
+                                            <div class="sendFried">
+                                                <a href="javascript:;">
+                                                    <i class="flaticon-send"></i>
+                                                    <span>Send to  friends</span>
+                                                </a>
+                                            </div>
+                                            <div class="sendBtn">
+                                                <input type="submit" class="form-control" value="SEND">
+                                            </div>
+                                            </div>*@
+                                        <div class="tailor">
+                                            <button data-toggle="modal" data-target="#tailor"><span>TAILOR MY TRIP </span><i class="fas fa-caret-right"></i></button>
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="recommended">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="discoveredBox">
+                    <div class="recommendedBlackBox">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/recoBox.jpg" data-loadMode="0" class="lazyload" alt="Luxury İstanbul">
+                        <div class="psAbslt">
+                            <h2 class="colorableText">Recommended By <span>Luxury Istanbul</span></h2>
+                            <a href="javascript:;" class="gradientBtn">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/discoverNow.png" data-loadMode="0" class="lazyload" alt="Luxury İstanbul">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

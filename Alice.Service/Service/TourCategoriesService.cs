@@ -14,11 +14,13 @@ namespace Alice.Service.Service
     {
         private IMapper _iMapper;
         IRepository<TourCategories> _tourCategoriesRepository;
+        IRepository<Categories> _categoriesRepository;
         private readonly LuxuryContext _context;
         public TourCategoriesService(LuxuryContext context)
         {
             _context = context;
             _tourCategoriesRepository = new Repository<TourCategories>(_context);
+            _categoriesRepository = new Repository<Categories>(_context);
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -35,6 +37,18 @@ namespace Alice.Service.Service
         public IEnumerable<TourCategoriesDTO> GetAllByTourIdCategories(int TourId)
         {
             return _iMapper.Map<List<TourCategories>, List<TourCategoriesDTO>>(_tourCategoriesRepository.Where(x => x.TourId == TourId).ToList());
+        }
+
+        public IEnumerable<TourCategoriesDTO> GetAllByTourIdCategoriesName(int TourId)
+        {
+            var categories = _tourCategoriesRepository.Where(x => x.TourId == TourId).ToList();
+
+            foreach (var item in categories)
+            {
+                item.CategoriesName = _categoriesRepository.First(x => x.Id == item.CategoriesId)?.CategoryName ?? string.Empty;
+            }
+
+            return _iMapper.Map<List<TourCategories>, List<TourCategoriesDTO>>(categories);
         }
 
         public IEnumerable<TourCategoriesDTO> GetAllByCategoriesofTours(int categoryId)

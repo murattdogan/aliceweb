@@ -4,7 +4,6 @@ E:\alice\Alice\Alice.Service\bin\Debug\netcoreapp2.2\Alice.Service.pdb
 E:\alice\Alice\Alice.Service\bin\Debug\netcoreapp2.2\Alice.Data.dll
 E:\alice\Alice\Alice.Service\bin\Debug\netcoreapp2.2\Alice.Data.pdb
 E:\alice\Alice\Alice.Service\obj\Debug\netcoreapp2.2\Alice.Service.csprojAssemblyReference.cache
-E:\alice\Alice\Alice.Service\obj\Debug\netcoreapp2.2\Alice.Service.csproj.CoreCompileInputs.cache
 E:\alice\Alice\Alice.Service\obj\Debug\netcoreapp2.2\Alice.Service.AssemblyInfoInputs.cache
 E:\alice\Alice\Alice.Service\obj\Debug\netcoreapp2.2\Alice.Service.AssemblyInfo.cs
 E:\alice\Alice\Alice.Service\obj\Debug\netcoreapp2.2\Alice.Service.csproj.CopyComplete

@@ -28,7 +28,7 @@ namespace Alice.Service.Service
 
         public IEnumerable<TourPlanListDTO> GetAll()
         {
-            return _tourPlanRepository.All().Select(x => new TourPlanListDTO() { Id = x.Id, DayDetail = x.DayDetail, Day = x.Day, DayTitle = x.DayTitle }).ToList();
+            return _tourPlanRepository.All().Select(x => new TourPlanListDTO() { Id = x.Id, DayDetail = x.DayDetail, Day = x.Day, DayTitle = x.DayTitle, TourId = x.TourId }).ToList();
         }
 
         public TourPlanListDTO GetById(int Id)

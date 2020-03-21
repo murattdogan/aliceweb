@@ -76,7 +76,10 @@ namespace Alice.Service.Service
                 TourSpot = tour.TourSpot,
                 TourSliderImage = tour.TourSliderImage,
                 TourImage = tour.TourImage,
-                TourType = 0
+                TourType = 0,
+                SEOTitle = tour.SEOTitle,
+                SEODescription = tour.SEODescription,
+                TourUrl = ConstHelper.UrlFriendly(tour.TourName)
             });
         }
 
@@ -94,6 +97,9 @@ namespace Alice.Service.Service
                 tourEntity.TourType = tour.TourType;
                 tourEntity.TourImage = tour.TourImage;
                 tourEntity.TourSliderImage = tour.TourSliderImage;
+                tourEntity.SEOTitle = tour.SEOTitle;
+                tourEntity.SEODescription = tour.SEODescription;
+                tourEntity.TourUrl = ConstHelper.UrlFriendly(tour.TourName);
                 return _tourRepository.Update(tourEntity);
             }
             else return false;

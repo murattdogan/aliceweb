@@ -6,7 +6,6 @@ E:\alice\Alice\Alice.Core\bin\Release\netcoreapp2.2\Newtonsoft.Json.dll
 E:\alice\Alice\Alice.Core\bin\Release\netcoreapp2.2\Microsoft.AspNetCore.Http.Features.xml
 E:\alice\Alice\Alice.Core\bin\Release\netcoreapp2.2\Newtonsoft.Json.xml
 E:\alice\Alice\Alice.Core\obj\Release\netcoreapp2.2\Alice.Core.csprojAssemblyReference.cache
-E:\alice\Alice\Alice.Core\obj\Release\netcoreapp2.2\Alice.Core.csproj.CoreCompileInputs.cache
 E:\alice\Alice\Alice.Core\obj\Release\netcoreapp2.2\Alice.Core.AssemblyInfoInputs.cache
 E:\alice\Alice\Alice.Core\obj\Release\netcoreapp2.2\Alice.Core.AssemblyInfo.cs
 E:\alice\Alice\Alice.Core\obj\Release\netcoreapp2.2\Alice.Core.csproj.CopyComplete

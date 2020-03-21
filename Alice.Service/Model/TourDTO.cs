@@ -19,5 +19,7 @@ namespace Alice.Service.Model
         public string TourBody { get; set; }
         public string TourUrl { get; set; }
         public string RecordDate { get; set; }
+        public string SEOTitle { get; set; }
+        public string SEODescription { get; set; }
     }
 }
