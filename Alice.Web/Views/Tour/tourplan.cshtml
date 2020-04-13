@@ -1,7 +1,8 @@
 ﻿@using Alice.Service.Model
 @model TourDTO
 @{
-    ViewData["Title"] = "tourplan";
+    ViewData["Title"] = Model.TourName;
+    ViewData["SEODesctiption"] = Model.TourName;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -48,37 +49,37 @@
                     <div class="featureList">
                         <ul>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}")">
+                                <a href="@($"{ViewBag.urlPrefix}")">
                                     <i class="flaticon-info"></i>
                                     Overview
                                 </a>
                             </li>
                             <li>
-                                <a class="active" href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/tour-plan")">
+                                <a href="@($"{ViewBag.urlPrefix}")tour-plan" class="active">
                                     <i class="flaticon-map-1"></i>
                                     Tour Plan
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/tour-map")">
+                                <a href="@($"{ViewBag.urlPrefix}")tour-map">
                                     <i class="flaticon-map"></i>
                                     Tour Map
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/hotel")">
+                                <a href="@($"{ViewBag.urlPrefix}")hotel">
                                     <i class="flaticon-urban"></i>
                                     Hotels
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/conditions")">
+                                <a href="@($"{ViewBag.urlPrefix}")conditions">
                                     <i class="flaticon-accept"></i>
                                     Conditions
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/gallery")">
+                                <a href="@($"{ViewBag.urlPrefix}")gallery">
                                     <i class="flaticon-art"></i>
                                     Gallery
                                 </a>
@@ -188,28 +189,6 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-<section class="recommended">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="discoveredBox">
-                    <div class="recommendedBlackBox">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/recoBox.jpg" data-loadMode="0" class="lazyload" alt="Luxury İstanbul">
-                        <div class="psAbslt">
-                            <h2 class="colorableText">Recommended By <span>Luxury Istanbul</span></h2>
-                            <a href="javascript:;" class="gradientBtn">
-                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/discoverNow.png" data-loadMode="0" class="lazyload" alt="Luxury İstanbul">
-                            </a>
                         </div>
                     </div>
                 </div>

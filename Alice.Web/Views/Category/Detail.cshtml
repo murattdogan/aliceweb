@@ -1,7 +1,8 @@
 ﻿@using Alice.Service.Model
 @model CategoriesDTO
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = Model.SEOTitle;
+    ViewData["SEODescription"] = Model.SEODescription;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -260,7 +261,7 @@
     </div>
 </section>
 
-<section class="recommended">
+@*<section class="recommended">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -269,7 +270,7 @@
                         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="~/Content/img/recoBox.jpg" data-loadMode="0" class="lazyload" alt="Luxury İstanbul">
                         <div class="psAbslt">
                             <h2 class="colorableText">Recommended By <span>Luxury Istanbul</span></h2>
-                            <a href="javascript:;" class="gradientBtn">
+                            <a href="/recommended-by-luxury-istanbul" class="gradientBtn">
                                 <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="~/Content/img/discoverNow.png" data-loadMode="0" class="lazyload" alt="Luxury İstanbul">
                             </a>
                         </div>
@@ -278,7 +279,7 @@
             </div>
         </div>
     </div>
-</section>
+</section>*@
 @section Scripts{
     <script src='~/Content/js/plugins.js'></script>
 }

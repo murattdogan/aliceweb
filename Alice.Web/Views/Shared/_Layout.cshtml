@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <title>@ViewData["Title"] - Alice.Web</title>
     <meta name="author" content="Erkan Güzelküçük">
-    <meta name="description" content="">
+    <meta name="description" content="@(ViewData["SEODescription"]??string.Empty)">
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <environment include="Production">
@@ -39,7 +39,7 @@
                             <a href="tel:00905353122642">+90 535 312 2642</a>
                         </div>
                         <div class="logo">
-                            <a href="index.html">
+                            <a href="/">
                                 <img src="/Content/img/logo.png" alt="Luxury İstanbul">
                             </a>
                         </div>

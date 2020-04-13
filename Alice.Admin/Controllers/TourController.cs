@@ -125,7 +125,7 @@ namespace Alice.Admin.Controllers
             {
                 var tourGalleries = new List<GalleryPoolDTO>();
                 var tourGallery = _tourGalleryService.GetGalleriesByTourId(tour.Id);
-                if (tourGallery.Any())
+                if (tourGallery!=null && tourGallery.Any())
                 {
                     foreach (var item in tourGallery)
                     {
@@ -154,7 +154,7 @@ namespace Alice.Admin.Controllers
         {
             var tourGalleries = new List<GalleryPoolDTO>();
             var tourGallery = _tourGalleryService.GetGalleriesByTourId(Id);
-            if (tourGallery.Any())
+            if (tourGallery !=null && tourGallery.Any())
             {
                 foreach (var item in tourGallery)
                 {

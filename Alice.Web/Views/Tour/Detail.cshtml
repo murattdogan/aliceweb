@@ -2,8 +2,10 @@
 @model TourDTO
 
 @{
-    ViewData["Title"] = "Detail";
+    ViewData["Title"] = Model.TourName;
+    ViewData["SEODesctiption"] = Model.TourName;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (List<Alice.Service.Model.TourCategoriesDTO>)ViewBag.Category;
 }
 <section class="mansetNoneSlide">
     <div class="littleBg" style="background: url(@Model.TourSliderImage)">
@@ -48,37 +50,37 @@
                     <div class="featureList">
                         <ul>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}")" class="active">
+                                <a href="@($"{ViewBag.urlPrefix}")" class="active">
                                     <i class="flaticon-info"></i>
                                     Overview
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/tour-plan")">
+                                <a href="@($"{ViewBag.urlPrefix}")/tour-plan">
                                     <i class="flaticon-map-1"></i>
                                     Tour Plan
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/tour-map")">
+                                <a href="@($"{ViewBag.urlPrefix}")/tour-map">
                                     <i class="flaticon-map"></i>
                                     Tour Map
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/hotel")">
+                                <a href="@($"{ViewBag.urlPrefix}")/hotel">
                                     <i class="flaticon-urban"></i>
                                     Hotels
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/conditions")">
+                                <a href="@($"{ViewBag.urlPrefix}")/conditions">
                                     <i class="flaticon-accept"></i>
                                     Conditions
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(Model.TourName)}/gallery")">
+                                <a href="@($"{ViewBag.urlPrefix}")/gallery">
                                     <i class="flaticon-art"></i>
                                     Gallery
                                 </a>
@@ -100,8 +102,8 @@
                             <!-- burda class eklendi farklı olarak withMarginSpace -->
                             <li class="breadcrumb-item active"><a href="/">HOME</a></li>
                             @*<li class="breadcrumb-item"><a href="#">Travel</a></li>
-                            <li class="breadcrumb-item"><a href="#">Tour packages </a></li>
-                            <li class="breadcrumb-item " aria-current="page">Family</li>*@
+                                <li class="breadcrumb-item"><a href="#">Tour packages </a></li>
+                                <li class="breadcrumb-item " aria-current="page">Family</li>*@
                             <li class="breadcrumb-item " aria-current="page">@Model.TourName</li>
                         </ol>
                     </nav>
@@ -195,15 +197,15 @@
                                             <input type="text" class="form-control" name="Name" placeholder="Your Name">
                                         </div>
                                         <div class="form-div">
-                                            <input type="text" class="form-control" name="Phone"  placeholder="Phone Number">
+                                            <input type="text" class="form-control" name="Phone" placeholder="Phone Number">
                                         </div>
                                         <div class="form-div">
-                                            <input type="mail" class="form-control"  name="Email" placeholder="Email Address">
+                                            <input type="mail" class="form-control" name="Email" placeholder="Email Address">
                                         </div>
                                         <div class="form-div">
-                                            <textarea  id="" class="form-control" name="Notes" placeholder="Notes"></textarea>
+                                            <textarea id="" class="form-control" name="Notes" placeholder="Notes"></textarea>
                                         </div>
-                                        @*<div class="form-div form-flex">
+                                        <div class="form-div form-flex">
                                             <div class="input-group">
                                                 <label class="input-group-btn">
                                                     <span class="btn download-btn">
@@ -221,12 +223,17 @@
                                             </div>
                                             <div class="sendBtn">
                                                 <input type="submit" class="form-control" value="SEND">
-                                            </div>*@
-                                        @*</div>*@
-                                        <div class="tailor">
-                                            <button data-toggle="modal" data-target="#tailor"><span>TAILOR MY TRIP </span><i class="fas fa-caret-right"></i></button>
-                                           
+                                            </div>
                                         </div>
+                                        <div class="tailor">
+                                            <a href="javascript:;" data-toggle="modal" data-target="#tailor">
+                                                <span>TAILOR MY TRIP </span><i class="fas fa-caret-right"></i>
+                                            </a>
+                                        </div>
+                                        @*<div class="tailor">
+                                            <button data-toggle="modal" data-target="#tailor"><span>TAILOR MY TRIP </span><i class="fas fa-caret-right"></i></button>
+
+                                        </div>*@
                                     </form>
                                 </div>
                             </div>
@@ -244,159 +251,38 @@
             <div class="col-12">
                 <div class="leftTitle">
                     <h3>
-                        Most Popular  <br> <span>Family Tours</span>
+                        Most Popular  <br> <span>Similar Tours</span>
                     </h3>
                 </div>
                 <div class="tours withAbsoloute">
                     <div class="tab-content">
                         <ul>
-                            <li class="animated fadeIn">
-                                <figure class="borderBox">
-                                    <a href="overview.html">
-                                        <span class="wrap">
-                                            <picture>
-                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t1.jpg" data-loadMode="0" class="lazyload" alt="" />
-                                            </picture>
-                                        </span>
-                                    </a>
-                                    <figcaption class="whiteBox">
+                            @foreach (var item in ((List<Alice.Service.Model.TourDTO>)ViewBag.SimilarTours))
+                            {
+                                <li class="animated fadeIn">
+                                    <figure class="borderBox">
                                         <a href="overview.html">
-                                            <b class="title">
-                                                New Zeland
-                                            </b>
-                                            <i>$ 3,268</i>
-                                            <em>
-                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                            </em>
+                                            <span class="wrap">
+                                                <picture>
+                                                    <img src="@item.TourImage" data-src="@item.TourImage" alt="" />
+                                                </picture>
+                                            </span>
                                         </a>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li class="animated fadeIn">
-                                <figure class="borderBox">
-                                    <a href="overview.html">
-                                        <span class="wrap">
-                                            <picture>
-                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t2.jpg" data-loadMode="0" class="lazyload" alt="" />
-                                            </picture>
-                                            <strong class="overrideText">
+                                        <figcaption class="whiteBox">
+                                            <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(category?.FirstOrDefault()?.CategoriesName)}/{item.TourUrl}")">
+                                                <b class="title">
+                                                    @item.TourName
+                                                </b>
+                                                @*<i>$ 3,268</i>*@
                                                 <em>
-                                                    Last Offer
+                                                    DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
                                                 </em>
-                                            </strong>
-                                        </span>
-                                    </a>
-                                    <figcaption class="whiteBox">
-                                        <a href="overview.html">
-                                            <b class="title">
-                                                Thailand
-                                            </b>
-                                            <i>$ 3,268</i>
-                                            <em>
-                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                            </em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li class="animated fadeIn">
-                                <figure class="borderBox">
-                                    <a href="overview.html">
-                                        <span class="wrap">
-                                            <picture>
-                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t3.jpg" data-loadMode="0" class="lazyload" alt="" />
-                                            </picture>
-                                        </span>
-                                    </a>
-                                    <figcaption class="whiteBox">
-                                        <a href="overview.html">
-                                            <b class="title">
-                                                Shangai
-                                            </b>
-                                            <i>$ 3,268</i>
-                                            <em>
-                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                            </em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li class="animated fadeIn">
-                                <figure class="borderBox">
-                                    <a href="overview.html">
-                                        <span class="wrap">
-                                            <picture>
-                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t4.jpg" data-loadMode="0" class="lazyload" alt="" />
-                                            </picture>
-                                            <strong class="overrideText">
-                                                <em>
-                                                    Last Offer
-                                                </em>
-                                            </strong>
-                                        </span>
-                                    </a>
-                                    <figcaption class="whiteBox">
-                                        <a href="overview.html">
-                                            <b class="title">
-                                                Costa Rica
-                                            </b>
-                                            <i>$ 3,268</i>
-                                            <em>
-                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                            </em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li class="animated fadeIn">
-                                <figure class="borderBox">
-                                    <a href="overview.html">
-                                        <span class="wrap">
-                                            <picture>
-                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t3.jpg" data-loadMode="0" class="lazyload" alt="" />
-                                            </picture>
-                                            <strong class="overrideText">
-                                                <em>
-                                                    Last Offer
-                                                </em>
-                                            </strong>
-                                        </span>
-                                    </a>
-                                    <figcaption class="whiteBox">
-                                        <a href="overview.html">
-                                            <b class="title">
-                                                India
-                                            </b>
-                                            <i>$ 3,268</i>
-                                            <em>
-                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                            </em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </li>
-                            <li class="animated fadeIn">
-                                <figure class="borderBox">
-                                    <a href="overview.html">
-                                        <span class="wrap">
-                                            <picture>
-                                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="assets/img/t5.jpg" data-loadMode="0" class="lazyload" alt="" />
-                                            </picture>
-                                        </span>
-                                    </a>
-                                    <figcaption class="whiteBox">
-                                        <a href="overview.html">
-                                            <b class="title">
-                                                South Africa
-                                            </b>
-                                            <i>$ 3,268</i>
-                                            <em>
-                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                            </em>
-                                        </a>
-                                    </figcaption>
-                                </figure>
-                            </li>
+                                            </a>
+                                        </figcaption>
+                                    </figure>
+                                </li>
+                            }
+
                         </ul>
                     </div>
                 </div>

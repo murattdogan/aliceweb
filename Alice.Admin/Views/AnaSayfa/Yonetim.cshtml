@@ -185,7 +185,7 @@
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">Başlık</label>
                         <div class="col-10">
-                            <input class="form-control" type="text" value="" id="categorytitle">
+                            <input class="form-control" type="text" value="" id="categoryCheckTitle" name="categoryCheckTitle">
                         </div>
                     </div>
 
@@ -364,7 +364,8 @@
                         url: "/AnaSayfa/UpdateCategoryBox",
                         data: {
                             "galleryId": galleryId,
-                            "categorySliderFieldName": sliderNumberId
+                            "categorySliderFieldName": sliderNumberId,
+                            "categoryCheckTitle": $("input[name='categoryCheckTitle']").val()
                         },
                         success: function (x) {
                             if (x == false) {

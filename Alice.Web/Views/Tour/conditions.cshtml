@@ -1,0 +1,226 @@
+﻿@using Alice.Service.Model
+@model TourDTO
+@{
+    ViewData["Title"] = Model.TourName;
+    ViewData["SEODesctiption"] = Model.TourName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="mansetNoneSlide">
+    <div class="littleBg" style="background: url(@Model.TourSliderImage)">
+        <div class="topSocialMedia">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <ul>
+                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.3s">
+                                <a href="javascript:;">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            </li>
+                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.6s">
+                                <a href="javascript:;">
+                                    <i class="fab fa-youtube"></i>
+                                </a>
+                            </li>
+                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.9s">
+                                <a href="javascript:;">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </li>
+                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="1.2s">
+                                <a href="javascript:;">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="littleManset">
+                        <h3>
+                            <span>@Model.TourName</span>
+                        </h3>
+                    </div>
+                    <div class="featureList">
+                        <ul>
+                            <li>
+                                <a href="@($"{ViewBag.urlPrefix}")">
+                                    <i class="flaticon-info"></i>
+                                    Overview
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@($"{ViewBag.urlPrefix}")tour-plan">
+                                    <i class="flaticon-map-1"></i>
+                                    Tour Plan
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@($"{ViewBag.urlPrefix}")tour-map">
+                                    <i class="flaticon-map"></i>
+                                    Tour Map
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@($"{ViewBag.urlPrefix}")hotel">
+                                    <i class="flaticon-urban"></i>
+                                    Hotels
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@($"{ViewBag.urlPrefix}")conditions" class="active">
+                                    <i class="flaticon-accept"></i>
+                                    Conditions
+                                </a>
+                            </li>
+                            <li>
+                                <a href="@($"{ViewBag.urlPrefix}")gallery">
+                                    <i class="flaticon-art"></i>
+                                    Gallery
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="tabSects">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="avaiBox">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb withMarginSpace">
+                            <!-- burda class eklendi farklı olarak withMarginSpace -->
+                            <li class="breadcrumb-item active"><a href="/">HOME</a></li>
+                            @*<li class="breadcrumb-item"><a href="#">Travel</a></li>
+                                <li class="breadcrumb-item"><a href="#">Tour packages </a></li>
+                                <li class="breadcrumb-item " aria-current="page">Family</li>*@
+                            <li class="breadcrumb-item " aria-current="page">@Model.TourName</li>
+                        </ol>
+                    </nav>
+                    <div class="contentDetail">
+
+                        <div class="contentLeft">
+                            <div class="col-12 col-md-12 col-lg-8">
+                                <p>
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer .
+                                </p>
+                                <div id="accordion">
+                                    <div class="card">
+                                        <div class="card-header" id="headingOne">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                    What’s Included <i class="flaticon-arrow"></i>
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <h6>What’s Included</h6>
+                                                <p>
+                                                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliqueenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. vulputate cursus a sit amet mauris. Donec ultricies, turpis a sagittis suscipit, ex odio volutpat sem, vel molestie varius est. Suspendisse ultrices nulla eu volutpat volutpat. Proin gravida nibh vel velit auctor aliqueenean. Nunc tincidunt mollis felis, sed bibendum ligula auctor et.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                    Add Separately <i class="flaticon-arrow"></i>
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <h6>Cancellation & Refund Policy</h6>
+                                                <p>
+                                                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliqueenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. vulputate cursus a sit amet mauris. Donec ultricies, turpis a sagittis suscipit, ex odio volutpat sem, vel molestie varius est. Suspendisse ultrices nulla eu volutpat volutpat. Proin gravida nibh vel velit auctor aliqueenean. Nunc tincidunt mollis felis, sed bibendum ligula auctor et.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingThree">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                    Payment <i class="flaticon-arrow"></i>
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <h6>Payment</h6>
+                                                <p>
+                                                    nim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-12 col-lg-4">
+                                <div class="fixedFormBox">
+                                    <h6>Book This Tour</h6>
+                                    <form action="/Tour/MessagePost" method="post" post="">
+                                        <div class="form-div">
+                                            <input type="text" class="form-control" name="Name" placeholder="Your Name">
+                                        </div>
+                                        <div class="form-div">
+                                            <input type="text" class="form-control" name="Phone" placeholder="Phone Number">
+                                        </div>
+                                        <div class="form-div">
+                                            <input type="mail" class="form-control" name="Email" placeholder="Email Address">
+                                        </div>
+                                        <div class="form-div">
+                                            <textarea id="" class="form-control" name="Notes" placeholder="Notes"></textarea>
+                                        </div>
+                                        <div class="form-div form-flex">
+                                            <div class="input-group">
+                                                <label class="input-group-btn">
+                                                    <span class="btn download-btn">
+                                                        <i class="flaticon-download"></i>
+                                                        <input type="file" name="ozgecmis" style="display: none;" accept=".doc, .docx, .pdf">
+                                                    </span>
+                                                </label>
+                                                <input type="text" class="form-control" readonly="">
+                                            </div>
+                                            <div class="sendFried">
+                                                <a href="javascript:;">
+                                                    <i class="flaticon-send"></i>
+                                                    <span>Send to  friends</span>
+                                                </a>
+                                            </div>
+                                            <div class="sendBtn">
+                                                <input type="submit" class="form-control" value="SEND">
+                                            </div>
+                                        </div>
+                                        <div class="tailor">
+                                            <a href="javascript:;" data-toggle="modal" data-target="#tailor">
+                                                <span>TAILOR MY TRIP </span><i class="fas fa-caret-right"></i>
+                                            </a>
+                                        </div>
+                                        @*<div class="tailor">
+                                                <button data-toggle="modal" data-target="#tailor"><span>TAILOR MY TRIP </span><i class="fas fa-caret-right"></i></button>
+
+                                            </div>*@
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

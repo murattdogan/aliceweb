@@ -1,7 +1,8 @@
 ﻿@using Alice.Service.Model
 @model StaticPagesDTO
 @{
-    ViewData["Title"] = "Page";
+    ViewData["Title"] = Model.PageTitle;
+    ViewData["SEODescription"] = Model.PageTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="~/Content/css/cssPlugins.css">

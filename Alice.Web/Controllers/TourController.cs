@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using Alice.Service.Model;
 using Alice.Service.Service;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,20 +13,26 @@ namespace Alice.Web.Controllers
     public class TourController : Controller
     {
         private readonly TourService _tourService;
+        private readonly TourGalleriesService _tourGalleryService;
         private readonly TourPlanService _tourPlanService;
         private readonly TourCategoriesService _tourCategoriesService;
         private readonly CategoryService _categoriesService;
 
-        public TourController(TourService tourService, TourPlanService tourPlanService, TourCategoriesService tourCategoriesService, CategoryService categoriesService)
+        public TourController(TourGalleriesService tourGalleryService, TourService tourService, TourPlanService tourPlanService, TourCategoriesService tourCategoriesService, CategoryService categoriesService)
         {
             _tourService = tourService;
             _tourPlanService = tourPlanService;
             _tourCategoriesService = tourCategoriesService;
             _categoriesService = categoriesService;
+            _tourGalleryService = tourGalleryService;
         }
 
         public IActionResult Detail(string tourUrl, string tourPage)
         {
+
+            ViewBag.urlPrefix = Request.Path.ToString().Contains(tourPage??"anasayfa") ? Request.Path.ToString().Split(tourPage)[0] : Request.Path.ToString();
+
+
             if (tourUrl.Contains(".") || tourUrl.Contains("src") || tourUrl.ToLower().Contains("true") || tourUrl.ToLower().Contains("false"))
             {
                 return RedirectPermanent(tourUrl);
@@ -36,13 +43,29 @@ namespace Alice.Web.Controllers
                 //var breadCrumb = new List<string>();
                 //breadCrumb.Add(q.TourName);
 
-                //var tourCategories = _tourCategoriesService.GetAllByTourIdCategoriesName(q.Id);
+                var tourCategories = _tourCategoriesService.GetAllByTourIdCategoriesName(q.Id);
+                ViewBag.Category = tourCategories;
+                if (tourCategories != null)
+                {
+                    var qs = _tourService.GetTourByCategoryId(tourCategories.First().CategoriesId);
+                    var similarTours = new List<TourDTO>();
+                    foreach (var item in qs)
+                    {
+                        similarTours.Add(_tourService.GetTourById(item.TourId));
+                    }
+                    ViewBag.SimilarTours = similarTours;
+                }
+                else
+                    ViewBag.SimilarTours = new List<TourDTO>();
+
                 //var breadCrumbCategory = tourCategories.FirstOrDefault(x => q.TourUrl.Contains(x.CategoriesName));
                 //breadCrumb.Add(breadCrumbCategory.CategoriesName);
 
                 //var secondTopCategory = _categoriesService.GetParentCategoryName(breadCrumbCategory.CategoriesId);
                 //breadCrumb.Add(secondTopCategory.CategoryName);
                 //breadCrumb.Add(_categoriesService.GetParentCategoryName(secondTopCategory.Id).CategoryName);
+
+
 
 
                 ViewBag.TourDays = _tourPlanService.GetAll().Where(x => x.TourId == q.Id).ToList();
@@ -66,7 +89,7 @@ namespace Alice.Web.Controllers
                 }
                 else if (tourPage == "gallery")
                 {
-                    ViewBag.Gallery = _tourPlanService.GetAll().Where(x => x.TourId == q.Id).ToList();
+                    ViewBag.Gallery = _tourGalleryService.GetGalleriesByTourId(q.Id).ToList();
                     return View("~/Views/Tour/gallery.cshtml", q);
                 }
 

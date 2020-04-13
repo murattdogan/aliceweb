@@ -38,3 +38,6 @@ E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Razor\Views\Tour\Detail.cshtm
 E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Razor\Views\Tour\tourplan.cshtml.g.cs
 E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Razor\Views\_ViewImports.cshtml.g.cs
 E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Razor\Views\_ViewStart.cshtml.g.cs
+E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Razor\Views\Tour\conditions.cshtml.g.cs
+E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Razor\Views\Tour\gallery.cshtml.g.cs
+E:\alice\Alice\Alice.Web\obj\Release\netcoreapp2.2\Razor\Views\Tour\MessagePost.cshtml.g.cs

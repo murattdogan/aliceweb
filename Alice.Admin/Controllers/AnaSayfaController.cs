@@ -46,7 +46,7 @@ namespace Alice.Admin.Controllers
             return Json(true);
         }
 
-        public JsonResult UpdateCategoryBox(string galleryId, string categorySliderFieldName, string categorytitle)
+        public JsonResult UpdateCategoryBox(string galleryId, string categorySliderFieldName, string categoryCheckTitle)
         {
             var imageResult = _siteSettingsService.GetFirstByFieldName(categorySliderFieldName);
             var titleResult = _siteSettingsService.GetFirstByFieldName($"{categorySliderFieldName}Title");
@@ -54,8 +54,9 @@ namespace Alice.Admin.Controllers
             if (imageResult != null && titleResult != null)
             {
                 imageResult.FieldValue = galleryId;
-                titleResult.FieldValue = categorytitle;
+                titleResult.FieldValue = categoryCheckTitle;
                 _siteSettingsService.Update(imageResult);
+                _siteSettingsService.Update(titleResult);
                 return Json(true);
             }
             return Json(false);

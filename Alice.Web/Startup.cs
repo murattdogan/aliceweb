@@ -42,6 +42,7 @@ namespace Alice.Web
             services.AddTransient<CategoriesSlidersService>();
             services.AddTransient<StaticPagesService>();
             services.AddTransient<TourCategoriesService>();
+            services.AddTransient<TourGalleriesService>();
             services.AddTransient<TourService>();
             services.AddTransient<TourPlanService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);

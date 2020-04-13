@@ -54,7 +54,26 @@ namespace Alice.Service.Service
 
         public List<TourCategoriesDTO> GetTourByCategoryId(int categoryId)
         {
-            return _iMapper.Map<List<TourCategories>, List<TourCategoriesDTO>>(_tourCategoriesService.Where(x => x.CategoriesId == categoryId).ToList());
+            var t = _tourCategoriesService.Where(x => x.CategoriesId == categoryId).ToList();
+            if (t.Count() > 0)
+            {
+                var tlist = new List<TourCategoriesDTO>();
+                foreach (var item in t)
+                {
+                    tlist.Add(new TourCategoriesDTO()
+                    {
+                        CategoriesId = item.CategoriesId,
+                        CategoriesName = item.CategoriesName,
+                        TourId = item.TourId
+                    });
+                }
+
+                return tlist;
+            }
+            else
+            {
+                return new List<TourCategoriesDTO>() { };
+            }
         }
 
         public bool Delete(int Id)
