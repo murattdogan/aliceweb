@@ -64,7 +64,7 @@ namespace Alice.Admin.Controllers
 
         [ServiceFilter(typeof(AuthorizationAttribute))]
         [HttpPost]
-        public JsonResult UpdateTour(int Id, string TourName, string TourSpot, string TourBody)
+        public JsonResult UpdateTour(int Id, string TourName, string TourSpot, string TourBody, string TourActivity2, string TourActivity1, string TourActivity0)
         {
             var tour = _tourService.GetTourById(Id);
             if (tour != null)
@@ -72,13 +72,12 @@ namespace Alice.Admin.Controllers
                 tour.TourName = TourName;
                 tour.TourSpot = TourSpot;
                 tour.OverView = TourBody;
+                tour.TourActivity = int.Parse(TourActivity2 ?? TourActivity1 ?? TourActivity0);
                 _tourService.Update(tour);
                 return Json(true);
             }
             else return Json(false);
         }
-
-
 
         [ServiceFilter(typeof(AuthorizationAttribute))]
         [HttpPost]
@@ -147,7 +146,6 @@ namespace Alice.Admin.Controllers
 
         }
 
-
         [ServiceFilter(typeof(AuthorizationAttribute))]
         [HttpGet]
         public PartialViewResult GetTourImages(int Id)
@@ -183,8 +181,6 @@ namespace Alice.Admin.Controllers
             return View();
         }
 
-
-
         [ServiceFilter(typeof(AuthorizationAttribute))]
         public PartialViewResult GetTourDays(int Id)
         {
@@ -207,8 +203,6 @@ namespace Alice.Admin.Controllers
             }
             return PartialView();
         }
-
-
 
         [ServiceFilter(typeof(AuthorizationAttribute))]
         [HttpGet]
@@ -253,6 +247,28 @@ namespace Alice.Admin.Controllers
             }
 
 
+            return Json(true);
+        }
+
+        [ServiceFilter(typeof(AuthorizationAttribute))]
+        [HttpPost]
+        public JsonResult MapsAddTourGalleries(int tourId, string galleryId, int imageType, string mapsDesc)
+        {
+            var tour = _tourService.GetTourById(tourId);
+            var galleryPath = _galleryPoolService.GetByGalleryId(galleryId);
+            var image = "";
+            if (galleryPath != null)
+            {
+                image = $"console.luxuryistanbul.com\\{galleryPath.ImagePath}\\{galleryPath.GalleryId}{galleryPath.PathExtension}".Replace("\\", @"/").Replace("//", "/");
+                image = $"http://{image}";
+
+                if (galleryPath != null)
+                {
+                    tour.TourMapImage = image;
+                    tour.TourMapDesc = mapsDesc;
+                    _tourService.Update(tour);
+                }
+            }
             return Json(true);
         }
 

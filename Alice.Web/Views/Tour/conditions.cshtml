@@ -49,7 +49,10 @@
                     <div class="featureList">
                         <ul>
                             <li>
-                                <a href="@($"{ViewBag.urlPrefix}")">
+                                @{
+                                    var q = ViewBag.urlPrefix.Remove(ViewBag.urlPrefix.Length - 1);
+                                }
+                                <a href="@($"{q}")">
                                     <i class="flaticon-info"></i>
                                     Overview
                                 </a>
@@ -111,7 +114,7 @@
                         <div class="contentLeft">
                             <div class="col-12 col-md-12 col-lg-8">
                                 <p>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer .
+                                    The conditions may differ according to the features of the tours and demand of our guests. We kindly ask you to inform us about the services that you want included. Once you confirm we will inform you about the exact conditions.
                                 </p>
                                 <div id="accordion">
                                     <div class="card">
@@ -127,7 +130,16 @@
                                             <div class="card-body">
                                                 <h6>What’s Included</h6>
                                                 <p>
-                                                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliqueenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. vulputate cursus a sit amet mauris. Donec ultricies, turpis a sagittis suscipit, ex odio volutpat sem, vel molestie varius est. Suspendisse ultrices nulla eu volutpat volutpat. Proin gravida nibh vel velit auctor aliqueenean. Nunc tincidunt mollis felis, sed bibendum ligula auctor et.
+                                                    <ul style="margin-left: 80px;font-size: 16px;">
+                                                        <li>Private basis expert local guides</li>
+                                                        <li>Private transportation during the city tour</li>
+                                                    </ul>
+
+                                                    <span style="margin-left: 80px;font-size: 16px;">Not Included:</span>
+                                                    <ul style="margin-left: 80px;font-size: 16px;">
+                                                        <li>Personal expenses</li>
+                                                        <li>Gratuity (tip) to guide & driver</li>
+                                                    </ul>
                                                 </p>
                                             </div>
                                         </div>
@@ -136,15 +148,48 @@
                                         <div class="card-header" id="headingTwo">
                                             <h5 class="mb-0">
                                                 <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    Add Separately <i class="flaticon-arrow"></i>
+                                                    Add Ons <i class="flaticon-arrow"></i>
                                                 </button>
                                             </h5>
                                         </div>
                                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                                             <div class="card-body">
-                                                <h6>Cancellation & Refund Policy</h6>
+                                                <h6>Add Ons</h6>
                                                 <p>
-                                                    This is Photoshop's version  of Lorem Ipsum. Proin gravida nibh vel velit auctor aliqueenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. vulputate cursus a sit amet mauris. Donec ultricies, turpis a sagittis suscipit, ex odio volutpat sem, vel molestie varius est. Suspendisse ultrices nulla eu volutpat volutpat. Proin gravida nibh vel velit auctor aliqueenean. Nunc tincidunt mollis felis, sed bibendum ligula auctor et.
+                                                    <ul style="margin-left: 80px;font-size: 16px;">
+                                                        <li>Hotels</li>
+                                                        <li>Domestic Flights</li>
+                                                        <li>Entrance Fees</li>
+                                                        <li>Meals</li>
+                                                        <li>Optional activities</li>
+                                                    </ul>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo1">
+                                            <h5 class="mb-0">
+                                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo1" aria-expanded="false" aria-controls="collapseTwo1">
+                                                    Cancellation & Refund <i class="flaticon-arrow"></i>
+                                                </button>
+                                            </h5>
+                                        </div>
+                                        <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo1" data-parent="#accordion">
+                                            <div class="card-body">
+                                                <h6>Cancellation & Refund</h6>
+                                                <p>
+                                                    For Daily Tours: If you cancel the tour within 36 hour(s) of the scheduled departure, there is a 100% percent cancellation fee. If you cancel between 37-48 hour(s) in advance of the scheduled departure, there is a 50% percent cancellation fee. If more than 48hour (s) then there is no cancellation fee.
+                                                    <br />
+
+                                                    For Tour Packages: If you cancel the tour package within 48 hour(s) of the scheduled departure, there is a 100% percent cancellation fee. If you cancel between 49-72 hour(s) in advance of the scheduled departure, there is a 50 percent cancellation fee. If more than 72hour (s) then there is no cancellation fee.
+                                                    <br />
+
+
+                                                    Only available for tour and transfer reservations. (Hotels and Airlines have their own policy)
+                                                    <br />
+
+                                                    Refund Process: If you cancel the tour before the penalty period then we will refund the whole payment after deducting 5% administration fee.
                                                 </p>
                                             </div>
                                         </div>
@@ -161,7 +206,7 @@
                                             <div class="card-body">
                                                 <h6>Payment</h6>
                                                 <p>
-                                                    nim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                                    In order to guarantee your reservation, you can pay 35% of the total amount by filling our mail order form or pay by wire transfer.
                                                 </p>
                                             </div>
                                         </div>

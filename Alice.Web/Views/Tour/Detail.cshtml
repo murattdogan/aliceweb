@@ -117,16 +117,32 @@
                                 <div class="downTitle">
                                     Tour Code : <span>@Model.TourCode</span>
                                     <br>
-                                    Tour Activity : <span>@Model.TourActivity</span>
+                                    Tour Activity : <span>
+    @{
+                                    if(Model.TourActivity == 0)
+                                    {
+                                                            <span>L (Light)</span>
+                                    }
+                                    else if(Model.TourActivity == 1)
+                                    {
+                                                    <span>M (Moderate)</span>
+                                    }
+                                    else
+                                    {
+                                                    <span>H (High)</span>
+                                    }
+    }
+</span>
                                 </div>
                                 <p class="marginBt-60">
+                                    @Html.Raw(Model.TourSpot)
                                     <!-- burda class eklendi farklı olarak marginBt-60 -->
-                                    @Html.Raw(Model.TourBody)
+                                    @Html.Raw(Model.OverView)
                                 </p>
                                 <div class="daysDetail">
                                     @foreach (var item in ((List<Alice.Service.Model.TourPlanListDTO>)ViewBag.TourDays))
                                     {
-                                        <p><i>Day @item.Day :</i><span>@item.DayTitle <em> @item.DayDetail</em></span> </p>
+                                    <p><i>Day @item.Day :</i><span>@item.DayTitle <em> @item.DayDetail</em></span> </p>
                                     }
                                 </div>
                                 <div class="daysWeather">
@@ -139,37 +155,37 @@
                                                 Jan °C 5.8
                                             </li>
                                             <li class="redBorder">
-                                                Feb °C 5.8
+                                                Feb °C 5.5
                                             </li>
                                             <li class="lowBorder">
                                                 Mar °C 7.3
                                             </li>
                                             <li class="mediumBorder">
-                                                Apr °C 11,2
+                                                Apr °C 11.2
                                             </li>
                                             <li class="highBorder">
-                                                May °C 5.8
+                                                May °C 15.7
                                             </li>
                                             <li class="highBorder">
-                                                Jun °C 5.8
+                                                Jun °C 20.5
                                             </li>
                                             <li class="highBorder">
-                                                Jul °C 5.8
+                                                Jul °C 22.9
                                             </li>
                                             <li class="highBorder">
-                                                Aug °C 5.8
+                                                Aug °C 23.4
                                             </li>
                                             <li class="highBorder">
-                                                Sep °C 5.8
+                                                Sep °C 19.9
                                             </li>
                                             <li class="mediumBorder">
-                                                Oct °C 11,2
+                                                Oct °C 15.8
                                             </li>
                                             <li class="lowBorder">
                                                 Nov °C 11.0
                                             </li>
                                             <li class="redBorder">
-                                                Dec °C 5.8
+                                                Dec °C 7.8
                                             </li>
                                         </ul>
                                         <ul class="colorBox">
@@ -231,9 +247,9 @@
                                             </a>
                                         </div>
                                         @*<div class="tailor">
-                                            <button data-toggle="modal" data-target="#tailor"><span>TAILOR MY TRIP </span><i class="fas fa-caret-right"></i></button>
+                                                <button data-toggle="modal" data-target="#tailor"><span>TAILOR MY TRIP </span><i class="fas fa-caret-right"></i></button>
 
-                                        </div>*@
+                                            </div>*@
                                     </form>
                                 </div>
                             </div>
@@ -259,28 +275,28 @@
                         <ul>
                             @foreach (var item in ((List<Alice.Service.Model.TourDTO>)ViewBag.SimilarTours))
                             {
-                                <li class="animated fadeIn">
-                                    <figure class="borderBox">
-                                        <a href="overview.html">
-                                            <span class="wrap">
-                                                <picture>
-                                                    <img src="@item.TourImage" data-src="@item.TourImage" alt="" />
-                                                </picture>
-                                            </span>
+                            <li class="animated fadeIn">
+                                <figure class="borderBox">
+                                    <a href="overview.html">
+                                        <span class="wrap">
+                                            <picture>
+                                                <img src="@item.TourImage" data-src="@item.TourImage" alt="" />
+                                            </picture>
+                                        </span>
+                                    </a>
+                                    <figcaption class="whiteBox">
+                                        <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(category?.FirstOrDefault()?.CategoriesName)}/{item.TourUrl}")">
+                                            <b class="title">
+                                                @item.TourName
+                                            </b>
+                                            @*<i>$ 3,268</i>*@
+                                            <em>
+                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                            </em>
                                         </a>
-                                        <figcaption class="whiteBox">
-                                            <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(category?.FirstOrDefault()?.CategoriesName)}/{item.TourUrl}")">
-                                                <b class="title">
-                                                    @item.TourName
-                                                </b>
-                                                @*<i>$ 3,268</i>*@
-                                                <em>
-                                                    DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                                </em>
-                                            </a>
-                                        </figcaption>
-                                    </figure>
-                                </li>
+                                    </figcaption>
+                                </figure>
+                            </li>
                             }
 
                         </ul>

@@ -19,5 +19,7 @@ namespace Alice.Data.Model
         public DateTime RecordDate { get; set; }
         public string SEOTitle { get; set; }
         public string SEODescription { get; set; }
+        public string TourMapImage { get; set; }
+        public string TourMapDesc { get; set; }
     }
 }

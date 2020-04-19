@@ -118,6 +118,8 @@ namespace Alice.Service.Service
                 tourEntity.TourSliderImage = tour.TourSliderImage;
                 tourEntity.SEOTitle = tour.SEOTitle;
                 tourEntity.SEODescription = tour.SEODescription;
+                tourEntity.TourMapDesc = tour.TourMapDesc;
+                tourEntity.TourMapImage = tour.TourMapImage;
                 tourEntity.TourUrl = ConstHelper.UrlFriendly(tour.TourName);
                 return _tourRepository.Update(tourEntity);
             }

@@ -49,7 +49,10 @@
                     <div class="featureList">
                         <ul>
                             <li>
-                                <a href="@($"{ViewBag.urlPrefix}")">
+                                @{
+                                var q = ViewBag.urlPrefix.Remove(ViewBag.urlPrefix.Length - 1);
+                                }
+                                <a href="@($"{q}")">
                                     <i class="flaticon-info"></i>
                                     Overview
                                 </a>

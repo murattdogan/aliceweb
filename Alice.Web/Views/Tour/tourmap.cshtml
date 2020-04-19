@@ -58,13 +58,13 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{ViewBag.urlPrefix}")tour-plan" class="active">
+                                <a href="@($"{ViewBag.urlPrefix}")tour-plan">
                                     <i class="flaticon-map-1"></i>
                                     Tour Plan
                                 </a>
                             </li>
                             <li>
-                                <a href="@($"{ViewBag.urlPrefix}")tour-map">
+                                <a href="@($"{ViewBag.urlPrefix}")tour-map" class="active">
                                     <i class="flaticon-map"></i>
                                     Tour Map
                                 </a>
@@ -117,37 +117,11 @@
                                     <h3 class="bigText">@Model.TourName</h3>
                                 </div>
 
-                                <div id="accordion" class="difAccordColor">
-                                    @{
-                                        var countCollapse = 0;
-                                        foreach (var item in ((List<Alice.Service.Model.TourPlanListDTO>)ViewBag.TourDays))
-                                        {
-                                            countCollapse++;
-                                            var oneClass = "headingOne";
-                                            if (countCollapse != 1)
-                                            {
-                                                oneClass = "";
-                                            }
-                                            <div class="card">
-                                                <div class="card-header" id="@oneClass">
-                                                    <h5 class="mb-0">
-                                                        <button class="btn btn-link" data-toggle="collapse" data-target="@($"#collapse{item.Day}")" aria-expanded="true" aria-controls="@oneClass">
-                                                            <span>Day @item.Day:</span> @item.DayTitle <i class="flaticon-arrow"></i>
-                                                        </button>
-                                                    </h5>
-                                                </div>
-                                                <div id="@($"collapse{item.Day}")" class="collapse show" aria-labelledby="@oneClass" data-parent="#accordion">
-                                                    <div class="card-body">
-                                                        <p>
-                                                            @item.DayDetail
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        }
-                                    }
+                                <span>@Model.TourMapDesc</span><br /><br />
 
-                                </div>
+                                <img src="@Model.TourMapImage" />
+
+
                             </div>
                             <div class="col-12 col-md-12 col-lg-4">
                                 <div class="fixedFormBox">
