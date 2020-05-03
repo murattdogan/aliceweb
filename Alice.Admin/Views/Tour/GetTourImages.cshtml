@@ -20,7 +20,6 @@
         $('.alreadyimageremove').click(function () {
             if (confirm("Seçtiğiniz Resmi Silmek İstediğinize Emin misiniz?")) {
                 var galleryId = $(this).children("img").data("id");
-
                 $.ajax({
                 type: "GET",
                 url: "/Tour/TourGalleryDelete",

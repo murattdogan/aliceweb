@@ -95,7 +95,7 @@ namespace Alice.Service.Service
                 TourSpot = tour.TourSpot,
                 TourSliderImage = tour.TourSliderImage,
                 TourImage = tour.TourImage,
-                TourType = 0,
+                TourType = tour.TourType,
                 SEOTitle = tour.SEOTitle,
                 SEODescription = tour.SEODescription,
                 TourUrl = ConstHelper.UrlFriendly(tour.TourName)
@@ -120,6 +120,10 @@ namespace Alice.Service.Service
                 tourEntity.SEODescription = tour.SEODescription;
                 tourEntity.TourMapDesc = tour.TourMapDesc;
                 tourEntity.TourMapImage = tour.TourMapImage;
+                tourEntity.TourMorning = tour.TourMorning;
+                tourEntity.TourLunch = tour.TourLunch;
+                tourEntity.TourAfternoon = tour.TourAfternoon;
+                tourEntity.Notes = tour.Notes;
                 tourEntity.TourUrl = ConstHelper.UrlFriendly(tour.TourName);
                 return _tourRepository.Update(tourEntity);
             }

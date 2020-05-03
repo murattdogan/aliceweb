@@ -81,5 +81,22 @@ namespace Alice.Service.Service
 
         }
 
+
+        public List<TourGalleriesDTO> GetGalleriesByTourIdNone(int tourId)
+        {
+            var tourGallery = _tourGalleriesRepository.Where(x => x.TourId == tourId).ToList();
+            if (tourGallery.Any())
+            {
+                foreach (var item in tourGallery)
+                {
+                    item.GalleryId = item.GalleryId;
+                }
+                return _iMapper.Map<List<TourGalleries>, List<TourGalleriesDTO>>(tourGallery);
+            }
+
+            return null;
+
+        }
+
     }
 }

@@ -26,7 +26,7 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />*@
     </environment>
 </head>
-<body>
+<body class="@ViewData["Body"]">
 
     <header class="header">
         <div class="container">
@@ -36,7 +36,9 @@
                         <i class="flaticon-search"></i>
                         <div class="callUs">
                             <span>Call Us 24/7</span>
-                            <a href="tel:00905353122642">+90 535 312 2642</a>
+                            <a href="tel:00905413122642" class="f-tel text-white">
+                                <i class="fas fa-phone-volume"></i>
+                            </a>
                         </div>
                         <div class="logo">
                             <a href="/">
@@ -99,7 +101,7 @@
                 <div class="col-12">
                     <ul>
                         <li class="wow fadeIn" data-wow-duration="0.9s" data-wow-delay="0.3s">
-                            <a href="javascript:;">
+                            <a href="https://www.instagram.com/luxuryistanbul/">
                                 <i class="fab fa-instagram"></i>
                             </a>
                         </li>
@@ -109,12 +111,12 @@
                             </a>
                         </li>
                         <li class="wow fadeIn" data-wow-duration="0.9s" data-wow-delay="0.9s">
-                            <a href="javascript:;">
+                            <a href="https://www.facebook.com/LuxuryIstanbul/">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
                         </li>
                         <li class="wow fadeIn" data-wow-duration="0.9s" data-wow-delay="1.2s">
-                            <a href="javascript:;">
+                            <a href="https://twitter.com/luxuryistanbul">
                                 <i class="fab fa-twitter"></i>
                             </a>
                         </li>
@@ -169,7 +171,7 @@
                         <div class="footerSocialMedia">
                             <ul class="d-flex align-items-center">
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="https://www.instagram.com/luxuryistanbul/">
                                         <i class="fab fa-instagram"></i>
                                     </a>
                                 </li>
@@ -179,12 +181,12 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="https://www.facebook.com/LuxuryIstanbul/">
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;">
+                                    <a href="https://twitter.com/luxuryistanbul ">
                                         <i class="fab fa-twitter"></i>
                                     </a>
                                 </li>
@@ -203,8 +205,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="/Page/terms-condations">
-                                        TERMS & CONDATIONS
+                                    <a href="/Page/terms-conditions">
+                                        TERMS & CONDITIONS
                                     </a>
                                 </li>
                                 <li>
@@ -245,7 +247,7 @@
                         <h2 class="grayLogo">
                             <b>LUXURY</b> ISTANBUL
                         </h2>
-                        <a href="tel:00905353122642" class="f-tel">
+                        <a href="tel:00905413122642" class="f-tel">
                             <i class="fas fa-phone-volume"></i>
                         </a>
                     </div>
@@ -278,6 +280,10 @@
 
     <script>
         $(function () {
+            $(document).bind("contextmenu", function (e) {
+                return false; 
+            });
+
             $('.fixedBottomMenu').addClass("homeMenu");
         });
     </script>

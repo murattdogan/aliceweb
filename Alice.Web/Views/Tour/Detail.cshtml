@@ -5,6 +5,7 @@
     ViewData["Title"] = Model.TourName;
     ViewData["SEODesctiption"] = Model.TourName;
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Body"] = "graySection";
     var category = (List<Alice.Service.Model.TourCategoriesDTO>)ViewBag.Category;
 }
 <section class="mansetNoneSlide">
@@ -12,30 +13,30 @@
         <div class="topSocialMedia">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <ul>
-                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.3s">
-                                <a href="javascript:;">
-                                    <i class="fab fa-instagram"></i>
-                                </a>
-                            </li>
-                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.6s">
-                                <a href="javascript:;">
-                                    <i class="fab fa-youtube"></i>
-                                </a>
-                            </li>
-                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.9s">
-                                <a href="javascript:;">
-                                    <i class="fab fa-facebook-f"></i>
-                                </a>
-                            </li>
-                            <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="1.2s">
-                                <a href="javascript:;">
-                                    <i class="fab fa-twitter"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                    @*<div class="col-12">
+                            <ul>
+                                <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.3s">
+                                    <a href="https://www.instagram.com/luxuryistanbul/">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </li>
+                                <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.6s">
+                                    <a href="javascript:;">
+                                        <i class="fab fa-youtube"></i>
+                                    </a>
+                                </li>
+                                <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="0.9s">
+                                    <a href="https://www.facebook.com/LuxuryIstanbul/">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                </li>
+                                <li class="wow fadeIn" data-wow-duration="0.3s" data-wow-delay="1.2s">
+                                    <a href="https://twitter.com/luxuryistanbul">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -118,21 +119,21 @@
                                     Tour Code : <span>@Model.TourCode</span>
                                     <br>
                                     Tour Activity : <span>
-    @{
-                                    if(Model.TourActivity == 0)
-                                    {
-                                                            <span>L (Light)</span>
-                                    }
-                                    else if(Model.TourActivity == 1)
-                                    {
-                                                    <span>M (Moderate)</span>
-                                    }
-                                    else
-                                    {
-                                                    <span>H (High)</span>
-                                    }
-    }
-</span>
+                                        @{
+                                            if (Model.TourActivity == 0)
+                                            {
+                                                <span>L (Light)</span>
+                                            }
+                                            else if (Model.TourActivity == 1)
+                                            {
+                                                <span>M (Moderate)</span>
+                                            }
+                                            else
+                                            {
+                                                <span>H (High)</span>
+                                            }
+                                        }
+                                    </span>
                                 </div>
                                 <p class="marginBt-60">
                                     @Html.Raw(Model.TourSpot)
@@ -140,10 +141,23 @@
                                     @Html.Raw(Model.OverView)
                                 </p>
                                 <div class="daysDetail">
-                                    @foreach (var item in ((List<Alice.Service.Model.TourPlanListDTO>)ViewBag.TourDays))
+                                    @if (Model.TourType == 0)
                                     {
-                                    <p><i>Day @item.Day :</i><span>@item.DayTitle <em> @item.DayDetail</em></span> </p>
+                                        foreach (var item in ((List<Alice.Service.Model.TourPlanListDTO>)ViewBag.TourDays))
+                                        {
+                                            <p><i>Day @item.Day :</i><span>@item.DayTitle </span> </p>
+                                        }
                                     }
+                                    else
+                                    {
+                                        <p><i>DAILY M :</i><span>@Html.Raw(Model.TourMorning)</span> </p>
+                                        <p><i>DAILY L :</i><span>@Html.Raw(Model.TourLunch)</span> </p>
+                                        <p><i>DAILY A :</i><span>@Html.Raw(Model.TourAfternoon)</span> </p>
+                                        <p><i>DAILY N :</i><span>@Html.Raw(Model.Notes)</span> </p>
+                                    }
+
+
+
                                 </div>
                                 <div class="daysWeather">
                                     <h3>
@@ -238,7 +252,7 @@
                                                 </a>
                                             </div>
                                             <div class="sendBtn">
-                                                <input type="submit" class="form-control" value="SEND">
+                                                <input type="submit" class="form-control" value="BOOK">
                                             </div>
                                         </div>
                                         <div class="tailor">
@@ -275,28 +289,28 @@
                         <ul>
                             @foreach (var item in ((List<Alice.Service.Model.TourDTO>)ViewBag.SimilarTours))
                             {
-                            <li class="animated fadeIn">
-                                <figure class="borderBox">
-                                    <a href="overview.html">
-                                        <span class="wrap">
-                                            <picture>
-                                                <img src="@item.TourImage" data-src="@item.TourImage" alt="" />
-                                            </picture>
-                                        </span>
-                                    </a>
-                                    <figcaption class="whiteBox">
-                                        <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(category?.FirstOrDefault()?.CategoriesName)}/{item.TourUrl}")">
-                                            <b class="title">
-                                                @item.TourName
-                                            </b>
-                                            @*<i>$ 3,268</i>*@
-                                            <em>
-                                                DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                            </em>
+                                <li class="animated fadeIn">
+                                    <figure class="borderBox">
+                                        <a href="overview.html">
+                                            <span class="wrap">
+                                                <picture>
+                                                    <img src="@item.TourImage" data-src="@item.TourImage" alt="" />
+                                                </picture>
+                                            </span>
                                         </a>
-                                    </figcaption>
-                                </figure>
-                            </li>
+                                        <figcaption class="whiteBox">
+                                            <a href="@($"{Alice.Web.Helper.ConstHelper.UrlFriendly(category?.FirstOrDefault()?.CategoriesName)}/{item.TourUrl}")">
+                                                <b class="title">
+                                                    @item.TourName
+                                                </b>
+                                                @*<i>$ 3,268</i>*@
+                                                <em>
+                                                    DISCOVER  MORE <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                                </em>
+                                            </a>
+                                        </figcaption>
+                                    </figure>
+                                </li>
                             }
 
                         </ul>
@@ -306,3 +320,182 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="tailor" tabindex="-1" role="dialog" aria-labelledby="tailorTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="flaticon-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/Tour/TailorMadeSend" method="post">
+                    <div class="row">
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="modalPadding">
+                                <div class="formSection">
+                                    <h3>Travel Information</h3>
+                                    <div class="padding-l-120">
+                                        <div class="formItem">
+                                            <h4>Destinations</h4>
+                                            <div class="form-flex">
+                                                <input type="text" class="form-control" placeholder="e. g. Iceland">
+                                                <input type="submit" class="form-control" value="+ Add Another">
+                                            </div>
+                                        </div>
+                                        <div class="formItem">
+                                            <h4>How many people are travelling?</h4>
+                                            <div class="form-flex">
+                                                <input type="text" name="hotmanypeople" class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="formItem">
+                                            <h4 class="customSpace">When would you like to go?</h4>
+                                            <div class="form-flex">
+                                                <div class="selectItem">
+                                                    <h5>Year</h5>
+                                                    <select id="year" class="select2" name="tailoryear">
+                                                        <option value="">2019</option>
+                                                        <option value="">2018</option>
+                                                        <option value="">2017</option>
+                                                        <option value="">2016</option>
+                                                    </select>
+                                                </div>
+                                                <div class="selectItem">
+                                                    <h5>Month</h5>
+                                                    <select id="month" class="select2" name="tailormonth">
+                                                        <option value="01">January</option>
+                                                        <option value="02">February</option>
+                                                        <option value="03">March</option>
+                                                        <option value="04">April</option>
+                                                        <option value="05">May</option>
+                                                        <option value="06">June</option>
+                                                        <option value="07">July</option>
+                                                        <option value="08">August</option>
+                                                        <option value="09">September</option>
+                                                        <option value="10">October</option>
+                                                        <option value="11">November</option>
+                                                        <option value="12">December</option>
+                                                    </select>
+                                                </div>
+                                                <div class="selectItem">
+                                                    <h5>Day</h5>
+                                                    <select id="day" class="select2" name="tailorday">
+                                                        <option value="01">Monday</option>
+                                                        <option value="02">Tuesday</option>
+                                                        <option value="03">Wednesday</option>
+                                                        <option value="04">Thursday</option>
+                                                        <option value="05">Friday</option>
+                                                        <option value="06">Saturday</option>
+                                                        <option value="07">Sunday</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="formSection">
+                                    <h3>
+                                        Your Trip
+                                    </h3>
+                                    <div class="padding-l-120">
+                                        <div class="formItem">
+                                            <h4>Tell us about your ideal trip </h4>
+                                            <div class="form-flex">
+                                                <textarea name="tellusabout" id="" class="form-control" placeholder=""></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="formItem">
+                                            <h4>What is the most important aspect of this trip for you? </h4>
+                                            <div class="form-flex">
+                                                <select name="tailorchoose" id="choose" class="select2">
+                                                    <option value="01">Please choose from the list</option>
+                                                    <option value="02">Holiday</option>
+                                                    <option value="03">Rest</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-6">
+                            <div class="modalPadding">
+                                <div class="formSection">
+                                    <h3>Budget</h3>
+                                    <div class="formItem">
+                                        <h4>Currency</h4>
+                                        <div class="form-flex">
+                                            <select name="tailorcurrency" id="currency" class="select2">
+                                                <option value="01">$ USD</option>
+                                                <option value="02">TL</option>
+                                                <option value="01">$ USD</option>
+                                                <option value="02">TL</option>
+                                                <option value="01">$ USD</option>
+                                                <option value="02">TL</option>
+                                                <option value="01">$ USD</option>
+                                                <option value="02">TL</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="formItem">
+                                        <h4>Max. budget per person</h4>
+                                        <div class="form-flex">
+                                            <select name="tailormaxbugget" id="maxBugget" class="select2">
+                                                <option value="01">1000</option>
+                                                <option value="02">2000</option>
+                                                <option value="01">1000</option>
+                                                <option value="02">2000</option>
+                                                <option value="01">1000</option>
+                                                <option value="02">2000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="formSection">
+                                    <h3>Your Details</h3>
+                                    <div class="formItem">
+                                        <h4>Your Name</h4>
+                                        <div class="form-flex">
+                                            <input type="text" name="yourname" class="form-control" placeholder="First name, Surname">
+                                        </div>
+                                    </div>
+                                    <div class="formItem">
+                                        <h4>Your Number</h4>
+                                        <div class="form-flex">
+                                            <input type="tel" name="yournumber" class="form-control" placeholder="Enter Your Phone Number">
+                                        </div>
+                                    </div>
+                                    <div class="formItem">
+                                        <h4>Email Address</h4>
+                                        <div class="form-flex">
+                                            <input type="mail" name="tailoremail" class="form-control" placeholder="Enter email address">
+                                        </div>
+                                    </div>
+                                    <div class="formItem">
+                                        <div class="custom-control custom-checkbox">
+                                            <input name="happyreceive" type="checkbox" class="custom-control-input" id="customCheck1">
+                                            <label class="custom-control-label" for="customCheck1">I am happy to receive emails from Jacada Travel including the latest travel guides, tips and information.</label>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input name="iagree" type="checkbox" class="custom-control-input" id="customCheck2">
+                                            <label class="custom-control-label" for="customCheck2">I agree to the processing of my personal information across Jacada Travel's global offices, in order to book my trip. </label>
+                                        </div>
+                                    </div>
+                                    <div class="formItem submitted">
+                                        <div class="formSubmit">
+                                            <input type="submit" class="form-control" value="START MY JOURNEY">
+                                            <i class="fas fa-caret-right"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

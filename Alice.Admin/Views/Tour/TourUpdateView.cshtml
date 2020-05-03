@@ -78,31 +78,51 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="example-text-input" class="col-2 col-form-label">Tur Tipi</label>
+                        <div class="col-10">
+                            <select class="form-control" id="TourType">
+                                @if (Model.TourType == 0)
+                                {
+                                    <option value="0" selected="selected">Daily Tour (Days)</option>
+                                    <option value="1">Daily Tour (Morning, Lunch v.b)</option>
+                                }
+                                else
+                                {
+                                    <option value="0">Daily Tour (Days)</option>
+                                    <option value="1" selected="selected">Daily Tour (Morning, Lunch v.b)</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label">Tur Activity</label>
                         <div class="col-10">
                             @{
-                            var high = "";
-                            var mod = "";
-                            var lig="";
-                            if(Model.TourActivity == 0)
-                            {
-                            lig="checked";
-                            }
-                            else if(Model.TourActivity == 0)
-                            {
-                            mod="checked";
-                            }
-                            else
-                            {
-                            high="checked";
-                            }
+                                var high = "";
+                                var mod = "";
+                                var lig = "";
+                                if (Model.TourActivity == 0)
+                                {
+                                    lig = "checked";
+                                }
+                                else if (Model.TourActivity == 1)
+                                {
+                                    mod = "checked";
+                                }
+                                else
+                                {
+                                    high = "checked";
+                                }
                             }
 
-                            <input type="checkbox" id="TourActivity2" name="TourActivity2" @high/> H (High)<br />
-                            <input type="checkbox" id="TourActivity1" name="TourActivity1" @mod/> M (Moderate)<br />
-                            <input type="checkbox" id="TourActivity0" name="TourActivity0" @lig/> L (Light)<br />
+                            <input type="checkbox" id="TourActivity2" name="TourActivity2" @high /> H (High)<br />
+                            <input type="checkbox" id="TourActivity1" name="TourActivity1" @mod /> M (Moderate)<br />
+                            <input type="checkbox" id="TourActivity0" name="TourActivity0" @lig /> L (Light)<br />
                         </div>
                     </div>
+
 
                     <div class="form-group row">
                         <label for="example-text-input" class="col-2 col-form-label"> </label>
@@ -194,42 +214,75 @@
                     <div class="row dayschecked">
                         <div class="col-xl-12">
                             <div class="kt-portlet__body">
+                                @if (Model.TourType == 0)
+                                {
 
-                                <table class="table table-bordered dayinfo" style="display:none;">
-                                    <tr style="display:none;">
-                                        <td>Id (Bu Alana Dokunma)</td>
-                                        <td><input type="number" class="form-control" name="Id" value="0" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gün</td>
-                                        <td><input type="number" class="form-control" name="Day" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gün Başlık</td>
-                                        <td><input type="text" class="form-control" name="DayTitle" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Gün Açıklama</td>
-                                        <td><input type="text" class="form-control" name="DayDetail" /></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td><button class="btn btn-info btn-sm dayAdds" style="width:80px;">Ekle</button></td>
-                                    </tr>
-                                </table>
 
-                                <button class="btn btn-success btn-sm dayAdd" style="width:120px;">Yeni Gün Ekle</button>
-
-                                <table class="table table-bordered">
-                                    @foreach (var item in ((Alice.Admin.Models.TourCategoryViewModel)ViewBag.Categories).TourPlanList)
-                                    {
-                                        <tr>
-                                            <td>@item.Day</td>
-                                            <td>@item.DayTitle</td>
-                                            <td><button class="btn btn-danger btn-sm daydelete" data-id="@item.Id">Sil</button></td>
+                                    <table class="table table-bordered dayinfo" style="display:none;">
+                                        <tr style="display:none;">
+                                            <td>Id (Bu Alana Dokunma)</td>
+                                            <td><input type="number" class="form-control" name="Id" value="0" /></td>
                                         </tr>
-                                    }
-                                </table>
+                                        <tr>
+                                            <td>Gün</td>
+                                            <td><input type="number" class="form-control" name="Day" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gün Başlık</td>
+                                            <td><input type="text" class="form-control" name="DayTitle" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gün Açıklama</td>
+                                            <td><input type="text" class="form-control" name="DayDetail" /></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><button class="btn btn-info btn-sm dayAdds" style="width:80px;">Ekle</button></td>
+                                        </tr>
+                                    </table>
+
+                                    <button class="btn btn-success btn-sm dayAdd" style="width:120px;">Yeni Gün Ekle</button>
+
+                                    <table class="table table-bordered">
+                                        @foreach (var item in ((Alice.Admin.Models.TourCategoryViewModel)ViewBag.Categories).TourPlanList)
+                                        {
+                                            <tr>
+                                                <td>@item.Day</td>
+                                                <td>@item.DayTitle</td>
+                                                <td><button class="btn btn-danger btn-sm daydelete" data-id="@item.Id">Sil</button></td>
+                                            </tr>
+                                        }
+                                    </table>
+                                }
+                                else
+                                {
+                                    <table>
+                                        <tr>
+                                            <td>Morning (M)</td>
+                                            <td><div id="TourMorning"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lunch (L)</td>
+                                            <td><div id="TourLunch"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Afternoon (A)</td>
+                                            <td><div id="TourAfternoon"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Notes (N)</td>
+                                            <td><div id="TourNotes"></div></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td><button class="btn btn-danger btn-sm dailyupdate">Güncelle</button></td>
+                                        </tr>
+                                    </table>
+                                }
+
+
+
+
                             </div>
                         </div>
                     </div>
@@ -292,6 +345,85 @@
                 //$("input[name='Id']").val();
             });
 
+            if (@Model.TourType==1)
+            {
+                let TourMorning;
+                ClassicEditor
+                    .create(document.querySelector('#TourMorning'))
+                    .then(newEditor => {
+                        newEditor.setData("@Html.Raw(Model.TourMorning)");
+                        TourMorning = newEditor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+                let TourLunch;
+                ClassicEditor
+                    .create(document.querySelector('#TourLunch'))
+                    .then(newEditor => {
+                        newEditor.setData("@Html.Raw(Model.TourLunch)");
+                        TourLunch = newEditor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+                let TourAfternoon;
+                ClassicEditor
+                    .create(document.querySelector('#TourAfternoon'))
+                    .then(newEditor => {
+                        newEditor.setData("@Html.Raw(Model.TourAfternoon)");
+                        TourAfternoon = newEditor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+                let TourNotes;
+                ClassicEditor
+                    .create(document.querySelector('#TourNotes'))
+                    .then(newEditor => {
+                        newEditor.setData("@Html.Raw(Model.Notes)");
+                        TourNotes = newEditor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+                $('.dailyupdate').click(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "/Tour/DailyTourUpdate",
+                        data: {
+                            "TourMorning": TourMorning.getData(),
+                            "TourLunch": TourLunch.getData(),
+                            "TourAfternoon": TourAfternoon.getData(),
+                            "Notes": TourNotes.getData(),
+                            "TourId": parseInt($("#TourId").val())
+                        },
+                        success: function (x) {
+                            if (x == false) {
+                                alert("Bir Sorun Var! Lütfen tekrar deneyiniz.");
+                            }
+                            else {
+                                swal.fire({
+                                    title: "Güncelleniyor..",
+                                    text: "Bu aralar çok hızlıyım, merak etme hemen güncelliyorum :)",
+                                    timer: 4000,
+                                    onOpen: function () {
+                                        swal.showLoading()
+                                    }
+                                }).then(function (result) {
+                                    if (result.dismiss === 'timer') {
+                                        window.location.reload(false);
+                                    }
+                                });
+                            }
+                        },
+                        dataType: "json"
+                    });
+                });
+            }
 
             $(".dayAdds").click(function () {
 
@@ -502,9 +634,10 @@
                     "TourName": $("#TourName").val(),
                     "TourSpot": TourSpot.getData(),
                     "TourBody": TourBody.getData(),
-                    "TourActivity2":$("input[name='TourActivity2']").val(),
-                    "TourActivity1":$("input[name='TourActivity1']").val(),
-                    "TourActivity0":$("input[name='TourActivity0']").val()
+                    "TourActivity2":$("input[name='TourActivity2']").is(":checked"),
+                    "TourActivity1":$("input[name='TourActivity1']").is(":checked"),
+                    "TourActivity0": $("input[name='TourActivity0']").is(":checked"),
+                    "TourType":  $("#TourType :selected").val()
                 },
                 success: function (x) {
                     if (x == false) {

@@ -132,5 +132,11 @@ namespace Alice.Web.Controllers
 
             return View();
         }
+
+        //public IActionResult TailorMadeSend(string hotmanypeople, string tailoryear, string tailormonth, string tailorday, string tellusabout, string tailorchoose,
+        //    string tailorcurrency, string tailormaxbugget, string yourname, string yournumber, string tailoremail, string happyreceive, string iagree) 
+        //{
+
+        //}
     }
 }

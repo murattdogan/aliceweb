@@ -191,6 +191,7 @@
                         $("input[name='id']").val(e.id);
                         $('#newcategory').fadeIn();
                         $('.updateimages').fadeIn();
+                        $(".alreadyimagelist").load("/Categories/GetGalleryImages?Id=" + Id);
                     },
                     dataType: "json"
                 });

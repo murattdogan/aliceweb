@@ -1,7 +1,7 @@
 ﻿@model List<Alice.Service.Model.GalleryPoolDTO>
 
 <div class="kt-section">
-    <div class="kt-section__desc">Kategoriye Ait Resimler (<small>Kategori resimlerini silmek için üzerine tıklamanız gerekiyor</small>)</div>
+    <div class="kt-section__desc">Kategoriye Ait Slider Resimleri (<small>Kategori resimlerini silmek için üzerine tıklamanız gerekiyor</small>)</div>
     <div class="kt-section__content">
         @foreach (var item in Model)
         {
@@ -23,9 +23,9 @@
 
                 $.ajax({
                 type: "GET",
-                url: "/Category/CategoryGalleryDelete",
+                url: "/Categories/CategoryGalleryDelete",
                 data: {
-                    "categoryId": parseInt($("#categoryId").val()),
+                    "categoryId": parseInt($("input[name='id']").val()),
                     "galleryId" : galleryId
                 },
                 success: function (x) {
@@ -42,7 +42,7 @@
                             }
                         }).then(function (result) {
                             if (result.dismiss === 'timer') {
-                                 $(".alreadyimagelist").load("/Categories/GetGalleryImages?Id=" + $("#categoryId").val());
+                                 $(".alreadyimagelist").load("/Categories/GetGalleryImages?Id=" + $("input[name='id']").val());
                             }
                         });
                     }

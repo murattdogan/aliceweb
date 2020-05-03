@@ -75,7 +75,8 @@
                     <thead>
                         <tr>
                             <th>Tur Kodu</th>
-                            <th>Tur Tipi</th>
+                            <th>Tur Type</th>
+                            <th>Tur Activity</th>
                             <th>Tur Adı</th>
                             <th>#</th>
                         </tr>
@@ -84,9 +85,25 @@
                     <tbody>
                         @foreach (var item in (List<TourDTO>)ViewBag.TourList)
                         {
+                            var touract = "High";
+                            if (item.TourActivity==1)
+                            {
+                                touract = "Moderate";
+                            }
+                            else if (item.TourActivity ==0)
+                            {
+                                touract = "Light";
+                            }
+
+                            var tourtype = "Daily Tour (Days)";
+                            if (item.TourType==1)
+                            {
+                                tourtype = "Daily Tour (Morning, Lunch v.b)";
+                            }
                             <tr>
                                 <td>@item.TourCode</td>
-                                <td>@item.TourType</td>
+                                <td>@tourtype</td>
+                                <td>@touract</td>
                                 <td>@item.TourName</td>
                                 <td>
                                     <button class="btn btn-sm btn-danger tourdelete">Sil</button>

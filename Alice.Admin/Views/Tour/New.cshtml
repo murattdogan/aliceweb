@@ -46,7 +46,18 @@
                                             <span class="form-text text-muted">Tur Adı çok önemli, Dikkatli belirle!</span>
                                         </div>
                                     </div>
+                                </div>
 
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="form-group">
+                                            <label>Tur Tipi:</label>
+                                            <select class="form-control" id="TourType">
+                                                <option value="0">Daily Tour (Days)</option>
+                                                <option value="1">Daily Tour (Morning, Lunch v.b)</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row">
@@ -57,7 +68,6 @@
                                             <span class="form-text text-muted">Olabildikçe Kısa Açıklama Yapınız!</span>
                                         </div>
                                     </div>
-
                                 </div>
 
 
@@ -180,7 +190,8 @@
                 data: {
                     "TourName": $("input[name='TourName']").val(),
                     "TourSpot": TourSpot.getData(),
-                    "TourBody": TourBody.getData()
+                    "TourBody": TourBody.getData(),
+                    "TourType": $("#TourType :selected").val()
                 },
                 success: function (x) {
                     if (x == "0") {

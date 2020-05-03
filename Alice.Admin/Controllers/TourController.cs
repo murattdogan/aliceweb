@@ -53,26 +53,57 @@ namespace Alice.Admin.Controllers
 
         [ServiceFilter(typeof(AuthorizationAttribute))]
         [HttpPost]
-        public JsonResult NewTour(string TourName, string TourSpot, string TourBody)
+        public JsonResult NewTour(string TourName, string TourSpot, string TourBody, string TourType)
         {
             var code = DateTime.Now.ToString("ddmmmmyyHHmmss");
-            var isInsert = _tourService.Insert(new Service.Model.TourDTO() { TourName = TourName, TourSpot = TourSpot, OverView = TourBody, TourCode = code, TourActivity = 0 });
+            var isInsert = _tourService.Insert(new Service.Model.TourDTO() { TourType= int.Parse(TourType), TourName = TourName, TourSpot = TourSpot.Replace("'", "&#039;"), OverView = TourBody.Replace("'", "&#039;"), TourCode = code, TourActivity = 0 });
             if (isInsert) return Json(code);
             else return Json("0");
 
         }
+        
+        [ServiceFilter(typeof(AuthorizationAttribute))]
+        [HttpPost]
+        public JsonResult DailyTourUpdate(string TourMorning, string TourLunch, string TourAfternoon, string Notes, int TourId)
+        {
+            var tour = _tourService.GetTourById(TourId);
+            if (tour != null)
+            {
+                tour.TourMorning = TourMorning.Replace("'", "&#039;");
+                tour.TourLunch = TourLunch.Replace("'", "&#039;");
+                tour.TourAfternoon = TourAfternoon.Replace("'", "&#039;");
+                tour.Notes = Notes.Replace("'","&#039;");
+                _tourService.Update(tour);
+                return Json(true);
+            }
+            else return Json(false);
+
+        }
+
+
 
         [ServiceFilter(typeof(AuthorizationAttribute))]
         [HttpPost]
-        public JsonResult UpdateTour(int Id, string TourName, string TourSpot, string TourBody, string TourActivity2, string TourActivity1, string TourActivity0)
+        public JsonResult UpdateTour(int Id, string TourType, string TourName, string TourSpot, string TourBody, string TourActivity2, string TourActivity1, string TourActivity0)
         {
             var tour = _tourService.GetTourById(Id);
             if (tour != null)
             {
+                var touract = 0;
+                if (TourActivity2 == "true")
+                {
+                    touract = 2;
+                }
+                else if (TourActivity1 == "true")
+                {
+                    touract = 1;
+                }
+
                 tour.TourName = TourName;
-                tour.TourSpot = TourSpot;
-                tour.OverView = TourBody;
-                tour.TourActivity = int.Parse(TourActivity2 ?? TourActivity1 ?? TourActivity0);
+                tour.TourSpot = TourSpot.Replace("'", "&#039;");
+                tour.OverView = TourBody.Replace("'", "&#039;");
+                tour.TourActivity = touract;
+                tour.TourType = int.Parse(TourType);
                 _tourService.Update(tour);
                 return Json(true);
             }
@@ -88,7 +119,7 @@ namespace Alice.Admin.Controllers
                 return Json(_tourPlanListService.Add(new TourPlanListDTO()
                 {
                     DayTitle = tourDayTitle,
-                    DayDetail = tourDayDetail,
+                    DayDetail = tourDayDetail.Replace("'", "&#039;"),
                     Day = tourDay,
                     TourId = tourId
                 }));
@@ -100,7 +131,7 @@ namespace Alice.Admin.Controllers
                 {
                     tourDayList.Day = tourDay;
                     tourDayList.DayTitle = tourDayTitle;
-                    tourDayList.DayDetail = tourDayDetail;
+                    tourDayList.DayDetail = tourDayDetail.Replace("'", "&#039;");
                     tourDayList.TourId = tourId;
                     return Json(_tourPlanListService.Update(tourDayList));
                 }
@@ -119,6 +150,20 @@ namespace Alice.Admin.Controllers
         [ServiceFilter(typeof(AuthorizationAttribute))]
         public IActionResult TourUpdateView(string Id)
         {
+            var q = _tourService.GetAllTours();
+            foreach (var item in q)
+            {
+                item.OverView = item.OverView.Replace("'", "&#039;");
+                item.OverView = item.OverView.Replace("\"", "&quot;");
+                item.OverView = item.OverView.Replace("’", "&#039;");
+                item.TourSpot = item.TourSpot?.Replace("'", "&#039;");
+                item.TourMorning = item.TourMorning?.Replace("'", "&#039;");
+                item.TourLunch=item.TourLunch?.Replace("'", "&#039;");
+                item.Notes=item.Notes?.Replace("'", "&#039;");
+                item.Notes = item.Notes?.Replace("\"", "&quot;");
+                _tourService.Update(item);
+            }
+
             var tour = _tourService.GetTourByTourCode(Id);
             if (tour != null)
             {
@@ -151,8 +196,8 @@ namespace Alice.Admin.Controllers
         public PartialViewResult GetTourImages(int Id)
         {
             var tourGalleries = new List<GalleryPoolDTO>();
-            var tourGallery = _tourGalleryService.GetGalleriesByTourId(Id);
-            if (tourGallery !=null && tourGallery.Any())
+            var tourGallery = _tourGalleryService.GetGalleriesByTourIdNone(Id);
+            if (tourGallery != null && tourGallery.Any())
             {
                 foreach (var item in tourGallery)
                 {
@@ -208,7 +253,7 @@ namespace Alice.Admin.Controllers
         [HttpGet]
         public JsonResult TourGalleryDelete(int tourId, string galleryId)
         {
-            var tourGallery = _tourGalleryService.GetGalleriesByTourId(tourId)?.First(x => x.GalleryId == galleryId) ?? null;
+            var tourGallery = _tourGalleryService.GetGalleriesByTourIdNone(tourId)?.First(x => x.GalleryId == galleryId) ?? null;
             return Json(tourGallery != null ? _tourGalleryService.Delete(tourGallery) : false);
 
         }

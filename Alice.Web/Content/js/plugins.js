@@ -170,19 +170,6 @@ $('.mansetSlide').slick({
   ]
 });
 
-
-$('.catSlide').slick({
-  dots: true,
-  arrows:false,
-  autoplay:true,
-  fade: true,
-  cssEase: 'linear',
-   focusOnSelect: true,
-  pauseOnHover:false,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-});
-
 window.onload=function(){
 
 $slideshow = $('.slideNumbers').slick({

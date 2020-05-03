@@ -21,5 +21,9 @@ namespace Alice.Data.Model
         public string SEODescription { get; set; }
         public string TourMapImage { get; set; }
         public string TourMapDesc { get; set; }
+        public string TourMorning { get; set; }
+        public string TourLunch { get; set; }
+        public string TourAfternoon { get; set; }
+        public string Notes { get; set; }
     }
 }
